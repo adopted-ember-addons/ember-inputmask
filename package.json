@@ -1,7 +1,7 @@
 {
   "name": "ember-inputmask",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.0",
+  "description": "Ember wrapper for the jquery.inputmask plugin",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "https://github.com/pzuraq/ember-inputmask",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Chris Garrett",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
