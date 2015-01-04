@@ -1,6 +1,9 @@
 module.exports = {
-    normalizeEntityName: function() {},
-    afterInstall: function(options) {
-        return this.addBowerPackageToProject('jquery.inputmask', '3.1.49');
-    }
+  name: 'ember-inputmask',
+
+  included: function(app) {
+    this._super.included(app);
+
+    app.import('bower_components/jquery.inputmask');
+  }
 };
