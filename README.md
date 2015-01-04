@@ -31,9 +31,9 @@ The standard `input-mask` component:
 
 * 9 : numeric
 * a : alphabetical
-* * : alphanumeric
+* \* : alphanumeric
 * A : automatically uppercased alphabetical 
-* # : unicode
+* \# : unicode
 
 Optional portions of masks are delimited with brackets `[]`:
 
