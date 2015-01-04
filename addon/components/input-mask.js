@@ -43,6 +43,11 @@ export default Ember.TextField.extend({
     this.propertyDidChange('unmaskedValue');
   },
 
+  // Remove the mask from the input
+  teardownMask: function() {
+    this.$().inputmask('remove');
+  }.on('willDestroyElement'),
+
   setMask: function() {
     var mask    = this.get('mask'),
         options = this.get('options');
