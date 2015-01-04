@@ -1,3 +1,16 @@
 <h2 id="title">Welcome to Ember.js</h2>
 
+{{input-mask mask="9[99]" greedyMask=true}}
+{{number-input decimal=true group=true unmaskedValue=numberValue}} {{numberValue}}
+{{number-input unmaskedValue=numberValue}} {{numberValue}}
+{{email-input}}
+{{phone-number-input extensions=true}}
+{{zip-code-input}}
+{{currency-input}}
+{{date-input}}
+{{credit-card-input value=blah cardType=cardTypeValue}} {{cardTypeValue}}
+
+{{blah}}
+{{blahh}}
+
 {{outlet}}

@@ -18,4 +18,24 @@ var app = new EmberAddon();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-module.exports = app.toTree();
+app.import('bower_components/jquery.inputmask/dist/jquery.inputmask.bundle.min.js');
+
+var pickFiles = require('broccoli-static-compiler');
+var mergeTrees  = require('broccoli-merge-trees');
+
+// get a hold of the tree in question
+var phoneCodes = pickFiles('vendor', {
+  srcDir: '/data/phone-codes',
+  files: [
+    'phone-codes.js'
+  ],
+  destDir: '/phone-codes/'
+});
+
+// default tree to export
+var emberApp = app.toTree();
+
+// shim my stuff
+module.exports = mergeTrees([emberApp, phoneCodes], {
+  overwrite: true
+});
