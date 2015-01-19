@@ -40,7 +40,6 @@ export default Ember.TextField.extend({
   // call to the updateMask function
   didInsertElement: function() {
     this.propertyDidChange('mask');
-    this.propertyDidChange('unmaskedValue');
   },
 
   // Remove the mask from the input
@@ -54,6 +53,11 @@ export default Ember.TextField.extend({
 
     this.$().inputmask('remove');
     this.$().inputmask(mask, options);
+
+    // Initialize the unmasked value if it exists
+    if(this.get('unmaskedValue')) {
+      this.$().val(this.get('unmaskedValue'));
+    }
     
     // If the mask has changed, we need to refocus the input to show the
     // proper mask preview. Since the caret is not positioned by the focus

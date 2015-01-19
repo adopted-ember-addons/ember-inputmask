@@ -1,10 +1,8 @@
 <h2 id="title">Welcome to Ember.js</h2>
 
 {{input-mask mask="AAAA" greedyMask=true}}
-{{number-input decimal=true group=true unmaskedValue=numberValue}} {{numberValue}}
-{{number-input unmaskedValue=numberValue}} {{numberValue}}
-{{email-input}}
-{{phone-number-input extensions=true}}
+{{email-input value=testValue}}
+{{phone-number-input unmaskedValue=numberValue extensions=true}}
 {{zip-code-input}}
 {{currency-input}}
 {{date-input}}
