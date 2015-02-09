@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
