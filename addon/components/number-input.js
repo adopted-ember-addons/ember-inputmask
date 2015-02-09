@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
@@ -45,7 +44,7 @@ export default InputMaskComponent.extend({
       this.set('mask', 'decimal');
       this.set('options.digits', this.get('decimal'));
     }
-    
+
     this._super();
   }.observes('mask', 'group', 'decimal', 'separator', 'radix', 'groupSize')
 });
