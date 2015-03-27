@@ -19,6 +19,8 @@ import Ember from 'ember';
  *     Clear the input if it was incomplete (partial date, time, etc.)
  *   greedyMask - bool=false
  *     Shows optional parts of a mask in preview when true
+ *   debounce - number=0
+ *     Enable by setting debounce > 0, makes sure to deduplicate calls to update the UI and only deliver the last ui change
  */
 
 export default Ember.TextField.extend({
@@ -29,6 +31,7 @@ export default Ember.TextField.extend({
   rightAlign:      false,
   clearIncomplete: false,
   greedyMask:      false,
+  debounce:        0,
 
   // Strangely enough, if we initialize the options object on the component itself
   // it's shared between all instances of the object. Since we don't want that, and
@@ -96,6 +99,12 @@ export default Ember.TextField.extend({
     this.setMask();
   }.observes('mask', 'maskPlaceholder', 'showMaskOnFocus', 'showMaskOnHover', 'rightAlign', 'clearIncomplete', 'greedyMask', 'pattern', 'regex'),
 
+  updateVar: function () {
+    if (this.$().inputmask('unmaskedvalue') !== this.get('unmaskedValue')) {
+      this.$().val(this.get('unmaskedValue'));
+    }
+  },
+
   // Unmask the value of the field and set the property.
   setUnmaskedValue: function() {
     this.set('unmaskedValue', this.$().inputmask('unmaskedvalue'));
@@ -103,8 +112,11 @@ export default Ember.TextField.extend({
 
   // When the unmaskedValue changes, set the value.
   setValue: function() {
-    if(this.$().inputmask('unmaskedvalue') !== this.get('unmaskedValue')) {
-      this.$().val(this.get('unmaskedValue'));
+    var debounce = this.get('debounce');
+    if ( debounce ) {
+      Ember.run.debounce(this, this.updateVar, debounce);
+    } else {
+      this.updateVar();
     }
   }.observes('unmaskedValue')
 });
