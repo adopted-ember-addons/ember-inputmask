@@ -17,6 +17,8 @@ import Ember from 'ember';
  *     Clear the input if it was incomplete (partial date, time, etc.)
  *   greedyMask - bool=false
  *     Shows optional parts of a mask in preview when true
+ *   debounce - number=0
+ *     Enable by setting debounce > 0, makes sure to deduplicate calls to update the UI and only deliver the last ui change
  */
 
 export default Ember.TextField.extend({
@@ -27,6 +29,7 @@ export default Ember.TextField.extend({
   rightAlign:      false,
   clearIncomplete: false,
   greedyMask:      false,
+  debounce:        0,
 
   // Strangely enough, if we initialize the options object on the component itself
   // it's shared between all instances of the object. Since we don't want that, and
@@ -35,7 +38,7 @@ export default Ember.TextField.extend({
   initializeOptions: function() {
     this.set('options', {});
   }.on('init'),
-  
+
   // Initialize the mask by forcing a
   // call to the updateMask function
   didInsertElement: function() {
@@ -62,13 +65,12 @@ export default Ember.TextField.extend({
         this.$().val(this.get('unmaskedValue'));
       }
 
-      // If the mask has changed, we need to refocus the input to show the
-      // proper mask preview. Since the caret is not positioned by the focus
-      // even, but the click event, we need to trigger a click as well.
-      if(this.$().is(':focus')) {
-        this.$().blur().focus().click();
-      }
-    });
+    // If the mask has changed, we need to refocus the input to show the
+    // proper mask preview. Since the caret is not positioned by the focus
+    // even, but the click event, we need to trigger a click as well.
+    if(this.$().is(':focus')) {
+      this.$().blur().focus().click();
+    }
   },
 
   // Update the mask whenever the mask itself changes or one of the options changes.
@@ -97,7 +99,15 @@ export default Ember.TextField.extend({
     this.setMask();
   }.observes('mask', 'showMaskOnFocus', 'showMaskOnHover', 'rightAlign', 'clearIncomplete', 'greedyMask', 'pattern', 'regex'),
 
-  // Unmask the value of the field and set the property. 
+  updateVar: function () {
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      if (this.$().inputmask('unmaskedvalue') !== this.get('unmaskedValue')) {
+        this.$().val(this.get('unmaskedValue'));
+      }
+    });
+  },
+
+  // Unmask the value of the field and set the property.
   setUnmaskedValue: function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
       this.set('unmaskedValue', this.$().inputmask('unmaskedvalue'));
@@ -106,10 +116,11 @@ export default Ember.TextField.extend({
 
   // When the unmaskedValue changes, set the value.
   setValue: function() {
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      if(this.$().inputmask('unmaskedvalue') !== this.get('unmaskedValue')) {
-        this.$().val(this.get('unmaskedValue'));
-      }
-    });
+    var debounce = this.get('debounce');
+    if ( debounce ) {
+      Ember.run.debounce(this, this.updateVar, debounce);
+    } else {
+      this.updateVar();
+    }
   }.observes('unmaskedValue')
 });
