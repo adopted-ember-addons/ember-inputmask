@@ -7,6 +7,8 @@ import Ember from 'ember';
  * using the jquery.inputmask plugin.
  *
  * OPTIONS:
+ *   maskPlaceholder - string
+ *     Override $.inputmask default's placeholder option.
  *   showMaskOnHover - bool=true
  *     Shows a preview of the mask when the field is hovered.
  *   showMaskOnFocus - bool=true
@@ -35,7 +37,7 @@ export default Ember.TextField.extend({
   initializeOptions: function() {
     this.set('options', {});
   }.on('init'),
-  
+
   // Initialize the mask by forcing a
   // call to the updateMask function
   didInsertElement: function() {
@@ -58,7 +60,7 @@ export default Ember.TextField.extend({
     if(this.get('unmaskedValue')) {
       this.$().val(this.get('unmaskedValue'));
     }
-    
+
     // If the mask has changed, we need to refocus the input to show the
     // proper mask preview. Since the caret is not positioned by the focus
     // even, but the click event, we need to trigger a click as well.
@@ -83,6 +85,7 @@ export default Ember.TextField.extend({
     }
 
     this.setProperties({
+      'options.placeholder'    : this.get('maskPlaceholder'),
       'options.showMaskOnFocus': this.get('showMaskOnFocus'),
       'options.showMaskOnHover': this.get('showMaskOnHover'),
       'options.rightAlign':      this.get('rightAlign'),
@@ -91,9 +94,9 @@ export default Ember.TextField.extend({
     });
 
     this.setMask();
-  }.observes('mask', 'showMaskOnFocus', 'showMaskOnHover', 'rightAlign', 'clearIncomplete', 'greedyMask', 'pattern', 'regex'),
+  }.observes('mask', 'maskPlaceholder', 'showMaskOnFocus', 'showMaskOnHover', 'rightAlign', 'clearIncomplete', 'greedyMask', 'pattern', 'regex'),
 
-  // Unmask the value of the field and set the property. 
+  // Unmask the value of the field and set the property.
   setUnmaskedValue: function() {
     this.set('unmaskedValue', this.$().inputmask('unmaskedvalue'));
   }.observes('value'),
