@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
@@ -8,7 +7,7 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  *
  * Currently Supports: Visa, MasterCard, Amex, Diners Club, Discover, JCB
  *
- * FUTURE: 
+ * FUTURE:
  *   - Add support for more cards
  *   - Add validation for full card numbers
  */
@@ -35,7 +34,7 @@ export default InputMaskComponent.extend({
   }.observes('mask', 'cardType', 'separator'),
 
   updateCardType: function() {
-    var unmaskedValue = this.get('unmaskedValue') || '', 
+    var unmaskedValue = this.get('unmaskedValue') || '',
         cardType;
 
     if (unmaskedValue.match(/^4/)) {
