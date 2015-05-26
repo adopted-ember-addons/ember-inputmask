@@ -73,7 +73,7 @@ export default Ember.TextField.extend({
       if(this.$().is(':focus')) {
         this.$().blur().focus().click();
       }
-    }
+    });
   },
 
   // Update the mask whenever the mask itself changes or one of the options changes.
