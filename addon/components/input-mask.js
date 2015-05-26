@@ -55,22 +55,24 @@ export default Ember.TextField.extend({
   }.on('willDestroyElement'),
 
   setMask: function() {
-    var mask    = this.get('mask'),
-        options = this.get('options');
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      var mask    = this.get('mask'),
+          options = this.get('options');
 
-    this.$().inputmask('remove');
-    this.$().inputmask(mask, options);
+      this.$().inputmask('remove');
+      this.$().inputmask(mask, options);
 
-    // Initialize the unmasked value if it exists
-    if(this.get('unmaskedValue')) {
-      this.$().val(this.get('unmaskedValue'));
-    }
+      // Initialize the unmasked value if it exists
+      if(this.get('unmaskedValue')) {
+        this.$().val(this.get('unmaskedValue'));
+      }
 
-    // If the mask has changed, we need to refocus the input to show the
-    // proper mask preview. Since the caret is not positioned by the focus
-    // even, but the click event, we need to trigger a click as well.
-    if(this.$().is(':focus')) {
-      this.$().blur().focus().click();
+      // If the mask has changed, we need to refocus the input to show the
+      // proper mask preview. Since the caret is not positioned by the focus
+      // even, but the click event, we need to trigger a click as well.
+      if(this.$().is(':focus')) {
+        this.$().blur().focus().click();
+      }
     }
   },
 
