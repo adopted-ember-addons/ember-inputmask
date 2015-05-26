@@ -65,12 +65,13 @@ export default Ember.TextField.extend({
         this.$().val(this.get('unmaskedValue'));
       }
 
-    // If the mask has changed, we need to refocus the input to show the
-    // proper mask preview. Since the caret is not positioned by the focus
-    // even, but the click event, we need to trigger a click as well.
-    if(this.$().is(':focus')) {
-      this.$().blur().focus().click();
-    }
+      // If the mask has changed, we need to refocus the input to show the
+      // proper mask preview. Since the caret is not positioned by the focus
+      // even, but the click event, we need to trigger a click as well.
+      if(this.$().is(':focus')) {
+        this.$().blur().focus().click();
+      }
+    });
   },
 
   // Update the mask whenever the mask itself changes or one of the options changes.
