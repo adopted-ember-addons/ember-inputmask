@@ -15,7 +15,7 @@ along with a set of commonly used masks including
 ## Installation
 
 ```
-$ ember install:addon ember-inputmask
+$ ember install ember-inputmask
 ```
 
 ## Usage
