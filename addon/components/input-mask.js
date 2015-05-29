@@ -7,6 +7,8 @@ import Ember from 'ember';
  * using the jquery.inputmask plugin.
  *
  * OPTIONS:
+ *   maskPlaceholder - string
+ *     Override $.inputmask default's placeholder option.
  *   showMaskOnHover - bool=true
  *     Shows a preview of the mask when the field is hovered.
  *   showMaskOnFocus - bool=true
@@ -86,6 +88,7 @@ export default Ember.TextField.extend({
     }
 
     this.setProperties({
+      'options.placeholder'    : this.get('maskPlaceholder'),
       'options.showMaskOnFocus': this.get('showMaskOnFocus'),
       'options.showMaskOnHover': this.get('showMaskOnHover'),
       'options.rightAlign':      this.get('rightAlign'),
@@ -94,7 +97,7 @@ export default Ember.TextField.extend({
     });
 
     this.setMask();
-  }.observes('mask', 'showMaskOnFocus', 'showMaskOnHover', 'rightAlign', 'clearIncomplete', 'greedyMask', 'pattern', 'regex'),
+  }.observes('mask', 'maskPlaceholder', 'showMaskOnFocus', 'showMaskOnHover', 'rightAlign', 'clearIncomplete', 'greedyMask', 'pattern', 'regex'),
 
   updateVar: function () {
     if (this.$().inputmask('unmaskedvalue') !== this.get('unmaskedValue')) {

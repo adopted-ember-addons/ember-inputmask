@@ -15,8 +15,7 @@ along with a set of commonly used masks including
 ## Installation
 
 ```
-$ npm install ember-inputmask --save-dev
-$ ember g ember-inputmask
+$ ember install ember-inputmask
 ```
 
 ## Usage
@@ -59,6 +58,10 @@ to you. Either way, both values are accessible and bound to each other, so
 choose whichever one you want.
 
 ### Options
+
+#### maskPlaceholder (default: null)
+
+Override $.inputmask default's [placeholder option](https://github.com/RobinHerbots/jquery.inputmask#placeholder-1)
 
 #### showMaskOnFocus (default: true)
 
