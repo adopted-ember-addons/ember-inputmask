@@ -53,6 +53,10 @@ export default Ember.TextField.extend({
   }.on('willDestroyElement'),
 
   setMask: function() {
+    if (!this.$()) {
+      return;
+    }
+
     var mask    = this.get('mask'),
         options = this.get('options');
 
@@ -100,6 +104,10 @@ export default Ember.TextField.extend({
   }.observes('mask', 'maskPlaceholder', 'showMaskOnFocus', 'showMaskOnHover', 'rightAlign', 'clearIncomplete', 'greedyMask', 'pattern', 'regex'),
 
   updateVar: function () {
+    if (!this.$()) {
+      return;
+    }
+
     if (this.$().inputmask('unmaskedvalue') !== this.get('unmaskedValue')) {
       this.$().val(this.get('unmaskedValue'));
     }
