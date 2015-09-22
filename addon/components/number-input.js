@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
@@ -29,22 +30,30 @@ export default InputMaskComponent.extend({
   radix:     '.',
   groupSize: '3',
 
-  updateMask: function() {
-    this.setProperties({
-      'options.autoGroup':      this.get('group'),
-      'options.groupSeparator': this.get('separator'),
-      'options.radixPoint':     this.get('radix'),
-      'options.groupSize':      this.get('groupSize')
-    });
+  updateMask: Ember.observer(
+    'mask',
+    'group',
+    'decimal',
+    'separator',
+    'radix',
+    'groupSize',
+    function() {
+      this.setProperties({
+        'options.autoGroup':      this.get('group'),
+        'options.groupSeparator': this.get('separator'),
+        'options.radixPoint':     this.get('radix'),
+        'options.groupSize':      this.get('groupSize')
+      });
 
-    if (this.get('decimal') === true) {
-      this.set('mask', 'decimal');
-      this.set('options.digits', 2);
-    } else if (this.get('decimal')) {
-      this.set('mask', 'decimal');
-      this.set('options.digits', this.get('decimal'));
+      if (this.get('decimal') === true) {
+        this.set('mask', 'decimal');
+        this.set('options.digits', 2);
+      } else if (this.get('decimal')) {
+        this.set('mask', 'decimal');
+        this.set('options.digits', this.get('decimal'));
+      }
+
+      this._super();
     }
-
-    this._super();
-  }.observes('mask', 'group', 'decimal', 'separator', 'radix', 'groupSize')
+  )
 });

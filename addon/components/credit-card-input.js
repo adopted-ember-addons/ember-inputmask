@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
@@ -13,7 +14,7 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  */
 
 export default InputMaskComponent.extend({
-  updateMask: function() {
+  updateMask: Ember.observer('mask', 'cardType', 'separator', function() {
     var cardType  = this.get('cardType'),
         s         = this.get('separator') || '-', // s for separator for convenience
         mask;                                     // Also, we put the default in here instead
@@ -31,9 +32,9 @@ export default InputMaskComponent.extend({
       this.set('mask', mask);
     }
     this._super();
-  }.observes('mask', 'cardType', 'separator'),
+  }),
 
-  updateCardType: function() {
+  updateCardType: Ember.observer('unmaskedValue', function() {
     var unmaskedValue = this.get('unmaskedValue') || '',
         cardType;
 
@@ -54,5 +55,5 @@ export default InputMaskComponent.extend({
     }
 
     this.set('cardType', cardType);
-  }.observes('unmaskedValue')
+  })
 });

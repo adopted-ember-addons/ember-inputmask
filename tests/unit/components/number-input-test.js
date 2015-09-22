@@ -12,37 +12,37 @@ moduleForComponent('number-input', 'number-input component', {
   }
 });
 
-test('number mask is correct', function() {
-  expect(4);
+test('number mask is correct', function(assert) {
+  assert.expect(4);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   fillIn('input', 'test');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '');
-    equal(component.get('unmaskedValue'), undefined);
+    assert.equal(find('input').val(), '');
+    assert.equal(component.get('unmaskedValue'), undefined);
   });
 
   fillIn('input', '123456789');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '123456789');
-    equal(component.get('unmaskedValue'), 123456789);
+    assert.equal(find('input').val(), '123456789');
+    assert.equal(component.get('unmaskedValue'), 123456789);
   });
 });
 
 
-test('decimal mask is correct', function() {
-  expect(2);
+test('decimal mask is correct', function(assert) {
+  assert.expect(2);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('decimal', true);
@@ -51,18 +51,18 @@ test('decimal mask is correct', function() {
   fillIn('input', '1234567.89');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '1234567.89');
-    equal(component.get('unmaskedValue'), 1234567.89);
+    assert.equal(find('input').val(), '1234567.89');
+    assert.equal(component.get('unmaskedValue'), 1234567.89);
   });
 });
 
-test('extra options work', function() {
-  expect(2);
+test('extra options work', function(assert) {
+  assert.expect(2);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('decimal', 4);
@@ -75,8 +75,8 @@ test('extra options work', function() {
   fillIn('input', '12345.6789');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '1.2345,6789');
-    equal(component.get('unmaskedValue'), '12345,6789');
+    assert.equal(find('input').val(), '1.2345,6789');
+    assert.equal(component.get('unmaskedValue'), '12345,6789');
   });
 });
 
