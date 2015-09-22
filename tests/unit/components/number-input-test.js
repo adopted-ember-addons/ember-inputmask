@@ -9,7 +9,8 @@ moduleForComponent('number-input', 'number-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
 test('number mask is correct', function(assert) {
@@ -79,4 +80,3 @@ test('extra options work', function(assert) {
     assert.equal(component.get('unmaskedValue'), '12345,6789');
   });
 });
-

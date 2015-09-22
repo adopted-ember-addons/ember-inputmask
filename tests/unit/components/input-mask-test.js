@@ -9,7 +9,8 @@ moduleForComponent('input-mask', 'input-mask component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
 test('regex works', function(assert) {

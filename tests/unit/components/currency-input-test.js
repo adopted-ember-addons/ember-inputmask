@@ -9,7 +9,8 @@ moduleForComponent('currency-input', 'currency-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
 // test('masked values are correct', function() {

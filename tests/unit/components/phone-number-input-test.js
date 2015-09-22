@@ -9,7 +9,8 @@ moduleForComponent('phone-number-input', 'phone-number-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
 test('values are correct', function(assert) {

@@ -9,7 +9,8 @@ moduleForComponent('credit-card-input', 'credit-card-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
 test('values are correct', function(assert) {
@@ -20,7 +21,7 @@ test('values are correct', function(assert) {
   // append the component to the DOM
   this.render();
 
-  // testing Visa formatting 
+  // testing Visa formatting
   fillIn('input', '4444444444444444');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
