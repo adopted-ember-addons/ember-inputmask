@@ -19,7 +19,7 @@ export default InputMaskComponent.extend({
 
   fullCode: false,
 
-  updateMask: Ember.observer('mask', 'fullCode', function() {
+  updateMask: function() {
     if (this.get('fullCode')) {
       this.set('mask', '99999[-9999]');
     } else {
@@ -27,5 +27,9 @@ export default InputMaskComponent.extend({
     }
 
     this._super();
+  },
+
+  _maskShouldChange: Ember.observer('mask', 'fullCode', function() {
+    Ember.run.once(this, 'updateMask');
   })
 });
