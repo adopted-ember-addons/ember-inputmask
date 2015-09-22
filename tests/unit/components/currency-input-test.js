@@ -1,5 +1,5 @@
 import Ember from "ember";
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
 import startApp from '../../helpers/start-app';
 var App;
 
@@ -9,7 +9,8 @@ moduleForComponent('currency-input', 'currency-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
 // test('masked values are correct', function() {
@@ -18,7 +19,7 @@ moduleForComponent('currency-input', 'currency-input component', {
 //   var component = this.subject();
 
 //   // append the component to the DOM
-//   this.append();
+//   this.render();
 
 //   // testing default value
 //   triggerEvent('input', 'blur');
@@ -40,7 +41,7 @@ moduleForComponent('currency-input', 'currency-input component', {
 //   var component = this.subject();
 
 //   // append the component to the DOM
-//   this.append();
+//   this.render();
 
 //   // testing default value
 //   triggerEvent('input', 'blur');

@@ -9,16 +9,17 @@ moduleForComponent('input-mask', 'input-mask component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
-test('regex works', function() {
-  expect(3);
+test('regex works', function(assert) {
+  assert.expect(3);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('mask', 'regex');
@@ -29,29 +30,29 @@ test('regex works', function() {
   fillIn('input', 'test');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '');
+    assert.equal(find('input').val(), '');
   });
 
   fillIn('input', 'you_can_only_type_this');
   triggerEvent('input', 'blur');
   andThen(function() {
-    equal(find('input').val(), 'you_can_only_type_this');
+    assert.equal(find('input').val(), 'you_can_only_type_this');
   });
 
   fillIn('input', 'you_can_only_type_thisssss');
   triggerEvent('input', 'blur');
   andThen(function() {
-    equal(find('input').val(), 'you_can_only_type_thisssss');
+    assert.equal(find('input').val(), 'you_can_only_type_thisssss');
   });
 });
 
-test('showMaskOnHover works', function() {
-  expect(3);
+test('showMaskOnHover works', function(assert) {
+  assert.expect(3);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('mask', '9-9+9');
@@ -60,23 +61,23 @@ test('showMaskOnHover works', function() {
   andThen(function() { // wait for async helpers to complete
     var input = find('input');
     input.mouseenter();
-    equal(find('input')[0].value, '_-_+_');
+    assert.equal(find('input')[0].inputmask._valueGet(), '_-_+_');
   });
 
   andThen(function() {
     var input = find('input');
     input.mouseleave();
-    equal(find('input')[0].value, '');
-  });
-
-  Ember.run(function(){
-    component.set('showMaskOnHover', false);
+    assert.equal(find('input')[0].inputmask._valueGet(), '');
   });
 
   andThen(function() {
+    Ember.run(function(){
+      component.set('showMaskOnHover', false);
+    });
+
     var input = find('input');
     input.mouseenter();
-    equal(find('input')[0].value, '');
+    assert.equal(find('input')[0].inputmask._valueGet(), '');
   });
 });
 
@@ -90,7 +91,7 @@ test('showMaskOnFocus works', function() {
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('mask', '9-9+9');
@@ -99,7 +100,7 @@ test('showMaskOnFocus works', function() {
   andThen(function() { // wait for async helpers to complete
     var input = find('input');
     input.focus();
-    equal(input[0].value, '_-_+_');
+    equal(input[0].inputmask._valueGet(), '_-_+_');
   });
 
   Ember.run(function(){
@@ -109,18 +110,18 @@ test('showMaskOnFocus works', function() {
   andThen(function() {
     var input = find('input');
     input.focus();
-    equal(input[0].value, '');
+    equal(input[0].inputmask._valueGet(), '');
   });
 });
 */
 
-test('clearIncomplete works', function() {
-  expect(1);
+test('clearIncomplete works', function(assert) {
+  assert.expect(1);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('mask', '9-9+9');
@@ -130,17 +131,17 @@ test('clearIncomplete works', function() {
   fillIn('input', '6');
   triggerEvent('input', 'blur');
   andThen(function() {
-    equal(find('input').val(), '');
+    assert.equal(find('input').val(), '');
   });
 });
 
-test('greedyMask works', function() {
-  expect(3);
+test('greedyMask works', function(assert) {
+  assert.expect(3);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('mask', '9[99]');
@@ -149,7 +150,7 @@ test('greedyMask works', function() {
   andThen(function() {
     var input = find('input');
     input.mouseenter();
-    equal(find('input')[0].value, '_');
+    assert.equal(find('input')[0].inputmask._valueGet(), '_');
   });
 
   fillIn('input', '66');
@@ -157,17 +158,17 @@ test('greedyMask works', function() {
   andThen(function() {
     var input = find('input');
     input.mouseenter();
-    equal(find('input')[0].value, '66_');
-  });
-
-  Ember.run(function(){
-    component.set('greedyMask', true);
+    assert.equal(find('input')[0].inputmask._valueGet(), '66_');
   });
 
   fillIn('input', '');
   andThen(function() {
+    Ember.run(function(){
+      component.set('greedyMask', true);
+    });
+
     var input = find('input');
     input.mouseenter();
-    equal(find('input')[0].value, '___');
+    assert.equal(find('input')[0].inputmask._valueGet(), '___');
   });
 });

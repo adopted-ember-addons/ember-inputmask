@@ -9,33 +9,34 @@ moduleForComponent('zip-code-input', 'zip-code-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
-test('values are correct', function() {
-  expect(2);
+test('values are correct', function(assert) {
+  assert.expect(2);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   // testing filled in value
   fillIn('input', '12345');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '12345');
-    equal(component.get('unmaskedValue'), 12345);
+    assert.equal(find('input').val(), '12345');
+    assert.equal(component.get('unmaskedValue'), 12345);
   });
 });
 
-test('full code works', function() {
-  expect(2);
+test('full code works', function(assert) {
+  assert.expect(2);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('fullCode', true);
@@ -45,7 +46,7 @@ test('full code works', function() {
   fillIn('input', '123451234');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '12345-1234');
-    equal(component.get('unmaskedValue'), 123451234);
+    assert.equal(find('input').val(), '12345-1234');
+    assert.equal(component.get('unmaskedValue'), 123451234);
   });
 });

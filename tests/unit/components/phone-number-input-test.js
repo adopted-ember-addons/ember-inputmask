@@ -9,33 +9,34 @@ moduleForComponent('phone-number-input', 'phone-number-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
-test('values are correct', function() {
-  expect(2);
+test('values are correct', function(assert) {
+  assert.expect(2);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   // testing filled in value
   fillIn('input', '12345678901234');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '(123) 456-7890');
-    equal(component.get('unmaskedValue'), 1234567890);
+    assert.equal(find('input').val(), '(123) 456-7890');
+    assert.equal(component.get('unmaskedValue'), 1234567890);
   });
 });
 
-test('extensions work', function() {
-  expect(2);
+test('extensions work', function(assert) {
+  assert.expect(2);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   Ember.run(function(){
     component.set('extensions', true);
@@ -45,7 +46,7 @@ test('extensions work', function() {
   fillIn('input', '1234567890x1234');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), '(123) 456-7890 x 1234');
-    equal(component.get('unmaskedValue'), 12345678901234);
+    assert.equal(find('input').val(), '(123) 456-7890 x 1234');
+    assert.equal(component.get('unmaskedValue'), 12345678901234);
   });
 });

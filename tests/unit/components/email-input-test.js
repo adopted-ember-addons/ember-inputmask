@@ -9,37 +9,38 @@ moduleForComponent('email-input', 'email-input component', {
   },
   teardown: function() {
     Ember.run(App, 'destroy');
-  }
+  },
+  unit: true
 });
 
-test('masked values are correct', function() {
-  expect(1);
+test('masked values are correct', function(assert) {
+  assert.expect(1);
 
-  var component = this.subject();
+  this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   // testing filled in value
   fillIn('input', 'test@test.test');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(find('input').val(), 'test@test.test');
+    assert.equal(find('input').val(), 'test@test.test');
   });
 });
 
-test('unmasked values are correct', function() {
-  expect(1);
+test('unmasked values are correct', function(assert) {
+  assert.expect(1);
 
   var component = this.subject();
 
   // append the component to the DOM
-  this.append();
+  this.render();
 
   // testing default value
   fillIn('input', 'test@test.test');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    equal(component.get('unmaskedValue'), 'testtesttest');
+    assert.equal(component.get('unmaskedValue'), 'testtesttest');
   });
 });
