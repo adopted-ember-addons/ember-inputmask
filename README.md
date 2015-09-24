@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pzuraq/ember-inputmask.svg?branch=v0.2.1)](https://travis-ci.org/pzuraq/ember-inputmask)
+
 # Ember-inputmask
 
 This addon provides an general use input masking component using the
@@ -31,7 +33,7 @@ The standard `input-mask` component:
 * 9 : numeric
 * a : alphabetical
 * \* : alphanumeric
-* A : automatically uppercased alphabetical 
+* A : automatically uppercased alphabetical
 * \# : unicode
 
 Optional portions of masks are delimited with brackets `[]`:
@@ -43,18 +45,18 @@ Optional portions of masks are delimited with brackets `[]`:
 
 ### Unmasked Value
 
-The mask is applied directly to the input itself, meaning it alters the `value` 
-attribute. `unmaskedValue` There are times when you might want the value with 
+The mask is applied directly to the input itself, meaning it alters the `value`
+attribute. `unmaskedValue` There are times when you might want the value with
 the mask, and times when you might want the value without the mask. For example:
 
 ```
 {{input-mask mask="99/99/9999" value=foo unmaskedValue=bar}}
 ```
 
-This is an adhoc mask for a date (consider using the `date-input` component 
-instead). If the user were to enter 12/12/2014, the value of `foo` would be just 
-that, whereas the value of `bar` would be `12122014`, which may not be as useful 
-to you. Either way, both values are accessible and bound to each other, so 
+This is an adhoc mask for a date (consider using the `date-input` component
+instead). If the user were to enter 12/12/2014, the value of `foo` would be just
+that, whereas the value of `bar` would be `12122014`, which may not be as useful
+to you. Either way, both values are accessible and bound to each other, so
 choose whichever one you want.
 
 ### Options
@@ -73,7 +75,7 @@ Shows the user a preview of the mask when the field is hovered
 
 #### rightAlign (default: false)
 
-This is an option on the original plugin, but I highly recommend using css 
+This is an option on the original plugin, but I highly recommend using css
 classes because all it does is apply a style directly to the input.
 
 #### clearIncomplete (default: false)
@@ -98,7 +100,7 @@ As mentioned above, this addon include other components that extend the base
 ### Credit Card Inputs
 
 ```
-{{credit-card-input unmaskedValue=foo cardType=bar separator=" "}} 
+{{credit-card-input unmaskedValue=foo cardType=bar separator=" "}}
 ```
 
 The `credit-card-input` dynamically determines the type of the credit card and
@@ -119,10 +121,10 @@ numbers can be specified with the `separator` option, and defaults to `-`.
 ### Currency Inputs
 
 ```
-{{currency-input unmaskedValue=foo}} 
+{{currency-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the 
+This is just a wrapper for the jquery.inputmask alias and is equivalent to the
 following:
 
 ```
@@ -134,10 +136,10 @@ following:
 ### Date Inputs
 
 ```
-{{date-input unmaskedValue=foo}} 
+{{date-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the 
+This is just a wrapper for the jquery.inputmask alias and is equivalent to the
 following:
 
 ```
@@ -149,10 +151,10 @@ following:
 ### Email Inputs
 
 ```
-{{email-input unmaskedValue=foo}} 
+{{email-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the 
+This is just a wrapper for the jquery.inputmask alias and is equivalent to the
 following:
 
 ```
@@ -164,17 +166,17 @@ following:
 ### Number Inputs
 
 ```
-{{number-input unmaskedValue=foo group=false groupSize=3 separator="," decimal=false radix="."}} 
+{{number-input unmaskedValue=foo group=false groupSize=3 separator="," decimal=false radix="."}}
 ```
 
-Number inputs only accept numbers, and can be formatted using the following 
+Number inputs only accept numbers, and can be formatted using the following
 options:
 
 * **group:** Display the number grouped for readability i.e. 1,234 vs. 1234
 * **groupSize:** Change the size of the groups
 * **separator:** Change the group separator (caveat: if radix and separator are
   the same, then the radix will default to '.')
-* **decimal:** If set to `true` then the input will be given 2 decimal places, 
+* **decimal:** If set to `true` then the input will be given 2 decimal places,
   if set some number then the input will be given that many decimal places
 * **radix:** Sets the radix that separates the decimal places
 
@@ -183,7 +185,7 @@ options:
 ### Phone Number Inputs
 
 ```
-{{phone-number-input unmaskedValue=foo extensions=false}} 
+{{phone-number-input unmaskedValue=foo extensions=false}}
 ```
 
 Masks a phone number with the format `(999) 999-9999`. The `extensions` option
@@ -200,7 +202,7 @@ than this tag, however.
 ### Zip Code Inputs
 
 ```
-{{zip-code-input unmaskedValue=foo fullCode=false}} 
+{{zip-code-input unmaskedValue=foo fullCode=false}}
 ```
 
 Masks a zip code. If `fullCode` is set to true, then it will enable the user
