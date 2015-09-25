@@ -21,7 +21,7 @@ export default InputMaskComponent.extend({
                                                   // of defining it on the model
 
     if (cardType === 'American Express') {
-      mask = '9999' + s + '9999999' + s + '99999';
+      mask = '9999' + s + '9999999' + s + '9999';
     } else if (cardType === 'Diners Club') {
       mask = '9999' + s + '999999' + s + '9999';
     } else {
