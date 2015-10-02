@@ -14,7 +14,7 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  */
 
 export default InputMaskComponent.extend({
-  updateMask: function() {
+  updateMask() {
     var cardType  = this.get('cardType'),
         s         = this.get('separator') || '-', // s for separator for convenience
         mask;                                     // Also, we put the default in here instead
