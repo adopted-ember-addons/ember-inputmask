@@ -18,21 +18,18 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
 export default InputMaskComponent.extend({
   mask: '(999) 999-9999',
   code: false,
-  init() {
-    if(this.get('code')) {
-      this.set('mask', '+99 (999) 999-9999');
-    }
-    this._super();
-  },
   updateMask() {
     if (this.get('extensions')) {
       this.set('mask', '(999) 999-9999[ x 9{1,4}]');
     }
+    if(this.get('code')) {
+      this.set('mask', '+99 (999) 999-9999');
+    }
 
     this._super();
   },
 
-  _maskShouldChange: Ember.observer('mask', 'extensions', function() {
+  _maskShouldChange: Ember.observer('mask', 'extensions', 'code', function() {
     Ember.run.once(this, 'updateMask');
   })
 });
