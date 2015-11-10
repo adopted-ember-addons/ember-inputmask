@@ -19,7 +19,7 @@ export default InputMaskComponent.extend({
 
   fullCode: false,
 
-  updateMask: function() {
+  updateMask() {
     if (this.get('fullCode')) {
       this.set('mask', '99999[-9999]');
     } else {

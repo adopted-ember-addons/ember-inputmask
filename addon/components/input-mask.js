@@ -43,7 +43,7 @@ export default Ember.TextField.extend({
 
   // Initialize the mask by forcing a
   // call to the updateMask function
-  didInsertElement: function() {
+  didInsertElement() {
     this.propertyDidChange('mask');
   },
 
@@ -52,7 +52,7 @@ export default Ember.TextField.extend({
     this.$().inputmask('remove');
   }),
 
-  setMask: function() {
+  setMask() {
     if (!this.$()) {
       return;
     }
@@ -80,7 +80,7 @@ export default Ember.TextField.extend({
   // This observer is meant to be extensible so that other fields can add options
   // (See `decimal-input`), which is why the actual setting of the mask is handled
   // in another function.
-  updateMask: function() {
+  updateMask() {
     if (this.get('mask').toLowerCase() === 'regex') {
       // Regex has to capitalized for the plugin, but that's annoying
       // so let's just allow users to enter it however they want...

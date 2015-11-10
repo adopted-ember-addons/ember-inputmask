@@ -30,7 +30,7 @@ export default InputMaskComponent.extend({
   radix:     '.',
   groupSize: '3',
 
-  updateMask: function() {
+  updateMask() {
     this.setProperties({
       'options.autoGroup':      this.get('group'),
       'options.groupSeparator': this.get('separator'),

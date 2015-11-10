@@ -50,3 +50,24 @@ test('extensions work', function(assert) {
     assert.equal(component.get('unmaskedValue'), 12345678901234);
   });
 });
+
+test('code work', function(assert) {
+  assert.expect(2);
+
+  var component = this.subject();
+
+  // append the component to the DOM
+  this.render();
+
+  Ember.run(function(){
+    component.set('code', true);
+  });
+
+  // testing filled in value
+  triggerEvent('input', 'blur');
+  fillIn('input', '380111111111');
+  andThen(function() { // wait for async helpers to complete
+    assert.equal(find('input').val(), '+38 (011) 111-1111');
+    assert.equal(component.get('unmaskedValue'), 380111111111);
+  });
+});
