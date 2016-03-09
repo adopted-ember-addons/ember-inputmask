@@ -3,7 +3,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import startApp from '../../helpers/start-app';
 var App;
 
-moduleForComponent('email-input', 'email-input component', {
+moduleForComponent('ssn-input', 'ssn-input component', {
   setup: function() {
     App = startApp();
   },
@@ -22,10 +22,10 @@ test('values are correct', function(assert) {
   this.render();
 
   // testing filled in value
-  fillIn('input', 'test@test.test');
+  fillIn('input', '123456789');
   triggerEvent('input', 'blur');
   andThen(function() { // wait for async helpers to complete
-    assert.equal(find('input').val(), 'test@test.test');
-    assert.equal(component.get('unmaskedValue'), 'test@test.test');
+    assert.equal(find('input').val(), '123-45-6789');
+    assert.equal(component.get('unmaskedValue'), 123456789);
   });
 });
