@@ -1,5 +1,12 @@
 [![Build Status](https://travis-ci.org/pzuraq/ember-inputmask.svg?branch=v0.2.1)](https://travis-ci.org/pzuraq/ember-inputmask)
 
+# This Addon is Deprecated!
+
+While I'll continue to review and merge PRs, I am no longer maintaining this
+addon. There are lots of problems that come from just wrapping jquery plugins,
+performance and bugginess among them. If you're interested in continuing the
+work on this plugin, let me know and we can talk about transferring ownership.
+
 # Ember-inputmask
 
 This addon provides an general use input masking component using the
