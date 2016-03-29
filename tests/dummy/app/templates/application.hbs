@@ -1,14 +1,43 @@
-<h2 id="title">Welcome to Ember.js</h2>
+<h2 id="title">ember-inputmask examples</h2>
 
-{{input-mask mask="AAAA" greedyMask=true}}
-{{email-input value=testValue}}
-{{phone-number-input unmaskedValue=numberValue extensions=true}}
-{{zip-code-input}}
-{{currency-input}}
-{{date-input}}
-{{credit-card-input value=blah cardType=cardTypeValue}} {{cardTypeValue}}
+<div class='container'>
+  <fieldset>
+    <legend>Generic input mask:</legend>
+    {{input-mask mask="AAAA" greedyMask=true}}
+  </fieldset>
 
-{{blah}}
-{{blahh}}
+  <fieldset>
+    <legend>SSN input:</legend>
+    {{ssn-input value=ssnValue pattern='^\d{3}-\d{2}-\d{4}$'}}
+  </fieldset>
 
-{{outlet}}
+  <fieldset>
+    <legend>Credit card input:</legend>
+    {{credit-card-input value=blah cardType=cardTypeValue}} {{cardTypeValue}}
+  </fieldset>
+
+  <fieldset>
+    <legend>Phone input:</legend>
+    {{phone-number-input unmaskedValue=numberValue extensions=true}}
+  </fieldset>
+
+  <fieldset>
+    <legend>Email input:</legend>
+    {{email-input value=testValue}}
+  </fieldset>
+
+  <fieldset>
+    <legend>US Zip code input:</legend>
+    {{zip-code-input}}
+  </fieldset>
+
+  <fieldset>
+    <legend>Currency input:</legend>
+    {{currency-input}}
+  </fieldset>
+
+  <fieldset>
+    <legend>Date input:</legend>
+    {{date-input}}
+  </fieldset>
+</div>
