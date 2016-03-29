@@ -33,6 +33,10 @@ export default Ember.TextField.extend({
   greedyMask:      false,
   debounce:        0,
 
+  // Make this addon to initially set pattern attribute for working out of the box with
+  // Ember addon like ember-cli-html5-validation
+  pattern:         null,
+
   // Strangely enough, if we initialize the options object on the component itself
   // it's shared between all instances of the object. Since we don't want that, and
   // we do want to store options somewhere, we need to initialize an options object
