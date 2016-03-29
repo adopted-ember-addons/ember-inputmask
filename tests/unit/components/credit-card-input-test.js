@@ -38,11 +38,11 @@ test('values are correct', function(assert) {
   });
 
   // testing American Express formatting
-  fillIn('input', '3444444444444444');
+  fillIn('input', '344444444444444');
   triggerEvent('input', 'blur');
   andThen(function() {
-    assert.equal(find('input').val(), "3444-4444444-44444");
-    assert.equal(component.get('unmaskedValue'), "3444444444444444");
+    assert.equal(find('input').val(), "3444-4444444-4444");
+    assert.equal(component.get('unmaskedValue'), "344444444444444");
   });
 
   // testing Discover formatting
