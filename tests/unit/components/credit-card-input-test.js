@@ -37,14 +37,6 @@ test('values are correct', function(assert) {
     assert.equal(component.get('unmaskedValue'), "5444444444444444");
   });
 
-  // testing American Express formatting
-  fillIn('input', '3444444444444444');
-  triggerEvent('input', 'blur');
-  andThen(function() {
-    assert.equal(find('input').val(), "3444-4444444-44444");
-    assert.equal(component.get('unmaskedValue'), "3444444444444444");
-  });
-
   // testing Discover formatting
   fillIn('input', '6011444444444444');
   triggerEvent('input', 'blur');
@@ -69,8 +61,17 @@ test('values are correct', function(assert) {
     assert.equal(component.get('unmaskedValue'), "9444444444444444");
   });
 
+  // testing American Express formatting
+  // test this last because the numbers are shorter, see below
+  fillIn('input', '344444444444444');
+  triggerEvent('input', 'blur');
+  andThen(function() {
+    assert.equal(find('input').val(), "3444-4444444-4444");
+    assert.equal(component.get('unmaskedValue'), "344444444444444");
+  });
+
   // testing Diners Club formatting
-  // test this last because the numbers are shorter, thus the
+  // test this last and Amex last because the numbers are shorter, thus the
   // mask will restrict the next test unless we clear the field.
   fillIn('input', '30544444444444');
   triggerEvent('input', 'blur');
