@@ -37,12 +37,8 @@ export default Ember.TextField.extend({
   // Ember addon like ember-cli-html5-validation
   pattern:         null,
 
-  // Strangely enough, if we initialize the options object on the component itself
-  // it's shared between all instances of the object. Since we don't want that, and
-  // we do want to store options somewhere, we need to initialize an options object
-  // whenever we create an `input-mask`.
-  initializeOptions: Ember.on('init', function() {
-    this.set('options', {});
+  options: Ember.computed(function() {
+    return {};
   }),
 
   // Initialize the mask by forcing a
