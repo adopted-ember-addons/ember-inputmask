@@ -37,6 +37,8 @@ export default Ember.TextField.extend({
   // Ember addon like ember-cli-html5-validation
   pattern:         null,
 
+  value: 'value',
+  
   options: Ember.computed(function() {
     return {};
   }),
