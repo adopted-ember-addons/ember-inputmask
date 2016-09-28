@@ -23,7 +23,7 @@ along with a set of commonly used masks including
 
 ## Installation
 
-```
+```sh
 $ ember install ember-inputmask
 ```
 
@@ -31,7 +31,7 @@ $ ember install ember-inputmask
 
 The standard `input-mask` component:
 
-```
+```hbs
 {{input-mask mask="999-aaa-***" value=foo unmaskedValue=bar}}
 ```
 
@@ -45,7 +45,7 @@ The standard `input-mask` component:
 
 Optional portions of masks are delimited with brackets `[]`:
 
-```
+```hbs
 // Optionally lets the user add the last dash and characters
 {{input-mask mask="999-aaa[-***]" value=foo unmaskedValue=bar}}
 ```
@@ -56,7 +56,7 @@ The mask is applied directly to the input itself, meaning it alters the `value`
 attribute. `unmaskedValue` There are times when you might want the value with
 the mask, and times when you might want the value without the mask. For example:
 
-```
+```hbs
 {{input-mask mask="99/99/9999" value=foo unmaskedValue=bar}}
 ```
 
@@ -106,7 +106,7 @@ As mentioned above, this addon include other components that extend the base
 
 ### Credit Card Inputs
 
-```
+```hbs
 {{credit-card-input unmaskedValue=foo cardType=bar separator=" "}}
 ```
 
@@ -127,14 +127,14 @@ numbers can be specified with the `separator` option, and defaults to `-`.
 
 ### Currency Inputs
 
-```
+```hbs
 {{currency-input unmaskedValue=foo}}
 ```
 
 This is just a wrapper for the jquery.inputmask alias and is equivalent to the
 following:
 
-```
+```hbs
 {{input-mask mask="currency" unmaskedValue=foo}}
 ```
 
@@ -149,7 +149,7 @@ following:
 This is just a wrapper for the jquery.inputmask alias and is equivalent to the
 following:
 
-```
+```hbs
 {{input-mask mask="date" unmaskedValue=foo}}
 ```
 
@@ -157,14 +157,14 @@ following:
 
 ### Email Inputs
 
-```
+```hbs
 {{email-input unmaskedValue=foo}}
 ```
 
 This is just a wrapper for the jquery.inputmask alias and is equivalent to the
 following:
 
-```
+```hbs
 {{input-mask mask="email" unmaskedValue=foo}}
 ```
 
@@ -172,7 +172,7 @@ following:
 
 ### Number Inputs
 
-```
+```hbs
 {{number-input unmaskedValue=foo group=false groupSize=3 separator="," decimal=false radix="."}}
 ```
 
@@ -191,7 +191,7 @@ options:
 
 ### Phone Number Inputs
 
-```
+```hbs
 {{phone-number-input unmaskedValue=foo extensions=false}}
 ```
 
@@ -208,7 +208,7 @@ than this tag, however.
 
 ### Zip Code Inputs
 
-```
+```hbs
 {{zip-code-input unmaskedValue=foo fullCode=false}}
 ```
 
