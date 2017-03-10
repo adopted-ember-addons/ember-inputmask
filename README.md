@@ -4,7 +4,7 @@
 [![Ember Observer Score](https://emberobserver.com/badges/ember-inputmask.svg)](https://emberobserver.com/addons/ember-inputmask)
 
 This addon provides an general use input masking component using the
-[jquery.inputmask](https://github.com/RobinHerbots/Inputmask/tree/3.2.7) plugin,
+[Inputmask](https://github.com/RobinHerbots/Inputmask) library,
 along with a set of commonly used masks including:
 
 * Credit card inputs
@@ -65,7 +65,7 @@ so choose whichever one you want.
 
 #### `maskPlaceholder` (default: `null`)
 
-Override jquery.inputmask default's
+Override Inputmask's default
 [`placeholder` option](https://github.com/RobinHerbots/Inputmask#placeholder-1).
 
 #### `showMaskOnFocus` (default: `true`)
@@ -121,7 +121,7 @@ numbers can be specified with the `separator` option, and defaults to `-`.
 {{currency-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the
+This is just a wrapper for the Inputmask alias and is equivalent to the
 following:
 
 ```hbs
@@ -134,7 +134,7 @@ following:
 {{date-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the
+This is just a wrapper for the Inputmask alias and is equivalent to the
 following:
 
 ```hbs
@@ -147,7 +147,7 @@ following:
 {{email-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the
+This is just a wrapper for the Inputmask alias and is equivalent to the
 following:
 
 ```hbs
@@ -183,7 +183,7 @@ The `extensions` option can be set to true to allow up to 4 digit extensions
 the default, then you have to press space or 'x' to activate the extension part
 of the mask when entering.
 
-NOTE: There is a "phone" alias included in the jquery.inputmask plugin, but when
+NOTE: There is a "phone" alias included in Inputmask, but when
 I tried using it, I encountered slowness and freezeups. It is much more general
 than this tag, however.
 

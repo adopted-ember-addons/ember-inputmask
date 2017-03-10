@@ -1,7 +1,7 @@
 {
   "name": "ember-inputmask",
   "version": "0.2.3",
-  "description": "Ember wrapper for the jquery.inputmask plugin",
+  "description": "Ember wrapper for Inputmask 3.x",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -44,7 +44,10 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.3"
+    "broccoli-funnel": "^1.1.0",
+    "broccoli-merge-trees": "^2.0.0",
+    "ember-cli-babel": "^5.1.3",
+    "jquery.inputmask": "^3.3.4"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

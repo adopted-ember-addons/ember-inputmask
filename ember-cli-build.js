@@ -13,12 +13,5 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  if (!process.env.EMBER_CLI_FASTBOOT) {
-    app.import({
-      development: app.bowerDirectory + '/jquery.inputmask/dist/jquery.inputmask.bundle.js',
-      production: app.bowerDirectory + '/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js'
-    });
-  }
-
   return app.toTree();
 };
