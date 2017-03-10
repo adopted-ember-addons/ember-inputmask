@@ -52,8 +52,6 @@ test('showMaskOnFocus=true (default) works', function(assert) {
   this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9-9+9'}}`);
   triggerEvent('input', 'focus');
   assert.equal(find('input').value, '_-_+_');
-  triggerEvent('input', 'blur');
-  assert.equal(find('input').value, '');
 });
 
 test('showMaskOnFocus=false works', function(assert) {
