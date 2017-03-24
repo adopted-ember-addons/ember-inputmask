@@ -177,8 +177,8 @@ options:
 {{phone-number-input unmaskedValue=foo extensions=false}}
 ```
 
-Masks a US/Canada phone number with the format `(999) 999-9999`.
-The `extensions` option can be set to true to allow up to 4 digit extensions
+Masks a US/Canada phone number with the format `(999) 999-9999`. The
+`extensions` option can be set to `true` to allow up to 4 digit extensions
 `(999) 999-9999 x 9999`. Note that if `greedyMask` is set to `false`, which is
 the default, then you have to press space or 'x' to activate the extension part
 of the mask when entering.
