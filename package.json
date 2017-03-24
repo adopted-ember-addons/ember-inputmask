@@ -13,7 +13,7 @@
   },
   "repository": "https://github.com/pzuraq/ember-inputmask",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "author": "Chris Garrett",
   "license": "MIT",
