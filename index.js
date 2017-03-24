@@ -20,12 +20,14 @@ module.exports = {
   },
   included() {
     this._super.included.apply(this, arguments);
-    this.import('vendor/jquery.inputmask/extra/dependencyLibs/inputmask.dependencyLib.js');
-    this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.js');
-    this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.extensions.js');
-    this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.date.extensions.js');
-    this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js');
-    this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.phone.extensions.js');
-    this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.regex.extensions.js');
+    if (!process.env.EMBER_CLI_FASTBOOT) {
+      this.import('vendor/jquery.inputmask/extra/dependencyLibs/inputmask.dependencyLib.js');
+      this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.js');
+      this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.extensions.js');
+      this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.date.extensions.js');
+      this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js');
+      this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.phone.extensions.js');
+      this.import('vendor/jquery.inputmask/dist/inputmask/inputmask.regex.extensions.js');
+    }
   }
 };
