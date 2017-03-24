@@ -3,18 +3,38 @@
 [![Build Status](https://travis-ci.org/pzuraq/ember-inputmask.svg)](https://travis-ci.org/pzuraq/ember-inputmask)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-inputmask.svg)](https://emberobserver.com/addons/ember-inputmask)
 
-This addon provides an general use input masking component using the
-[jquery.inputmask](https://github.com/RobinHerbots/Inputmask/tree/3.2.7) plugin,
-along with a set of commonly used masks including:
+Ember Inputmask is an Ember addon and a wrapper of the
+[Inputmask](https://github.com/RobinHerbots/Inputmask) library. It provides a
+general use input masking component, along with a set of commonly used masks
+including:
 
-* Credit card inputs
-* Currency inputs
-* Date inputs
-* Email inputs
-* Number inputs
-* US/Canada phone number inputs
-* US SSN inputs
-* US ZIP Code inputs
+  - Credit card number
+  - Currency
+  - Date
+  - Email
+  - Number
+  - US/Canada phone number
+  - US SSN
+  - US ZIP Code
+
+## Versions and Upgrading
+
+Inputmask (previously known as `jquery.inputmask`) used to be a jQuery plugin,
+but is now a standalone package without relying on jQuery.
+
+Ember Inputmask currently has two branches:
+
+  - [v0.2.x](https://github.com/pzuraq/ember-inputmask/tree/v0.2.x) pulls
+    legacy jquery.inputmask 3.2.x from Bower. This branch is in maintenance
+    mode. Critical bugs will be fixed, but minor issues will not be fixed and
+    new features will not be added.
+
+  - [v0.4.x (master)](https://github.com/pzuraq/ember-inputmask/tree/master)
+    pulls Inputmask 3.3.x from NPM. Bower and jQuery are not required.
+
+Versions prior to 0.4.0 automatically adds `jquery.inputmask` into your
+application's `bower.json` file. If you are upgrading from a pre-0.4 version to
+0.4.x, feel free to remove it from `bower.json`.
 
 ## Installation
 
@@ -32,11 +52,11 @@ The standard `input-mask` component:
 
 ### Default Masking Definitions
 
-* `9` : numeric
-* `a` : alphabetical
-* `*` : alphanumeric
-* `A` : automatically uppercased alphabetical
-* `#` : unicode
+  - `9` : numeric
+  - `a` : alphabetical
+  - `*` : alphanumeric
+  - `A` : automatically uppercased alphabetical
+  - `#` : unicode
 
 Optional portions of masks are delimited with brackets `[]`:
 
@@ -63,33 +83,34 @@ so choose whichever one you want.
 
 ### Options
 
-#### `maskPlaceholder` (default: `null`)
+  - `maskPlaceholder` (default: `null`)
 
-Override jquery.inputmask default's
-[`placeholder` option](https://github.com/RobinHerbots/Inputmask#placeholder-1).
+    Override Inputmask's default
+    [`placeholder`](https://github.com/RobinHerbots/Inputmask#placeholder-1)
+    option.
 
-#### `showMaskOnFocus` (default: `true`)
+  - `showMaskOnFocus` (default: `true`)
 
-Shows the user a preview of the mask when the field is focussed.
+    Shows the user a preview of the mask when the field is focussed.
 
-#### `showMaskOnHover` (default: `true`)
+  - `showMaskOnHover` (default: `true`)
 
-Shows the user a preview of the mask when the field is hovered.
+    Shows the user a preview of the mask when the field is hovered.
 
-#### `rightAlign` (default: `false`)
+  - `rightAlign` (default: `false`)
 
-This is an option on the original plugin, but I highly recommend using CSS
-classes because all it does is apply a style directly to the input.
+    This is an option on the original plugin, but I highly recommend using CSS
+    classes because all it does is apply a style directly to the input.
 
-#### `clearIncomplete` (default: `false`)
+  - `clearIncomplete` (default: `false`)
 
-If the user does not completely fill in the mask before defocus, it will clear
-the input.
+    If the user does not completely fill in the mask before defocus, it will
+    clear the input.
 
-#### `greedyMask` (default: `false`)
+  - `greedyMask` (default: `false`)
 
-If there are any optional portions of the mask this decides whether or not to
-display them in the preview.
+    If there are any optional portions of the mask this decides whether or not
+    to display them in the preview.
 
 ## Other Components
 
@@ -105,12 +126,12 @@ As mentioned above, this addon include other components that extend the base
 The `credit-card-input` dynamically determines the type of the credit card and
 changes the mask as appropriate. It currently has support for:
 
-* Visa
-* MasterCard
-* Amex
-* Diners Club
-* Discover
-* JCB
+  - Visa
+  - MasterCard
+  - Amex
+  - Diners Club
+  - Discover
+  - JCB
 
 The card type is stored in `cardType`, which can be bound to. The separator for
 numbers can be specified with the `separator` option, and defaults to `-`.
@@ -121,7 +142,7 @@ numbers can be specified with the `separator` option, and defaults to `-`.
 {{currency-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the
+This is just a wrapper for the Inputmask alias and is equivalent to the
 following:
 
 ```hbs
@@ -134,7 +155,7 @@ following:
 {{date-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the
+This is just a wrapper for the Inputmask alias and is equivalent to the
 following:
 
 ```hbs
@@ -147,7 +168,7 @@ following:
 {{email-input unmaskedValue=foo}}
 ```
 
-This is just a wrapper for the jquery.inputmask alias and is equivalent to the
+This is just a wrapper for the Inputmask alias and is equivalent to the
 following:
 
 ```hbs
@@ -157,19 +178,21 @@ following:
 ### Number Inputs
 
 ```hbs
-{{number-input unmaskedValue=foo group=false groupSize=3 separator=','' decimal=false radix='.'}}
+{{number-input unmaskedValue=foo group=false groupSize=3 separator=',''
+  decimal=false radix='.'}}
 ```
 
 Number inputs only accept numbers, and can be formatted using the following
 options:
 
-* `group`: Display the number grouped for readability (i.e. `1,234` vs. `1234`).
-* `groupSize`: Change the size of the groups.
-* `separator`: Change the group separator. (Caveat: If radix and separator are
+  - `group`: Display the number grouped for readability (i.e. `1,234` vs.
+    `1234`).
+  - `groupSize`: Change the size of the groups.
+  - `separator`: Change the group separator. (Caveat: If radix and separator are
   the same, then the radix will default to '.'.)
-* `decimal`: If set to `true` then the input will be given 2 decimal places,
+  - `decimal`: If set to `true` then the input will be given 2 decimal places,
   if set some number then the input will be given that many decimal places.
-* `radix`: Sets the radix that separates the decimal places.
+  - `radix`: Sets the radix that separates the decimal places.
 
 ### US/Canada Phone Number Inputs
 
@@ -177,13 +200,13 @@ options:
 {{phone-number-input unmaskedValue=foo extensions=false}}
 ```
 
-Masks a US/Canada phone number with the format `(999) 999-9999`.
-The `extensions` option can be set to true to allow up to 4 digit extensions
+Masks a US/Canada phone number with the format `(999) 999-9999`. The
+`extensions` option can be set to `true` to allow up to 4 digit extensions
 `(999) 999-9999 x 9999`. Note that if `greedyMask` is set to `false`, which is
 the default, then you have to press space or 'x' to activate the extension part
 of the mask when entering.
 
-NOTE: There is a "phone" alias included in the jquery.inputmask plugin, but when
+NOTE: There is a "phone" alias included in Inputmask, but when
 I tried using it, I encountered slowness and freezeups. It is much more general
 than this tag, however.
 

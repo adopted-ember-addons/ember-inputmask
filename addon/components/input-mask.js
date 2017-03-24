@@ -1,14 +1,16 @@
+/* global Inputmask */
+
 import Ember from 'ember';
 
 /**
  * `{{input-mask}}` component.
  *
  * Displays an input with the specified mask applied to it
- * using the jquery.inputmask plugin.
+ * using Inputmask library.
  *
  * OPTIONS:
  *   maskPlaceholder - string
- *     Override $.inputmask default's placeholder option.
+ *     Override Inputmask default's placeholder option.
  *   showMaskOnHover - bool=true
  *     Shows a preview of the mask when the field is hovered.
  *   showMaskOnFocus - bool=true
@@ -51,30 +53,37 @@ export default Ember.TextField.extend({
 
   // Remove the mask from the input
   teardownMask: Ember.on('willDestroyElement', function() {
-    this.$().inputmask('remove');
+    if (this.element.inputmask) {
+      this.element.inputmask.remove();
+    }
   }),
 
   setMask: function() {
-    if (!this.$()) {
+    if (!this.element) {
       return;
     }
 
-    var mask    = this.get('mask'),
-        options = this.get('options');
+    var mask = this.get('mask'), options = this.get('options');
 
-    this.$().inputmask('remove');
-    this.$().inputmask(mask, options);
+    if (this.element.inputmask) {
+      this.element.inputmask.remove();
+    }
+
+    var inputmask = new Inputmask(mask, options);
+    inputmask.mask(this.element);
 
     // Initialize the unmasked value if it exists
-    if(this.get('unmaskedValue')) {
-      this.$().val(this.get('unmaskedValue'));
+    if (this.get('unmaskedValue')) {
+      this.element.value = this.get('unmaskedValue');
     }
 
     // If the mask has changed, we need to refocus the input to show the
     // proper mask preview. Since the caret is not positioned by the focus
     // even, but the click event, we need to trigger a click as well.
-    if(this.$().is(':focus')) {
-      this.$().blur().focus().click();
+    if (this.element === document.activeElement) {
+      this.element.blur();
+      this.element.focus();
+      this.element.click();
     }
   },
 
@@ -119,18 +128,19 @@ export default Ember.TextField.extend({
   }),
 
   updateVar: function () {
-    if (!this.$()) {
+    if (!this.element || !this.element.inputmask) {
       return;
     }
-
-    if (this.$().inputmask('unmaskedvalue') !== this.get('unmaskedValue')) {
-      this.$().val(this.get('unmaskedValue'));
+    if (this.element.inputmask.unmaskedvalue() !== this.get('unmaskedValue')) {
+      this.element.value = this.get('unmaskedValue');
     }
   },
 
   // Unmask the value of the field and set the property.
   setUnmaskedValue: Ember.observer('value', function() {
-    this.set('unmaskedValue', this.$().inputmask('unmaskedvalue'));
+    if (this.element && this.element.inputmask) {
+      this.set('unmaskedValue', this.element.inputmask.unmaskedvalue());
+    }
   }),
 
   // When the unmaskedValue changes, set the value.
