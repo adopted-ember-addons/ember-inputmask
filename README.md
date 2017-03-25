@@ -32,9 +32,13 @@ Ember Inputmask currently has two branches:
   - [v0.4.x (master)](https://github.com/pzuraq/ember-inputmask/tree/master)
     pulls Inputmask 3.3.x from NPM. Bower and jQuery are not required.
 
-Versions prior to 0.4.0 automatically adds `jquery.inputmask` into your
+Versions prior to 0.4.0 automatically add `jquery.inputmask` into your
 application's `bower.json` file. If you are upgrading from a pre-0.4 version to
 0.4.x, feel free to remove it from `bower.json`.
+
+In case you are using v0.3.0 of this addon -- it was a versioning mistake. In
+fact, v0.3.0 is older than v0.2.1 and we don't recommend it. Feel free to
+upgrade to the latest version of either v0.2.x or v0.4.x.
 
 ## Installation
 
