@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('currency-input', 'Integration | Component | currency-input', {
   integration: true
@@ -10,7 +10,7 @@ test('default value', function(assert) {
   this.render(hbs`{{currency-input unmaskedValue=unmaskedValue}}`);
   triggerEvent('input', 'blur');
   assert.equal(find('input').value, '$ 0.00');
-  assert.equal(this.unmaskedValue, '');
+  assert.equal(this.unmaskedValue, '0.00');
 });
 
 test('filled-in value', function(assert) {

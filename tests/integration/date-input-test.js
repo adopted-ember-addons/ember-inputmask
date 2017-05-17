@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('date-input', 'Integration | Component | date-input', {
   integration: true
