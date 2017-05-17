@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('input-mask', 'Integration | Component | input-mask', {
   integration: true
@@ -8,8 +8,8 @@ moduleForComponent('input-mask', 'Integration | Component | input-mask', {
 
 test('regex with invalid value', function(assert) {
   this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='regex'
-    pattern='you_can_only_type_thi[s]+'}}`);
-  fillIn('input', 'test');
+    pattern='[a-z]+ is [0-9]*'}}`);
+  fillIn('input', '42');
   triggerEvent('input', 'blur');
   assert.equal(find('input').value, '');
   assert.equal(this.unmaskedValue, '');
@@ -17,20 +17,20 @@ test('regex with invalid value', function(assert) {
 
 test('regex with valid value', function(assert) {
   this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='regex'
-    pattern='you_can_only_type_thi[s]+'}}`);
-  fillIn('input', 'you_can_only_type_this');
+    pattern='[a-z]+ is [0-9]*'}}`);
+  fillIn('input', 'answer is 42');
   triggerEvent('input', 'blur');
-  assert.equal(find('input').value, 'you_can_only_type_this');
-  assert.equal(this.unmaskedValue, 'you_can_only_type_this');
+  assert.equal(find('input').value, 'answer is 42');
+  assert.equal(this.unmaskedValue, 'answer42');
 });
 
 test('regex with another valid value', function(assert) {
   this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='regex'
-    pattern='you_can_only_type_thi[s]+'}}`);
-  fillIn('input', 'you_can_only_type_thisssss');
+    pattern='[a-z]+ is [0-9]*'}}`);
+  fillIn('input', 'question is ?');
   triggerEvent('input', 'blur');
-  assert.equal(find('input').value, 'you_can_only_type_thisssss');
-  assert.equal(this.unmaskedValue, 'you_can_only_type_thisssss');
+  assert.equal(find('input').value, 'question is ');
+  assert.equal(this.unmaskedValue, 'question');
 });
 
 test('showMaskOnHover=true (default) works', function(assert) {
@@ -49,14 +49,16 @@ test('showMaskOnHover=false works', function(assert) {
 });
 
 test('showMaskOnFocus=true (default) works', function(assert) {
-  this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9-9+9'}}`);
+  this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9-9+9'
+    showMaskOnHover=false}}`);
   triggerEvent('input', 'focus');
   assert.equal(find('input').value, '_-_+_');
 });
 
 test('showMaskOnFocus=false works', function(assert) {
   this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9-9+9'
-    showMaskOnFocus=false}}`);
+    showMaskOnFocus=false showMaskOnHover=false}}`);
+  triggerEvent('input', 'mouseenter');
   triggerEvent('input', 'focus');
   assert.equal(find('input').value, '');
 });

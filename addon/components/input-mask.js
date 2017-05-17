@@ -93,13 +93,10 @@ export default Ember.TextField.extend({
   // in another function.
   updateMask: function() {
     if (this.get('mask').toLowerCase() === 'regex') {
-      // Regex has to capitalized for the plugin, but that's annoying
-      // so let's just allow users to enter it however they want...
-      this.set('mask', 'Regex');
-
       // Note: I like pattern better, but I'll leave regex in as an option
       // as well since that's what the plugin defines on the options hash
       this.set('options.regex', this.get('pattern') || this.get('regex'));
+      this.set('options.mask', '');
     }
 
     this.setProperties({
