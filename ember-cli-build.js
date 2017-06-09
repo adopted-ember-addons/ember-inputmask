@@ -15,8 +15,8 @@ module.exports = function(defaults) {
 
   if (!process.env.EMBER_CLI_FASTBOOT) {
     app.import({
-      development: app.bowerDirectory + '/jquery.inputmask/dist/jquery.inputmask.bundle.js',
-      production: app.bowerDirectory + '/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js'
+      development: app.bowerDirectory + '/inputmask/dist/jquery.inputmask.bundle.js',
+      production: app.bowerDirectory + '/inputmask/dist/min/jquery.inputmask.bundle.min.js'
     });
   }
 

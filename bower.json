@@ -6,7 +6,7 @@
     "ember-cli-test-loader": "0.2.1",
     "ember-qunit": "0.4.16",
     "ember-qunit-notifications": "0.1.0",
-    "jquery.inputmask": "3.2.7",
+    "inputmask": "3.2.7",
     "loader.js": "ember-cli/loader.js#4.0.1",
     "qunit": "~1.20.0"
   }
