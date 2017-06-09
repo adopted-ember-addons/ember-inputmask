@@ -1,6 +1,6 @@
 {
   "name": "ember-inputmask",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Ember wrapper for the jquery.inputmask plugin",
   "directories": {
     "doc": "doc",
