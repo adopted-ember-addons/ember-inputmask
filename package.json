@@ -34,7 +34,7 @@
     "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
-    "ember-load-initializers": "0.5.1",
+    "ember-load-initializers": "^1.0.0",
     "ember-resolver": "2.0.3",
     "ember-try": "^0.2.12",
     "ember-watson": "^0.8.0",
