@@ -186,10 +186,10 @@ following:
   decimal=false radix='.'}}
 ```
 
-Number inputs only accept numbers, and can be formatted using the following
+Number inputs only accept numbers, and can be modified using the following
 options:
 
-  - `group`: Display the number grouped for readability (i.e. `1,234` vs.
+  - `group`: Display the number grouped for readability (e.g. `1,234` vs.
     `1234`).
   - `groupSize`: Change the size of the groups.
   - `separator`: Change the group separator. (Caveat: If radix and separator are
@@ -197,6 +197,12 @@ options:
   - `decimal`: If set to `true` then the input will be given 2 decimal places,
   if set some number then the input will be given that many decimal places.
   - `radix`: Sets the radix that separates the decimal places.
+  - `digitsOptional`: Specify whether digits are optional (e.g. `97.00` vs. `97`)
+  - `prefix`: Sets a prefix to be displayed before the number (e.g. `$97.00`)
+  - `suffix`: Sets a suffix to be displayed after the number (e.g. `100%`)
+  - `min`: Sets the minimum value for the field
+  - `max`: Sets the maximum value for the field
+  - `unmaskAsNumber`: Unmasks the input as a number rather than a string (e.g. `1234.56` vs. `'1234,56'`)
 
 ### US/Canada Phone Number Inputs
 
