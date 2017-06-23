@@ -14,28 +14,53 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  *     Sets the radix separator (defaults to period)
  *   separator - string
  *     Sets the separator for numbers (defaults to comma)
- *   groupSize - number
+ *   groupSize - int
  *     Sets the size of number separation (defaults to 3)
  *   group - bool
  *     Sets grouping (1,000 vs 1000) (defaults to false)
+ *   digitsOptional - bool
+ *     Specify whether digits are optional (defaults to true)
+ *   min - number
+ *     Sets a minimum value (defaults to undefined)
+ *   max - number
+ *     Sets a maximum value (defaults to undefined)
+ *   prefix - string
+ *     Sets a prefix for the number (defaults to '')
+ *   suffix - string
+ *     Sets a suffix for the number (defaults to '')
+ *   unmaskAsNumber - bool
+ *     Specify whether the input should be unmasked as a
+ *     number instead of a string (defaults to false)
  */
 
 export default InputMaskComponent.extend({
   mask: 'integer',
 
   // Default options
-  decimal:   false,
-  group:     false,
-  separator: ',',
-  radix:     '.',
-  groupSize: '3',
+  decimal:        false,
+  group:          false,
+  separator:      ',',
+  radix:          '.',
+  groupSize:      '3',
+  digitsOptional: true,
+  min:            undefined,
+  max:            undefined,
+  prefix:         '',
+  suffix:         '',
+  unmaskAsNumber: false,
 
   updateMask: function() {
     this.setProperties({
       'options.autoGroup':      this.get('group'),
       'options.groupSeparator': this.get('separator'),
       'options.radixPoint':     this.get('radix'),
-      'options.groupSize':      this.get('groupSize')
+      'options.groupSize':      this.get('groupSize'),
+      'options.digitsOptional': this.get('digitsOptional'),
+      'options.min':            this.get('min'),
+      'options.max':            this.get('max'),
+      'options.prefix':         this.get('prefix'),
+      'options.suffix':         this.get('suffix'),
+      'options.unmaskAsNumber': this.get('unmaskAsNumber'),
     });
 
     if (this.get('decimal') === true) {
@@ -56,6 +81,12 @@ export default InputMaskComponent.extend({
     'separator',
     'radix',
     'groupSize',
+    'digitsOptional',
+    'min',
+    'max',
+    'prefix',
+    'suffix',
+    'unmaskAsNumber',
     function() {
       Ember.run.once(this, 'updateMask');
   })
