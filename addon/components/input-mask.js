@@ -40,7 +40,7 @@ export default Ember.TextField.extend({
   pattern:         null,
 
   value: 'value',
-  
+
   options: Ember.computed(function() {
     return {};
   }),
@@ -59,6 +59,12 @@ export default Ember.TextField.extend({
   }),
 
   setMask: function() {
+    Inputmask.extendDefinitions({
+      '2': {
+        'validator': '[2-9]'
+      }
+    });
+
     if (!this.element) {
       return;
     }

@@ -16,11 +16,11 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  */
 
 export default InputMaskComponent.extend({
-  mask:    '(999) 999-9999',
+  mask:    '(299) 999-9999',
 
   updateMask: function() {
     if (this.get('extensions')) {
-      this.set('mask', '(999) 999-9999[ x 9{1,4}]');
+      this.set('mask', '(299) 999-9999[ x 9{1,4}]');
     }
 
     this._super();
