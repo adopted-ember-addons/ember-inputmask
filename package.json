@@ -20,6 +20,7 @@
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
     "ember-cli-node-assets": "^0.2.2",
+    "fastboot-transform": "^0.1.1",
     "inputmask": "3.3.6"
   },
   "devDependencies": {

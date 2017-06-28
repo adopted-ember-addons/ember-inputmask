@@ -1,31 +1,31 @@
 /* eslint-env node */
 'use strict';
 
+const fastbootTransform = require('fastboot-transform');
+
+const filesToImport = [
+  'dependencyLibs/inputmask.dependencyLib.js',
+  'inputmask.js',
+  'inputmask.extensions.js',
+  'inputmask.date.extensions.js',
+  'inputmask.numeric.extensions.js',
+  'inputmask.phone.extensions.js'
+];
+
 module.exports = {
   name: 'ember-inputmask',
   options: {
     nodeAssets: {
-      'inputmask': {
-        vendor: [
-          'dist/inputmask/dependencyLibs/inputmask.dependencyLib.js',
-          'dist/inputmask/inputmask.js',
-          'dist/inputmask/inputmask.extensions.js',
-          'dist/inputmask/inputmask.date.extensions.js',
-          'dist/inputmask/inputmask.numeric.extensions.js',
-          'dist/inputmask/inputmask.phone.extensions.js'
-        ]
-      }
+      inputmask: () => ({
+        vendor: filesToImport.map(file => `dist/inputmask/${file}`),
+        processTree: input => fastbootTransform(input)
+      })
     }
   },
   included() {
     this._super.included.apply(this, arguments);
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      this.import('vendor/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js');
-      this.import('vendor/inputmask/dist/inputmask/inputmask.js');
-      this.import('vendor/inputmask/dist/inputmask/inputmask.extensions.js');
-      this.import('vendor/inputmask/dist/inputmask/inputmask.date.extensions.js');
-      this.import('vendor/inputmask/dist/inputmask/inputmask.numeric.extensions.js');
-      this.import('vendor/inputmask/dist/inputmask/inputmask.phone.extensions.js');
-    }
+    filesToImport.forEach(file => {
+      this.import(`vendor/inputmask/dist/inputmask/${file}`);
+    });
   }
 };
