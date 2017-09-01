@@ -17,8 +17,10 @@ module.exports = {
   options: {
     nodeAssets: {
       inputmask: () => ({
-        vendor: filesToImport.map(file => `dist/inputmask/${file}`),
-        processTree: input => fastbootTransform(input)
+        vendor: {
+          include: filesToImport.map(file => `dist/inputmask/${file}`),
+          processTree: input => fastbootTransform(input)
+        }
       })
     }
   },
