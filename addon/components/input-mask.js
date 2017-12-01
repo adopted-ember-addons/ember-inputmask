@@ -79,7 +79,7 @@ export default Ember.TextField.extend({
     inputmask.mask(this.element);
 
     // Initialize the unmasked value if it exists
-    if (this.get('unmaskedValue')) {
+    if (Ember.isPresent(this.get('unmaskedValue'))) {
       this.element.value = this.get('unmaskedValue');
     }
 
