@@ -82,3 +82,10 @@ test('extra options work', function(assert) {
   assert.equal(find('input').value, '1.2345,67890');
   assert.equal(this.unmaskedValue, '12345,6789', 'unmasked value is incorrect'); // in a browser, this will unmask as '12345,67890', but the trailing zero does not work in PhantomJS
 });
+
+test('0 values will appear', function(assert) {
+  this.set('unmaskedValue', 0);
+  this.render(hbs`{{number-input unmaskedValue=unmaskedValue}}`);
+  assert.equal(find('input').value, '0');
+  assert.equal(this.unmaskedValue, '0', 'unmasked value is correct');
+});
