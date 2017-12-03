@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { once } from '@ember/runloop';
+import { observer } from '@ember/object';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
@@ -34,11 +35,11 @@ export default InputMaskComponent.extend({
     this._super();
   },
 
-  _maskShouldChange: Ember.observer('mask', 'cardType', 'separator', function() {
-    Ember.run.once(this, 'updateMask');
+  _maskShouldChange: observer('mask', 'cardType', 'separator', function() {
+    once(this, 'updateMask');
   }),
 
-  updateCardType: Ember.observer('unmaskedValue', function() {
+  updateCardType: observer('unmaskedValue', function() {
     var unmaskedValue = this.get('unmaskedValue') || '',
         cardType;
 
