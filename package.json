@@ -18,10 +18,10 @@
     "test": "ember try:each"
   },
   "dependencies": {
+    "ember-cli-babel": "^6.6.0",
     "ember-cli-node-assets": "^0.2.2",
     "fastboot-transform": "^0.1.1",
-    "inputmask": "3.3.6",
-    "ember-cli-babel": "^6.6.0"
+    "inputmask": "3.3.6"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -39,6 +39,7 @@
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
+    "ember-native-dom-helpers": "^0.5.8",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.17.0",
     "loader.js": "^4.2.3"

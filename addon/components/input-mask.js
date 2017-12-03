@@ -153,8 +153,8 @@ export default TextField.extend({
 
   // When the unmaskedValue changes, set the value.
   setValue: observer('unmaskedValue', function() {
-    var debounce = this.get('debounce');
-    if ( debounce ) {
+    let debounceTime = this.get('debounce');
+    if ( debounceTime ) {
       debounce(this, this.updateVar, debounce);
     } else {
       this.updateVar();
