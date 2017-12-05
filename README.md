@@ -29,7 +29,7 @@ Ember Inputmask currently has two branches:
     mode. Critical bugs will be fixed, but minor issues will not be fixed and
     new features will not be added.
 
-  - [v0.4.x (master)](https://github.com/pzuraq/ember-inputmask/tree/master)
+  - [>v0.4.x](https://github.com/pzuraq/ember-inputmask/tree/master)
     pulls Inputmask 3.3.x from NPM. Bower and jQuery are not required.
 
 Versions prior to 0.4.0 automatically add `jquery.inputmask` into your
@@ -46,7 +46,22 @@ upgrade to the latest version of either v0.2.x or v0.4.x.
 $ ember install ember-inputmask
 ```
 
-## Usage
+## One Way Input Mask
+
+```hbs
+{{one-way-input-mask value mask='999-aaa-***' update=(action (mut value))}}
+```
+
+This component extends from the [ember-one-way-controls](https://github.com/DockYard/ember-one-way-controls) addon and follows the data-down-actions-up (DDAU) pattern. You should use the "one-way" components in this addon as the "non-one-way" versions are deprecated as of `0.5.0` and will be removed in `1.0.0`.
+
+### Usage
+
+This component has the same signature a it's [ember-one-way-controls counterpart](https://github.com/DockYard/ember-one-way-controls/blob/master/docs/one-way-input.md), but accepts two additional arguments:
+
+* `mask` The type of mask to put on the input
+* `options` Any additional masking options from [Inputmask](https://github.com/RobinHerbots/Inputmask) you would like to add
+
+## **deprecated** Input Mask Component
 
 The standard `input-mask` component:
 
