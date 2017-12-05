@@ -48,3 +48,10 @@ test('It can accept options', function(assert) {
   this.render(hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`);
   assert.equal(find('input').value, '1-*+*');
 });
+
+test('mask and options are not bound attributes', function(assert) {
+  this.set('options', { placeholder: '*' });
+  this.render(hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`);
+  assert.notOk(find('input').getAttribute('mask'), 'mask is not bound');
+  assert.notOk(find('input').getAttribute('options'), 'options is not bound');
+});

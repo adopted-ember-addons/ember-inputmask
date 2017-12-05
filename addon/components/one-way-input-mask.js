@@ -3,6 +3,16 @@ import { OneWayInput } from 'ember-one-way-controls';
 import { computed, get, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
+/**
+ * Displays an input with the specified mask applied to it
+ * using Inputmask library. Follows Data-down actions up pattern
+ *
+ * @param {string} value The unmasked value to display in the input
+ * @param {action} update The function to perform when the value changes. Will be passed the
+ * unmasked value and the masked values
+ * @param {string} mask The mask to use on the input
+ * @param {object} options The options to pass into the Inputmask library
+ */
 export default OneWayInput.extend({
   /**
    * Set the `_value` to be whatever the `element.value` is
@@ -10,6 +20,17 @@ export default OneWayInput.extend({
   attributeBindings: [
     'type',
     '_value:value'
+  ],
+
+  // In ember-one-way-controls all attributes are bound dynamically via a mixin, except for
+  // the ones specified in this property. We need to include 'mask', and 'options' to the list
+  NON_ATTRIBUTE_BOUND_PROPS: [
+    'keyEvents',
+    'classNames',
+    'positionalParamValue',
+    'update',
+    'mask',
+    'options',
   ],
 
   /**
@@ -20,7 +41,7 @@ export default OneWayInput.extend({
   mask: '',
 
   /**
-   * options - Options accepted by the Inputmask library  
+   * options - Options accepted by the Inputmask library
    */
   options: null,
 
