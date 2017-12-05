@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { once } from '@ember/runloop';
+import { observer } from '@ember/object';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
@@ -14,7 +15,7 @@ export default InputMaskComponent.extend({
     this._super();
   },
 
-  _maskShouldChange: Ember.observer('mask', function() {
-    Ember.run.once(this, 'updateMask');
+  _maskShouldChange: observer('mask', function() {
+    once(this, 'updateMask');
   })
 });

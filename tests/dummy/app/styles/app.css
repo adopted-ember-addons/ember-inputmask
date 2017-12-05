@@ -1,4 +1,8 @@
-html, body {
+body {
+  margin: 0;
+}
+
+.ember-application {
   margin: 20px;
 }
 
