@@ -56,12 +56,16 @@ This component extends from the [ember-one-way-controls](https://github.com/Dock
 
 ### Usage
 
-This component has the same signature a it's [ember-one-way-controls counterpart](https://github.com/DockYard/ember-one-way-controls/blob/master/docs/one-way-input.md), but accepts two additional arguments:
+This component has the same interface as it's [ember-one-way-controls counterpart](https://github.com/DockYard/ember-one-way-controls/blob/master/docs/one-way-input.md), but accepts two additional arguments:
 
 * `mask` The type of mask to put on the input
 * `options` Any additional masking options from [Inputmask](https://github.com/RobinHerbots/Inputmask) you would like to add
 
-## **deprecated** Input Mask Component
+## Other One Way Masks
+
+* [{{one-way-number-mask}}](docs/one-way-number-mask.md)
+
+## Input Mask Component (deprecated)
 
 The standard `input-mask` component:
 
@@ -194,7 +198,7 @@ following:
 {{input-mask mask='email' unmaskedValue=foo}}
 ```
 
-### Number Inputs
+### Number Inputs (deprecated)
 
 ```hbs
 {{number-input unmaskedValue=foo group=false groupSize=3 separator=',''
