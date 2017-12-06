@@ -1,7 +1,11 @@
 /* global Inputmask */
 import { OneWayInput } from 'ember-one-way-controls';
 import { computed, get, set } from '@ember/object';
-import { isBlank } from '@ember/utils';
+import { schedule } from '@ember/runloop';
+
+const DEFAULT_OPTIONS = {
+  rightAlign: false,
+};
 
 /**
  * Displays an input with the specified mask applied to it
@@ -64,11 +68,9 @@ export default OneWayInput.extend({
   init() {
     this._super(...arguments);
 
-    // Give options default value of {}, without setting it as {} in the property definition
-    // otherwise it will be shared accross all instances of the component
-    if (isBlank(get(this, 'options'))) {
-      set(this, 'options', {});
-    }
+    // Give the mask some default options that can be overridden
+    let options = get(this, 'options');
+    set(this, 'options', Object.assign({}, DEFAULT_OPTIONS, options));
   },
 
   /**
@@ -85,21 +87,32 @@ export default OneWayInput.extend({
 
   willDestroyElement() {
     this._destroyMask();
+    this.element.removeEventListener('input', this._changeEventListener);
   },
 
   /**
+   * Disabling this so we don't have conflicts with manual addEventListener in case something
+   * changes one day
+   *
    * @override
    */
-  change(event) {
-    this._processNewValue(event.target.value)
-  },
+  change(){},
 
   /**
+   * Disabling thi so we don't have conflicts with manual addEventListener in case something
+   * changes one day
+   *
    * @override
    */
-  input(event) {
-    this._processNewValue(event.target.value)
-  },
+  input(){},
+
+  /**
+   * _changeEventListener - A place to store the event listener we setup to listen to the 'input'
+   * events, because the Inputmask library events don't play nice with the Ember components event
+   *
+   * @private
+   */
+  _changeEventListener() {},
 
   /**
    * _processNewValue - Handle when a new value changes
@@ -108,10 +121,26 @@ export default OneWayInput.extend({
    * @param {string} value - The masked value visible in the element
    */
   _processNewValue(value) {
+    let cursorStart = this.element.selectionStart;
+    let cursorEnd = this.element.selectionEnd;
+    let unmaskedValue = this._getUnmaskedValue();
+    let oldUnmaskedValue = get(this, '_value');
+    let options = get(this, 'options');
+
     // We only want to make changes if something is different so we don't cause infinite loops or
-    // double renders
-    if (get(this, '_value') !== value) {
-      get(this, 'update')(this._getUnmaskedValue(), value);
+    // double renders.
+    // We want to make sure that that values we compare are going to come out the same through
+    // the masking algorithm, to ensure that we only call `update` if the values are actually different
+    // (e.g. '1234.' will be masked as '1234' and so when `update` is called and passed back
+    // into the component the decimal will be removed, we don't want this)
+    if (Inputmask.format(String(oldUnmaskedValue), options) !== Inputmask.format(unmaskedValue, options)) {
+      get(this, 'update')(unmaskedValue, value);
+
+      // When the value is updated, and then sent back down the cursor moves to the end of the field.
+      // We therefore need to put it back to where the user was typing so they don't get janked around
+      schedule('afterRender', () => {
+        this.element.setSelectionRange(cursorStart, cursorEnd);
+      });
     }
   },
 
@@ -124,6 +153,14 @@ export default OneWayInput.extend({
     let mask = get(this, 'mask'), options = get(this, 'options');
     let inputmask = new Inputmask(mask, options);
     inputmask.mask(this.element);
+
+    // We need to setup a manual event listener for the change event instead of using the Ember
+    // Component event methods, because the Inputmask events don't play nice with the Component
+    // ones. Similar issue happens in React.js as well
+    // https://github.com/RobinHerbots/Inputmask/issues/1377
+    let eventListener = event => this._processNewValue(event.target.value);
+    set(this, '_changeEventListener', eventListener);
+    this.element.addEventListener('input', eventListener);
   },
 
   /**
