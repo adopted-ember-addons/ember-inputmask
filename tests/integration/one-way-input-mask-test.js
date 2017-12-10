@@ -55,3 +55,23 @@ test('mask and options are not bound attributes', function(assert) {
   assert.notOk(find('input').getAttribute('mask'), 'mask is not bound');
   assert.notOk(find('input').getAttribute('options'), 'options is not bound');
 });
+
+test('mask can dynamically be changed', function(assert) {
+  this.set('mask', '9-9+9');
+  this.set('value', 123);
+  this.render(hbs`{{one-way-input-mask value mask=mask}}`);
+  assert.equal(find('input').value, '1-2+3');
+
+  this.set('mask', '9_9_9');
+  assert.equal(find('input').value, '1_2_3');
+});
+
+test('options can dynamically be changed', function(assert) {
+  this.set('value', 1)
+  this.set('options', { placeholder: '*' });
+  this.render(hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`);
+  assert.equal(find('input').value, '1-*+*');
+
+  this.set('options', { placeholder: '_' });
+  assert.equal(find('input').value, '1-_+_');
+});

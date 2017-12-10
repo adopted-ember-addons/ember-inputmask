@@ -2,6 +2,7 @@
 import { OneWayInput } from 'ember-one-way-controls';
 import { computed, get, set } from '@ember/object';
 import { schedule } from '@ember/runloop';
+import { areDifferent } from 'ember-inputmask/utils/compare-objects';
 
 const DEFAULT_OPTIONS = {
   rightAlign: false,
@@ -45,11 +46,13 @@ export default OneWayInput.extend({
    * @public
    */
   mask: '',
+  _oldMask: '',
 
   /**
    * options - Options accepted by the Inputmask library
    */
   options: null,
+  _oldOptions: null,
 
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
@@ -85,6 +88,22 @@ export default OneWayInput.extend({
 
   didInsertElement() {
     this._setupMask();
+  },
+
+  didReceiveAttrs() {
+    let mask = get(this, 'mask');
+    let oldMask = get(this, '_oldMask');
+    let didMaskChange = mask !== oldMask;
+    let options = get(this, 'options');
+    let oldOptions = get(this, '_oldOptions');
+    let didOptionsChange = areDifferent(options, oldOptions);
+
+    // We want to repply the mask if it has changed
+    if (didMaskChange || didOptionsChange) {
+      set(this, '_oldMask', mask);
+      set(this, '_oldOptions', options);
+      this._changeMask();
+    }
   },
 
   willDestroyElement() {
@@ -173,6 +192,20 @@ export default OneWayInput.extend({
    */
   _getUnmaskedValue() {
     return this.element.inputmask.unmaskedvalue();
+  },
+
+  /**
+   * _changeMask - Destroy and reapply the mask when the mask or options change so the mask and
+   * options can be dynamic
+   *
+   * @private
+   */
+  _changeMask() {
+    if (this.element && this.element.inputmask) {
+      this._destroyMask();
+      this.element.removeEventListener('input', this._changeEventListener);
+      this._setupMask();
+    }
   },
 
   _destroyMask() {
