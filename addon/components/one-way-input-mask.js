@@ -78,14 +78,6 @@ export default OneWayInput.extend({
     set(this, 'options', Object.assign({}, DEFAULT_OPTIONS, options));
   },
 
-  /**
-   * update - This action will be called when the value changes and will be passed the unmasked value
-   * and the masked value
-   *
-   * @public
-   */
-  update() {},
-
   didInsertElement() {
     this._setupMask();
   },
@@ -112,6 +104,14 @@ export default OneWayInput.extend({
   },
 
   /**
+   * update - This action will be called when the value changes and will be passed the unmasked value
+   * and the masked value
+   *
+   * @public
+   */
+  update() {},
+
+  /**
    * Disabling this so we don't have conflicts with manual addEventListener in case something
    * changes one day
    *
@@ -136,6 +136,14 @@ export default OneWayInput.extend({
   _changeEventListener() {},
 
   /**
+   * sendUpdate - Send the update action with the values. Components that inherit from this may
+   * need to override this if they want to pass additional data on the update
+   */
+  sendUpdate(unmaskedValue, value) {
+    get(this, 'update')(unmaskedValue, value);
+  },
+
+  /**
    * _processNewValue - Handle when a new value changes
    *
    * @private
@@ -155,7 +163,7 @@ export default OneWayInput.extend({
     // (e.g. '1234.' will be masked as '1234' and so when `update` is called and passed back
     // into the component the decimal will be removed, we don't want this)
     if (Inputmask.format(String(oldUnmaskedValue), options) !== Inputmask.format(unmaskedValue, options)) {
-      get(this, 'update')(unmaskedValue, value);
+      this.sendUpdate(unmaskedValue, value);
 
       // When the value is updated, and then sent back down the cursor moves to the end of the field.
       // We therefore need to put it back to where the user was typing so they don't get janked around
