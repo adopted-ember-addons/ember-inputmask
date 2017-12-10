@@ -1,4 +1,4 @@
-import OneWayInputMask from 'ember-inputmask/components/one-way-input-mask';
+import OneWayInputMask, { DEFAULT_NON_BOUND_PROPS } from 'ember-inputmask/components/one-way-input-mask';
 import { get, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
@@ -10,6 +10,8 @@ const DEFAULT_OPTIONS = {
 };
 
 export default OneWayInputMask.extend({
+  NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('decimal'),
+  
   /**
    * @override
    */

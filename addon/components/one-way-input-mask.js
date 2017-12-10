@@ -7,6 +7,15 @@ const DEFAULT_OPTIONS = {
   rightAlign: false,
 };
 
+export const DEFAULT_NON_BOUND_PROPS = [
+  'keyEvents',
+  'classNames',
+  'positionalParamValue',
+  'update',
+  'mask',
+  'options',
+];
+
 /**
  * Displays an input with the specified mask applied to it
  * using Inputmask library. Follows Data-down actions up pattern
@@ -28,14 +37,7 @@ export default OneWayInput.extend({
 
   // In ember-one-way-controls all attributes are bound dynamically via a mixin, except for
   // the ones specified in this property. We need to include 'mask', and 'options' to the list
-  NON_ATTRIBUTE_BOUND_PROPS: [
-    'keyEvents',
-    'classNames',
-    'positionalParamValue',
-    'update',
-    'mask',
-    'options',
-  ],
+  NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS,
 
   /**
    * mask - Pass in the `mask` string to set it on the element
