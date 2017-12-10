@@ -3184,9 +3184,9 @@ inline-source-map-comment@^1.0.5:
     sum-up "^1.0.1"
     xtend "^4.0.0"
 
-inputmask@3.3.6:
-  version "3.3.6"
-  resolved "https://registry.yarnpkg.com/inputmask/-/inputmask-3.3.6.tgz#31952c37cb831e5cce5bf364b4c621cb61486a70"
+inputmask@^3.3.11:
+  version "3.3.11"
+  resolved "https://registry.yarnpkg.com/inputmask/-/inputmask-3.3.11.tgz#1421c94ae28c3dcd1b4d26337b508bb34998e2d8"
 
 inquirer@^2:
   version "2.0.0"

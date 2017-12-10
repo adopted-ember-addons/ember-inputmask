@@ -22,7 +22,7 @@
     "ember-cli-node-assets": "^0.2.2",
     "ember-one-way-controls": "^3.0.1",
     "fastboot-transform": "^0.1.1",
-    "inputmask": "3.3.6"
+    "inputmask": "^3.3.11"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
