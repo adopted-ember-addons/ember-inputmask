@@ -1,6 +1,6 @@
 {
   "name": "ember-inputmask",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Ember wrapper for Inputmask 3.x.",
   "keywords": [
     "ember-addon"
