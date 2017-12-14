@@ -18,6 +18,7 @@ test('It can be a decimal mask with 2 digits with one argument', function(assert
   this.render(hbs`{{one-way-number-mask value decimal=true}}`);
 
   assert.equal(find('input').value, '1,234.57');
+  assert.notOk(find('input').getAttribute('decimal'), 'decimal is not a bound attribute');
 });
 
 test('Can change default digits with options', function(assert) {

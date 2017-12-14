@@ -2,10 +2,20 @@
 import { OneWayInput } from 'ember-one-way-controls';
 import { computed, get, set } from '@ember/object';
 import { schedule } from '@ember/runloop';
+import { areDifferent } from 'ember-inputmask/utils/compare-objects';
 
 const DEFAULT_OPTIONS = {
   rightAlign: false,
 };
+
+export const DEFAULT_NON_BOUND_PROPS = [
+  'keyEvents',
+  'classNames',
+  'positionalParamValue',
+  'update',
+  'mask',
+  'options',
+];
 
 /**
  * Displays an input with the specified mask applied to it
@@ -28,14 +38,7 @@ export default OneWayInput.extend({
 
   // In ember-one-way-controls all attributes are bound dynamically via a mixin, except for
   // the ones specified in this property. We need to include 'mask', and 'options' to the list
-  NON_ATTRIBUTE_BOUND_PROPS: [
-    'keyEvents',
-    'classNames',
-    'positionalParamValue',
-    'update',
-    'mask',
-    'options',
-  ],
+  NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS,
 
   /**
    * mask - Pass in the `mask` string to set it on the element
@@ -43,11 +46,13 @@ export default OneWayInput.extend({
    * @public
    */
   mask: '',
+  _oldMask: '',
 
   /**
    * options - Options accepted by the Inputmask library
    */
   options: null,
+  _oldOptions: null,
 
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
@@ -73,6 +78,30 @@ export default OneWayInput.extend({
     set(this, 'options', Object.assign({}, DEFAULT_OPTIONS, options));
   },
 
+  didInsertElement() {
+    this._setupMask();
+  },
+
+  didReceiveAttrs() {
+    let mask = get(this, 'mask');
+    let oldMask = get(this, '_oldMask');
+    let didMaskChange = mask !== oldMask;
+    let options = get(this, 'options');
+    let oldOptions = get(this, '_oldOptions');
+    let didOptionsChange = areDifferent(options, oldOptions);
+
+    // We want to repply the mask if it has changed
+    if (didMaskChange || didOptionsChange) {
+      set(this, '_oldMask', mask);
+      set(this, '_oldOptions', options);
+      this._changeMask();
+    }
+  },
+
+  willDestroyElement() {
+    this._destroyMask();
+  },
+
   /**
    * update - This action will be called when the value changes and will be passed the unmasked value
    * and the masked value
@@ -80,15 +109,6 @@ export default OneWayInput.extend({
    * @public
    */
   update() {},
-
-  didInsertElement() {
-    this._setupMask();
-  },
-
-  willDestroyElement() {
-    this._destroyMask();
-    this.element.removeEventListener('input', this._changeEventListener);
-  },
 
   /**
    * Disabling this so we don't have conflicts with manual addEventListener in case something
@@ -115,6 +135,14 @@ export default OneWayInput.extend({
   _changeEventListener() {},
 
   /**
+   * sendUpdate - Send the update action with the values. Components that inherit from this may
+   * need to override this if they want to pass additional data on the update
+   */
+  sendUpdate(unmaskedValue, value) {
+    get(this, 'update')(unmaskedValue, value);
+  },
+
+  /**
    * _processNewValue - Handle when a new value changes
    *
    * @private
@@ -134,7 +162,7 @@ export default OneWayInput.extend({
     // (e.g. '1234.' will be masked as '1234' and so when `update` is called and passed back
     // into the component the decimal will be removed, we don't want this)
     if (Inputmask.format(String(oldUnmaskedValue), options) !== Inputmask.format(unmaskedValue, options)) {
-      get(this, 'update')(unmaskedValue, value);
+      this.sendUpdate(unmaskedValue, value);
 
       // When the value is updated, and then sent back down the cursor moves to the end of the field.
       // We therefore need to put it back to where the user was typing so they don't get janked around
@@ -173,7 +201,21 @@ export default OneWayInput.extend({
     return this.element.inputmask.unmaskedvalue();
   },
 
+  /**
+   * _changeMask - Destroy and reapply the mask when the mask or options change so the mask and
+   * options can be dynamic
+   *
+   * @private
+   */
+  _changeMask() {
+    if (this.element && this.element.inputmask) {
+      this._destroyMask();
+      this._setupMask();
+    }
+  },
+
   _destroyMask() {
+    this.element.removeEventListener('input', this._changeEventListener);
     this.element.inputmask.remove();
   },
 });

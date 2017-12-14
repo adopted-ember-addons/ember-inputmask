@@ -3,7 +3,12 @@
 <div class='container'>
   <fieldset>
     <legend>Generic input mask:</legend>
-    {{input-mask mask="AAAA" greedyMask=true}}
+    {{one-way-input-mask mask="AAAA"}}
+  </fieldset>
+
+  <fieldset>
+    <legend>Number mask:</legend>
+    {{one-way-number-mask}}
   </fieldset>
 
   <fieldset>
@@ -13,7 +18,7 @@
 
   <fieldset>
     <legend>Credit card input:</legend>
-    {{credit-card-input value=blah cardType=cardTypeValue}} {{cardTypeValue}}
+    {{one-way-credit-card-mask update=(action 'updateCardType')}} {{cardTypeValue}}
   </fieldset>
 
   <fieldset>

@@ -63,6 +63,7 @@ This component has the same interface as it's [ember-one-way-controls counterpar
 
 ## Other One Way Masks
 
+* [{{one-way-credit-card-mask}}](docs/one-way-credit-card-mask.md)
 * [{{one-way-number-mask}}](docs/one-way-number-mask.md)
 
 ## Input Mask Component (deprecated)
@@ -140,7 +141,7 @@ so choose whichever one you want.
 As mentioned above, this addon include other components that extend the base
 `input-mask` component. Some of simple aliases, but some add additional options.
 
-### Credit Card Inputs
+### Credit Card Inputs (deprecated)
 
 ```hbs
 {{credit-card-input unmaskedValue=foo cardType=bar separator=' '}}

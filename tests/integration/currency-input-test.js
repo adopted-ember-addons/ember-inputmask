@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
 
@@ -6,7 +6,7 @@ moduleForComponent('currency-input', 'Integration | Component | currency-input',
   integration: true
 });
 
-test('default value', function(assert) {
+skip('default value', function(assert) {
   this.render(hbs`{{currency-input unmaskedValue=unmaskedValue}}`);
   triggerEvent('input', 'blur');
   assert.equal(find('input').value, '$ 0.00');
