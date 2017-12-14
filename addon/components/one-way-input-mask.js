@@ -100,7 +100,6 @@ export default OneWayInput.extend({
 
   willDestroyElement() {
     this._destroyMask();
-    this.element.removeEventListener('input', this._changeEventListener);
   },
 
   /**
@@ -211,12 +210,12 @@ export default OneWayInput.extend({
   _changeMask() {
     if (this.element && this.element.inputmask) {
       this._destroyMask();
-      this.element.removeEventListener('input', this._changeEventListener);
       this._setupMask();
     }
   },
 
   _destroyMask() {
+    this.element.removeEventListener('input', this._changeEventListener);
     this.element.inputmask.remove();
   },
 });
