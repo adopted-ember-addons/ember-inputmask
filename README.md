@@ -69,6 +69,7 @@ This component has the same interface as it's [ember-one-way-controls counterpar
 * [{{one-way-email-mask}}](docs/one-way-email-mask.md)
 * [{{one-way-number-mask}}](docs/one-way-number-mask.md)
 * [{{one-way-phone-mask}}](docs/one-way-phone-mask.md)
+* [{{one-way-ssn-mask}}](docs/one-way-ssn-mask.md)
 
 ## Input Mask Component (deprecated)
 

@@ -13,7 +13,7 @@
 
   <fieldset>
     <legend>SSN input:</legend>
-    {{ssn-input value=ssnValue pattern='^\d{3}-\d{2}-\d{4}$'}}
+    {{one-way-ssn-mask value=ssnValue pattern='^\d{3}-\d{2}-\d{4}$'}}
   </fieldset>
 
   <fieldset>
@@ -28,7 +28,7 @@
 
   <fieldset>
     <legend>Email input:</legend>
-    {{email-input value=testValue}}
+    {{one-way-email-mask value=testValue}}
   </fieldset>
 
   <fieldset>
