@@ -2,7 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { fillIn, find } from 'ember-native-dom-helpers';
 
-moduleForComponent('one-way-currency-mask', 'Integration | Component | one way currency mask', {
+moduleForComponent('one-way-date-mask', 'Integration | Component | one way date mask', {
   integration: true,
 
   beforeEach() {
@@ -13,8 +13,8 @@ moduleForComponent('one-way-currency-mask', 'Integration | Component | one way c
 });
 
 test('filled-in value', async function(assert) {
-  this.render(hbs`{{one-way-currency-mask value=unmaskedValue update=update}}`);
-  await fillIn('input', '1234567.89');
-  assert.equal(find('input').value, '$ 1,234,567.89');
-  assert.equal(this.unmaskedValue, '1234567.89');
+  this.render(hbs`{{one-way-date-mask value=unmaskedValue update=update}}`);
+  await fillIn('input', '14914');
+  assert.equal(find('input').value, '14/09/2014');
+  assert.equal(this.unmaskedValue, '14092014');
 });

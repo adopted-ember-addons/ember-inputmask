@@ -65,6 +65,7 @@ This component has the same interface as it's [ember-one-way-controls counterpar
 
 * [{{one-way-credit-card-mask}}](docs/one-way-credit-card-mask.md)
 * [{{one-way-currency-mask}}](docs/one-way-currency-mask.md)
+* [{{one-way-date-mask}}](docs/one-way-date-mask.md)
 * [{{one-way-number-mask}}](docs/one-way-number-mask.md)
 
 ## Input Mask Component (deprecated)
@@ -174,7 +175,7 @@ following:
 {{input-mask mask='currency' unmaskedValue=foo}}
 ```
 
-### Date Inputs
+### Date Inputs (deprecated)
 
 ```hbs
 {{date-input unmaskedValue=foo}}
