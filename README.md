@@ -64,6 +64,7 @@ This component has the same interface as it's [ember-one-way-controls counterpar
 ## Other One Way Masks
 
 * [{{one-way-credit-card-mask}}](docs/one-way-credit-card-mask.md)
+* [{{one-way-currency-mask}}](docs/one-way-currency-mask.md)
 * [{{one-way-number-mask}}](docs/one-way-number-mask.md)
 
 ## Input Mask Component (deprecated)
@@ -160,7 +161,7 @@ changes the mask as appropriate. It currently has support for:
 The card type is stored in `cardType`, which can be bound to. The separator for
 numbers can be specified with the `separator` option, and defaults to `-`.
 
-### Currency Inputs
+### Currency Inputs (deprecated)
 
 ```hbs
 {{currency-input unmaskedValue=foo}}
