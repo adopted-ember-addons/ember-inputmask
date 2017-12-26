@@ -19,6 +19,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
 export default InputMaskComponent.extend({
   mask:    '(299) 999-9999',
 
+  oldComponent: '{{phone-number-input}}',
+  newComponent: '{{one-way-phone-mask}}',
+
   updateMask: function() {
     if (this.get('extensions')) {
       this.set('mask', '(299) 999-9999[ x 9{1,4}]');

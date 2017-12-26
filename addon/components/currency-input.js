@@ -7,5 +7,7 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  */
 
 export default InputMaskComponent.extend({
+  oldComponent: '{{currency-input}}',
+  newComponent: '{{one-way-currency-mask}}',
   mask: 'currency'
 });

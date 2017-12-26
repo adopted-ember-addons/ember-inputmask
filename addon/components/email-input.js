@@ -7,5 +7,7 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  */
 
 export default InputMaskComponent.extend({
+  oldComponent: '{{email-input}}',
+  newComponent: '{{one-way-email-mask}}',
   mask: 'email'
 });

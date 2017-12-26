@@ -1,10 +1,10 @@
 /* global Inputmask */
 
 import { once, debounce } from '@ember/runloop';
-
+import { deprecate } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { on } from '@ember/object/evented';
-import { computed, observer } from '@ember/object';
+import { computed, observer, get } from '@ember/object';
 import TextField from '@ember/component/text-field';
 
 /**
@@ -45,6 +45,18 @@ export default TextField.extend({
   pattern:         null,
 
   value: 'value',
+
+  oldComponent: '{{input-mask}}',
+  newComponent: '{{one-way-input-mask}}',
+
+  init() {
+    this._super(...arguments);
+    let message = `${get(this, 'oldComponent')} is deprecated in favor of ${get(this, 'newComponent')} and will be removed in 1.0.0`;
+    deprecate(message, false, {
+      id: 'non-one-way-mask',
+      until: '1.0.0',
+    });
+  },
 
   options: computed(function() {
     return {};

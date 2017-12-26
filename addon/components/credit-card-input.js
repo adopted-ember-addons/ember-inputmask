@@ -15,6 +15,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  */
 
 export default InputMaskComponent.extend({
+  oldComponent: '{{credit-card-input}}',
+  newComponent: '{{one-way-credit-card-mask}}',
+
   updateMask: function() {
     var cardType  = this.get('cardType'),
         s         = this.get('separator') || '-', // s for separator for convenience
