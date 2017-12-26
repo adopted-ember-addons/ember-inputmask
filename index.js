@@ -29,5 +29,6 @@ module.exports = {
     filesToImport.forEach(file => {
       this.import(`vendor/inputmask/dist/inputmask/${file}`);
     });
+    this.import('vendor/shims/inputmask.js');
   }
 };

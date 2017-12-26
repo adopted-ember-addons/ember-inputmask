@@ -1,8 +1,8 @@
-/* global Inputmask */
 import { OneWayInput } from 'ember-one-way-controls';
 import { computed, get, set } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { areDifferent } from 'ember-inputmask/utils/compare-objects';
+import Inputmask from 'inputmask';
 
 const DEFAULT_OPTIONS = {
   rightAlign: false,
