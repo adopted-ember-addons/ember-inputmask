@@ -10,6 +10,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
 export default InputMaskComponent.extend({
   mask: '999-99-9999',
 
+  oldComponent: '{{ssn-input}}',
+  newComponent: '{{one-way-ssn-mask}}',
+
   updateMask() {
     this.set('mask', '999-99-9999');
     this._super();

@@ -50,6 +50,9 @@ export default InputMaskComponent.extend({
   suffix:         '',
   unmaskAsNumber: false,
 
+  oldComponent: '{{number-input}}',
+  newComponent: '{{one-way-number-mask}}',
+
   updateMask: function() {
     this.setProperties({
       'options.autoGroup':      this.get('group'),
