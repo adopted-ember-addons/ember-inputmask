@@ -67,6 +67,7 @@ This component has the same interface as it's [ember-one-way-controls counterpar
 * [{{one-way-currency-mask}}](docs/one-way-currency-mask.md)
 * [{{one-way-date-mask}}](docs/one-way-date-mask.md)
 * [{{one-way-number-mask}}](docs/one-way-number-mask.md)
+* [{{one-way-phone-mask}}](docs/one-way-phone-mask.md)
 
 ## Input Mask Component (deprecated)
 
@@ -226,7 +227,7 @@ options:
   - `max`: Sets the maximum value for the field
   - `unmaskAsNumber`: Unmasks the input as a number rather than a string (e.g. `1234.56` vs. `'1234,56'`)
 
-### US/Canada Phone Number Inputs
+### US/Canada Phone Number Inputs (deprecated)
 
 ```hbs
 {{phone-number-input unmaskedValue=foo extensions=false}}
