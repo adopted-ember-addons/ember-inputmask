@@ -70,6 +70,7 @@ This component has the same interface as it's [ember-one-way-controls counterpar
 * [{{one-way-number-mask}}](docs/one-way-number-mask.md)
 * [{{one-way-phone-mask}}](docs/one-way-phone-mask.md)
 * [{{one-way-ssn-mask}}](docs/one-way-ssn-mask.md)
+* [{{one-way-zip-code-mask}}](docs/one-way-zip-code-mask.md)
 
 ## Input Mask Component (deprecated)
 
@@ -253,7 +254,7 @@ than this tag, however.
 
 Masks a US SSN code (`999-99-9999`).
 
-### US ZIP Code Inputs
+### US ZIP Code Inputs (deprecated)
 
 ```hbs
 {{zip-code-input unmaskedValue=foo fullCode=false}}
