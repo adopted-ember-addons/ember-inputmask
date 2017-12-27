@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1
+
+- Make `Inputmask` importable
+
 ## 0.6.0
 
 - [DEPRECATION] Add deprecation warnings to all non-one-way input masks
