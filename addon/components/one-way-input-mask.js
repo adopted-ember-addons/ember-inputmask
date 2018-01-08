@@ -52,6 +52,7 @@ export default OneWayInput.extend({
    * options - Options accepted by the Inputmask library
    */
   options: null,
+  _options: null, // Internal options so external attribute doesnt clobber it
   _oldOptions: null,
 
   /**
@@ -75,7 +76,7 @@ export default OneWayInput.extend({
 
     // Give the mask some default options that can be overridden
     let options = get(this, 'options');
-    set(this, 'options', Object.assign({}, DEFAULT_OPTIONS, options));
+    set(this, '_options', Object.assign({}, DEFAULT_OPTIONS, options));
   },
 
   didInsertElement() {
@@ -90,7 +91,12 @@ export default OneWayInput.extend({
     let oldOptions = get(this, '_oldOptions');
     let didOptionsChange = areDifferent(options, oldOptions);
 
-    // We want to repply the mask if it has changed
+    if (didOptionsChange) {
+      // Override external options on top of internal options
+      set(this, '_options', Object.assign({}, get(this, '_options'), options));
+    }
+
+    // We want to reapply the mask if it has changed
     if (didMaskChange || didOptionsChange) {
       set(this, '_oldMask', mask);
       set(this, '_oldOptions', options);
@@ -153,7 +159,7 @@ export default OneWayInput.extend({
     let cursorEnd = this.element.selectionEnd;
     let unmaskedValue = this._getUnmaskedValue();
     let oldUnmaskedValue = get(this, '_value');
-    let options = get(this, 'options');
+    let options = get(this, '_options');
 
     // We only want to make changes if something is different so we don't cause infinite loops or
     // double renders.
@@ -178,7 +184,7 @@ export default OneWayInput.extend({
    * @private
    */
   _setupMask() {
-    let mask = get(this, 'mask'), options = get(this, 'options');
+    let mask = get(this, 'mask'), options = get(this, '_options');
     let inputmask = new Inputmask(mask, options);
     inputmask.mask(this.element);
 
