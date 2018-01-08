@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.2
+
+- [BUG] Fix issue where `options` were being clobbered
+
 ## 0.6.1
 
 - Make `Inputmask` importable
