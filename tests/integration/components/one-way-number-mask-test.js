@@ -41,3 +41,14 @@ test('The parent can receive the updated value via the `update` action', async f
   await fillIn('input', 456);
   assert.equal(this.get('value'), '456');
 });
+
+test('Internal options are not clobbered by external ones', async function(assert) {
+  this.set('value', 123)
+  this.render(hbs`{{one-way-number-mask value
+    update=(action (mut value))
+    options=(hash prefix="$")
+    decimal=true}}`);
+  await fillIn('input', 1);
+  await fillIn('input', 456.78901);
+  assert.equal(find('input').value, '$456.79');
+});

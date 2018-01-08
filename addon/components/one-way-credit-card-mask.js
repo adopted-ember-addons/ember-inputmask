@@ -7,9 +7,11 @@ export default OneWayInputMask.extend({
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('separator'),
 
   init() {
-    let options = get(this, 'options');
+    this._super(...arguments);
 
-    set(this, 'options', Object.assign({}, {
+    let options = get(this, '_options');
+
+    set(this, '_options', Object.assign({}, {
       // We need to make sure we catch paste events so that we change the mask before the text
       // hits the input. This is a callback provided by Inputmask.js
       onBeforePaste: value => {
@@ -25,8 +27,6 @@ export default OneWayInputMask.extend({
         });
       },
     }, options));
-
-    this._super(...arguments);
   },
 
   /**
