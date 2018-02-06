@@ -64,7 +64,7 @@ test('Other formatting', async function(assert) {
 test('American Express formatting', async function(assert) {
   this.render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
   await fillIn('input', '344444444444444');
-  assert.equal(find('input').value, '3444-4444444-4444');
+  assert.equal(find('input').value, '3444-444444-44444');
   assert.equal(this.unmaskedValue, '344444444444444');
   assert.equal(this.cardType, 'American Express');
 });

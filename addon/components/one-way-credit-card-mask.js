@@ -61,7 +61,7 @@ export default OneWayInputMask.extend({
       let s = get(this, 'separator');
 
       if (cardType === 'American Express') {
-        return `9999${s}9999999${s}9999`;
+        return `9999${s}999999${s}99999`;
       }
 
       if (cardType === 'Diners Club') {
