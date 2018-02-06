@@ -50,7 +50,7 @@ test('American Express formatting', function(assert) {
   this.render(hbs`{{credit-card-input unmaskedValue=unmaskedValue}}`);
   fillIn('input', '344444444444444');
   triggerEvent('input', 'blur');
-  assert.equal(find('input').value, '3444-4444444-4444');
+  assert.equal(find('input').value, '3444-444444-44444');
   assert.equal(this.unmaskedValue, '344444444444444');
 });
 
