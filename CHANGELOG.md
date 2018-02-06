@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.3
+
+- [BUG] Fix American Express Formatting
+
 ## 0.6.2
 
 - [BUG] Fix issue where `options` were being clobbered
