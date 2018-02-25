@@ -52,11 +52,9 @@ $ ember install ember-inputmask
 {{one-way-input-mask value mask='999-aaa-***' update=(action (mut value))}}
 ```
 
-This component extends from the [ember-one-way-controls](https://github.com/DockYard/ember-one-way-controls) addon and follows the data-down-actions-up (DDAU) pattern. You should use the "one-way" components in this addon as the "non-one-way" versions are deprecated as of `0.5.0` and will be removed in `1.0.0`.
+This component follows the data-down-actions-up (DDAU) pattern. You should use the "one-way" components in this addon as the "non-one-way" versions are deprecated as of `0.5.0` and will be removed in `1.0.0`.
 
-### Usage
-
-This component has the same interface as it's [ember-one-way-controls counterpart](https://github.com/DockYard/ember-one-way-controls/blob/master/docs/one-way-input.md), but accepts two additional arguments:
+### Arguments
 
 * `mask` The type of mask to put on the input
 * `options` Any additional masking options from [Inputmask](https://github.com/RobinHerbots/Inputmask) you would like to add
