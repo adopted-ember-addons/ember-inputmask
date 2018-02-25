@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.4
+
+- Remove ember-one-way-controls as a dependency since it's deprecated
+- [BUG] Fix failing Travis build
+
 ## 0.6.3
 
 - [BUG] Fix American Express Formatting
