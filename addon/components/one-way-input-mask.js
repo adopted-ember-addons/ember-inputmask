@@ -1,4 +1,4 @@
-import { OneWayInput } from 'ember-one-way-controls';
+import Component from '@ember/component';
 import { computed, get, set } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { areDifferent } from 'ember-inputmask/utils/compare-objects';
@@ -27,7 +27,9 @@ export const DEFAULT_NON_BOUND_PROPS = [
  * @param {string} mask The mask to use on the input
  * @param {object} options The options to pass into the Inputmask library
  */
-export default OneWayInput.extend({
+const OneWayInputMask = Component.extend({
+  tagName: 'input',
+
   /**
    * Set the `_value` to be whatever the `element.value` is
    */
@@ -36,9 +38,10 @@ export default OneWayInput.extend({
     '_value:value'
   ],
 
-  // In ember-one-way-controls all attributes are bound dynamically via a mixin, except for
-  // the ones specified in this property. We need to include 'mask', and 'options' to the list
+  // This is where we blacklist all the attributes that should not be bound
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS,
+
+  type: 'text',
 
   /**
    * mask - Pass in the `mask` string to set it on the element
@@ -54,6 +57,11 @@ export default OneWayInput.extend({
   options: null,
   _options: null, // Internal options so external attribute doesnt clobber it
   _oldOptions: null,
+
+  keyEvents: {
+    '13': 'onenter',
+    '27': 'onescape',
+  },
 
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
@@ -77,6 +85,18 @@ export default OneWayInput.extend({
     // Give the mask some default options that can be overridden
     let options = get(this, 'options');
     set(this, '_options', Object.assign({}, DEFAULT_OPTIONS, options));
+
+    // We want any attribute that is not explicitally blacklisted to be bound that way we don't
+    // have to whitelist every single html attribute that an `input` can have. Borrowed from
+    // https://github.com/DockYard/ember-one-way-controls/blob/master/addon/-private/dynamic-attribute-bindings.js
+    let newAttributeBindings = [];
+    for (let key in this.attrs) {
+      if (get(this, 'NON_ATTRIBUTE_BOUND_PROPS').indexOf(key) === -1 && get(this, 'attributeBindings').indexOf(key) === -1) {
+        newAttributeBindings.push(key);
+      }
+    }
+
+    set(this, 'attributeBindings', this.attributeBindings.concat(newAttributeBindings));
   },
 
   didInsertElement() {
@@ -117,28 +137,23 @@ export default OneWayInput.extend({
   update() {},
 
   /**
-   * Disabling this so we don't have conflicts with manual addEventListener in case something
-   * changes one day
-   *
-   * @override
-   */
-  change(){},
-
-  /**
-   * Disabling thi so we don't have conflicts with manual addEventListener in case something
-   * changes one day
-   *
-   * @override
-   */
-  input(){},
-
-  /**
    * _changeEventListener - A place to store the event listener we setup to listen to the 'input'
    * events, because the Inputmask library events don't play nice with the Ember components event
    *
    * @private
    */
   _changeEventListener() {},
+
+  /**
+   * keyUp - If the keycode matches one of the keycodes in the `keyEvents` hash we want to fire
+   * the passed in action that matches it
+   */
+  keyUp(event) {
+    let method = get(this, `keyEvents.${event.keyCode}`);
+    if (method) {
+      get(this, method)(event.target.value);
+    }
+  },
 
   /**
    * sendUpdate - Send the update action with the values. Components that inherit from this may
@@ -225,3 +240,9 @@ export default OneWayInput.extend({
     this.element.inputmask.remove();
   },
 });
+
+OneWayInputMask.reopenClass({
+  positionalParams: ['positionalParamValue']
+});
+
+export default OneWayInputMask;
