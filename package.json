@@ -1,6 +1,6 @@
 {
   "name": "ember-inputmask",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Ember wrapper for Inputmask 3.x.",
   "keywords": [
     "ember-addon"
@@ -11,7 +11,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/pzuraq/ember-inputmask",
+  "repository": "https://github.com/brandynbennett/ember-inputmask",
   "scripts": {
     "build": "ember build",
     "start": "ember serve",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.5
+
+- [BUG] Fix inability to add classes to one way input masks
+
 ## 0.6.4
 
 - Remove ember-one-way-controls as a dependency since it's deprecated
@@ -9,7 +13,7 @@
 
 - [BUG] Fix American Express Formatting
 
-## 0.6.2
+## 0.6.
 
 - [BUG] Fix issue where `options` were being clobbered
 
