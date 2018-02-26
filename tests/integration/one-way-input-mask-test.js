@@ -75,3 +75,9 @@ test('options can dynamically be changed', function(assert) {
   this.set('options', { placeholder: '_' });
   assert.equal(find('input').value, '1-_+_');
 });
+
+test('It can have classes', function(assert) {
+  this.set('value', 123)
+  this.render(hbs`{{one-way-input-mask value mask='9-9+9' class='foo'}}`);
+  assert.equal(find('.foo').value, '1-2+3');
+});

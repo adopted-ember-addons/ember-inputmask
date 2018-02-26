@@ -10,6 +10,7 @@ const DEFAULT_OPTIONS = {
 
 export const DEFAULT_NON_BOUND_PROPS = [
   'keyEvents',
+  'class',
   'classNames',
   'positionalParamValue',
   'update',
