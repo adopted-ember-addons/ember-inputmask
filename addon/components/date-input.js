@@ -1,9 +1,9 @@
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
- * `{{email-input}}` component.
+ * `{{date-input}}` component.
  *
- * Displays an input that masks email addresses.
+ * Displays an input that masks dates.
  */
 
 export default InputMaskComponent.extend({
