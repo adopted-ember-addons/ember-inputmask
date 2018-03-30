@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.6
+
+- [BUG] Fix error thrown when keyup action methods aren't passed in
+- [DOCUMENTATION] Fix typo
+
 ## 0.6.5
 
 - [BUG] Fix inability to add classes to one way input masks
