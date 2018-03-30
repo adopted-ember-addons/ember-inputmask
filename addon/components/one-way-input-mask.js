@@ -151,7 +151,7 @@ const OneWayInputMask = Component.extend({
    */
   keyUp(event) {
     let method = get(this, `keyEvents.${event.keyCode}`);
-    if (method) {
+    if (method && get(this, method)) {
       get(this, method)(event.target.value);
     }
   },

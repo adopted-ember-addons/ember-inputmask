@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, find } from 'ember-native-dom-helpers';
+import { fillIn, find, keyEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('one-way-input-mask', 'Integration | Component | one-way-input-mask', {
   integration: true
@@ -80,4 +80,12 @@ test('It can have classes', function(assert) {
   this.set('value', 123)
   this.render(hbs`{{one-way-input-mask value mask='9-9+9' class='foo'}}`);
   assert.equal(find('.foo').value, '1-2+3');
+});
+
+test('It does not throw errors if key event methods are not passed in', async function(assert) {
+  this.set('value', 123)
+  this.render(hbs`{{one-way-input-mask value mask='9-9+9'}}`);
+  await keyEvent('input', 'keyup', 13);
+  await keyEvent('input', 'keyup', 27);
+  assert.equal(find('input').value, '1-2+3', 'no errors thrown');
 });
