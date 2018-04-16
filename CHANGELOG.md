@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.7
+
+- [UPGRADE] Use `notifyPropertyChange` instead of `propertyDidChange`
+
 ## 0.6.6
 
 - [BUG] Fix error thrown when keyup action methods aren't passed in
