@@ -64,7 +64,7 @@ export default TextField.extend({
   // Initialize the mask by forcing a
   // call to the updateMask function
   didInsertElement: function() {
-    this.propertyDidChange('mask');
+    this.notifyPropertyChange('mask');
   },
 
   // Remove the mask from the input
