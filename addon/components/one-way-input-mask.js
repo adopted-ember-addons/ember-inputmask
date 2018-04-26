@@ -102,6 +102,7 @@ const OneWayInputMask = Component.extend({
 
   didInsertElement() {
     this._setupMask();
+    set(this, '_didInsertElement', true);
   },
 
   didReceiveAttrs() {
@@ -230,7 +231,7 @@ const OneWayInputMask = Component.extend({
    * @private
    */
   _changeMask() {
-    if (this.element && this.element.inputmask) {
+    if (get(this, '_didInsertElement') && this.element && this.element.inputmask) {
       this._destroyMask();
       this._setupMask();
     }
