@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.8
+
+- [BUG] Fix broken fastboot build
+
 ## 0.6.7
 
 - [UPGRADE] Use `notifyPropertyChange` instead of `propertyDidChange`
