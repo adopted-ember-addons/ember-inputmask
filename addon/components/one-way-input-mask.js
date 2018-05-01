@@ -102,6 +102,11 @@ const OneWayInputMask = Component.extend({
 
   didInsertElement() {
     this._setupMask();
+
+    // We're setting this flag because we want to ensure that fastboot doesn't break when using
+    // this component. In `didReceiveAttrs` we can potentially change the mask which reqires
+    // `this.element` to exist. Fastboot doesn't work with `this.element` so we should only attempt
+    // to do this if we know this hook has been called
     set(this, '_didInsertElement', true);
   },
 
