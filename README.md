@@ -59,6 +59,13 @@ This component follows the data-down-actions-up (DDAU) pattern. You should use t
 * `mask` The type of mask to put on the input
 * `options` Any additional masking options from [Inputmask](https://github.com/RobinHerbots/Inputmask) you would like to add
 
+```hbs
+{{one-way-input-mask value mask='999-aaa-***'
+  options=(hash showMaskOnHover=false
+    showMaskOnFocus=false)
+  update=(action (mut value))}}
+```
+
 ## Other One Way Masks
 
 * [{{one-way-credit-card-mask}}](docs/one-way-credit-card-mask.md)
