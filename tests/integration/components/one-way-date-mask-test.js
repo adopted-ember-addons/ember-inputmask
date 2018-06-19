@@ -14,7 +14,7 @@ moduleForComponent('one-way-date-mask', 'Integration | Component | one way date 
 
 test('filled-in value', async function(assert) {
   this.render(hbs`{{one-way-date-mask value=unmaskedValue update=update}}`);
-  await fillIn('input', '14914');
+  await fillIn('input', '1492014');
   assert.equal(find('input').value, '14/09/2014');
   assert.equal(this.unmaskedValue, '14092014');
 });
