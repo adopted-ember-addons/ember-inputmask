@@ -8,7 +8,7 @@ moduleForComponent('date-input', 'Integration | Component | date-input', {
 
 test('filled-in value', function(assert) {
   this.render(hbs`{{date-input unmaskedValue=unmaskedValue}}`);
-  fillIn('input', '14914');
+  fillIn('input', '1492014');
   triggerEvent('input', 'blur');
   assert.equal(find('input').value, '14/09/2014');
   assert.equal(this.unmaskedValue, '14092014');

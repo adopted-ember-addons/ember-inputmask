@@ -23,13 +23,13 @@ test('The mask updates if the passed value is mutated in the parent', function(a
 test('The parent can receive the updated value via the `update` action', async function(assert) {
   this.set('value', 123)
   this.render(hbs`{{one-way-input-mask value mask='9-9+9' update=(action (mut value))}}`);
-  await fillIn('input', 456);
+  await fillIn('input', '456');
   assert.equal(this.get('value'), '456');
 });
 
 test('Update action works when `value` begins as undefined', async function(assert) {
   this.render(hbs`{{one-way-input-mask value mask='9-9+9' update=(action (mut value))}}`);
-  await fillIn('input', 456);
+  await fillIn('input', '456');
   assert.equal(this.get('value'), '456');
 });
 
@@ -38,7 +38,7 @@ test('The parent can receive the masked value via the `update` action', async fu
     this.set('masked', masked)
   })
   this.render(hbs`{{one-way-input-mask value mask='9-9+9' update=update}}`);
-  await fillIn('input', 456);
+  await fillIn('input', '456');
   assert.equal(this.get('masked'), '4-5+6');
 });
 
