@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+- [UPGRADE] Upgrade to inputmask.js@4
+
 ## 0.6.8
 
 - [BUG] Fix broken fastboot build
