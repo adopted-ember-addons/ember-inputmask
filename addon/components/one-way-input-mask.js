@@ -171,6 +171,19 @@ const OneWayInputMask = Component.extend({
   },
 
   /**
+   * _syncValue - If this component's consumer modifies the passed in `value` inside their `update`
+   * method we want to make sure that value is reflected in the input's display.
+   */
+  _syncValue() {
+    let actualValue = get(this, '_value');
+    let renderedValue = this.element.value;
+
+    if (actualValue !== renderedValue) {
+      this.element.inputmask.setValue(actualValue);
+    }
+  },
+
+  /**
    * _processNewValue - Handle when a new value changes
    *
    * @private
@@ -195,6 +208,7 @@ const OneWayInputMask = Component.extend({
       // When the value is updated, and then sent back down the cursor moves to the end of the field.
       // We therefore need to put it back to where the user was typing so they don't get janked around
       schedule('afterRender', () => {
+        this._syncValue();
         this.element.setSelectionRange(cursorStart, cursorEnd);
       });
     }
