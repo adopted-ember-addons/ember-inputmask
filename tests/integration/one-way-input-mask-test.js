@@ -89,3 +89,24 @@ test('It does not throw errors if key event methods are not passed in', async fu
   await keyEvent('input', 'keyup', 27);
   assert.equal(find('input').value, '1-2+3', 'no errors thrown');
 });
+
+test('Shows the correct value in input if modified in `update` action', async function(assert) {
+  this.set('num', 15)
+  this.set('update', unmaskedValue => {
+    let number = parseInt(unmaskedValue, 10);
+    if (number > 15) {
+      this.set('num', '15');
+    } else {
+      this.set('num', number);
+    }
+  });
+  this.render(hbs`{{one-way-input-mask num mask='999999' update=update
+    options=(hash
+      showMaskOnFocus=false
+      showMaskOnHover=false
+      jitMasking=true)}}`);
+  assert.equal(find('input').value, '15');
+
+  await fillIn('input', '155');
+  assert.equal(find('input').value, '15');
+});
