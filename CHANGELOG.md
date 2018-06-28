@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1
+
+- [BUG] Sync input display value with passed in value if modified during `update`
+
 ## 0.7.0
 
 - [UPGRADE] Upgrade to inputmask.js@4
