@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.2
+
+- [UPGRADE] Upgrade Babel to 6.16.10
+
 ## 0.7.1
 
 - [BUG] Sync input display value with passed in value if modified during `update`
