@@ -1,8 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { fillIn, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, find } from 'ember-native-dom-helpers';
 
 module('Integration | Component | one way phone mask', function(hooks) {
   setupRenderingTest(hooks);
