@@ -8,8 +8,8 @@ module('Integration | Component | email-input', function(hooks) {
 
   test('filled-in value', async function(assert) {
     await render(hbs`{{email-input unmaskedValue=unmaskedValue}}`);
-    fillIn('input', 'test@test.test');
-    triggerEvent('input', 'blur');
+    await fillIn('input', 'test@test.test');
+    await triggerEvent('input', 'blur');
     assert.dom('input').hasValue('test@test.test');
     assert.equal(this.unmaskedValue, 'test@test.test');
   });

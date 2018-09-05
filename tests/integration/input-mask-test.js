@@ -9,8 +9,8 @@ module('Integration | Component | input-mask', function(hooks) {
   test('regex with invalid value', async function(assert) {
     await render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='regex'
       pattern='[a-z]+ is [0-9]*'}}`);
-    fillIn('input', '42');
-    triggerEvent('input', 'blur');
+    await fillIn('input', '42');
+    await triggerEvent('input', 'blur');
     assert.dom('input').hasValue('');
     assert.equal(this.unmaskedValue, '');
   });
@@ -18,8 +18,8 @@ module('Integration | Component | input-mask', function(hooks) {
   test('regex with valid value', async function(assert) {
     await render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='regex'
       pattern='[a-z]+ is [0-9]*'}}`);
-    fillIn('input', 'answer is 42');
-    triggerEvent('input', 'blur');
+    await fillIn('input', 'answer is 42');
+    await triggerEvent('input', 'blur');
     assert.dom('input').hasValue('answer is 42');
     assert.equal(this.unmaskedValue, 'answer42');
   });
@@ -27,8 +27,8 @@ module('Integration | Component | input-mask', function(hooks) {
   test('regex with another valid value', async function(assert) {
     await render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='regex'
       pattern='[a-z]+ is [0-9]*'}}`);
-    fillIn('input', 'question is ?');
-    triggerEvent('input', 'blur');
+    await fillIn('input', 'question is ?');
+    await triggerEvent('input', 'blur');
     assert.dom('input').hasValue('question is ');
     assert.equal(this.unmaskedValue, 'question');
   });
