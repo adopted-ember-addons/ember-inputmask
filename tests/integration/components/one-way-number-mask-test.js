@@ -1,8 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { fillIn, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { find, fillIn } from 'ember-native-dom-helpers';
 
 module('Integration | Component | one way number mask', function(hooks) {
   setupRenderingTest(hooks);
@@ -19,7 +18,7 @@ module('Integration | Component | one way number mask', function(hooks) {
     await render(hbs`{{one-way-number-mask value decimal=true}}`);
 
     assert.dom('input').hasValue('1,234.57');
-    assert.notOk(find('input').getAttribute('decimal'), 'decimal is not a bound attribute');
+    assert.dom('input').doesNotHaveAttribute('decimal', 'decimal is not a bound attribute');
   });
 
   test('Can change default digits with options', async function(assert) {
@@ -52,5 +51,17 @@ module('Integration | Component | one way number mask', function(hooks) {
     await fillIn('input', 1);
     await fillIn('input', 456.78901);
     assert.dom('input').hasValue('$456.79');
+  });
+
+  test('It can show a trailing decimal', async function(assert) {
+    let callCount = 0;
+    this.set('update', () => callCount++);
+    this.set('value', '1234');
+    await render(hbs`{{one-way-number-mask value
+      update=update
+      options=(hash prefix="$")
+      decimal=true}}`);
+    await fillIn('input', '1234.');
+    assert.equal(callCount, 0, '');
   });
 });

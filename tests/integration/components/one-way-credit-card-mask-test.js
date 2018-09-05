@@ -1,8 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { fillIn, find, triggerEvent, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
 
 module('Integration | Component | one way credit card mask', function(hooks) {
   setupRenderingTest(hooks);

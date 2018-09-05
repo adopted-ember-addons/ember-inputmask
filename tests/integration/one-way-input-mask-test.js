@@ -1,8 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { fillIn, find, triggerKeyEvent, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, find, keyEvent } from 'ember-native-dom-helpers';
 
 module('Integration | Component | one-way-input-mask', function(hooks) {
   setupRenderingTest(hooks);
@@ -86,8 +85,8 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
   test('It does not throw errors if key event methods are not passed in', async function(assert) {
     this.set('value', 123)
     await render(hbs`{{one-way-input-mask value mask='9-9+9'}}`);
-    await keyEvent('input', 'keyup', 13);
-    await keyEvent('input', 'keyup', 27);
+    await triggerKeyEvent('input', 'keyup', 13);
+    await triggerKeyEvent('input', 'keyup', 27);
     assert.dom('input').hasValue('1-2+3', 'no errors thrown');
   });
 
