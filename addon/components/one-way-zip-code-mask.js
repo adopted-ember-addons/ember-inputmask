@@ -1,4 +1,6 @@
-import OneWayInputMask, { DEFAULT_NON_BOUND_PROPS }  from 'ember-inputmask/components/one-way-input-mask';
+import OneWayInputMask, {
+  DEFAULT_NON_BOUND_PROPS }
+} from 'ember-inputmask/components/one-way-input-mask';
 import { computed, get } from '@ember/object';
 
 /**
