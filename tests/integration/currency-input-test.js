@@ -10,7 +10,7 @@ module('Integration | Component | currency-input', function(hooks) {
   skip('default value', function(assert) {
     this.render(hbs`{{currency-input unmaskedValue=unmaskedValue}}`);
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, '$ 0.00');
+    assert.dom('input').hasValue('$ 0.00');
     assert.equal(this.unmaskedValue, '0.00');
   });
 
@@ -18,7 +18,7 @@ module('Integration | Component | currency-input', function(hooks) {
     await render(hbs`{{currency-input unmaskedValue=unmaskedValue}}`);
     fillIn('input', '1234567.89');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, '$ 1,234,567.89');
+    assert.dom('input').hasValue('$ 1,234,567.89');
     assert.equal(this.unmaskedValue, '1234567.89');
   });
 });

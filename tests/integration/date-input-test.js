@@ -11,7 +11,7 @@ module('Integration | Component | date-input', function(hooks) {
     await render(hbs`{{date-input unmaskedValue=unmaskedValue}}`);
     fillIn('input', '1492014');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, '14/09/2014');
+    assert.dom('input').hasValue('14/09/2014');
     assert.equal(this.unmaskedValue, '14092014');
   });
 });

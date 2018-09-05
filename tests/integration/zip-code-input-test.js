@@ -11,7 +11,7 @@ module('Integration | Component | zip-code-input', function(hooks) {
     await render(hbs`{{zip-code-input unmaskedValue=unmaskedValue}}`);
     fillIn('input', '12345');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, '12345');
+    assert.dom('input').hasValue('12345');
     assert.equal(this.unmaskedValue, 12345);
   });
 
@@ -19,7 +19,7 @@ module('Integration | Component | zip-code-input', function(hooks) {
     await render(hbs`{{zip-code-input unmaskedValue=unmaskedValue fullCode=true}}`);
     fillIn('input', '123451234');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, '12345-1234');
+    assert.dom('input').hasValue('12345-1234');
     assert.equal(this.unmaskedValue, 123451234);
   });
 });

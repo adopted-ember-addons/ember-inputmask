@@ -11,7 +11,7 @@ module('Integration | Component | email-input', function(hooks) {
     await render(hbs`{{email-input unmaskedValue=unmaskedValue}}`);
     fillIn('input', 'test@test.test');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, 'test@test.test');
+    assert.dom('input').hasValue('test@test.test');
     assert.equal(this.unmaskedValue, 'test@test.test');
   });
 });

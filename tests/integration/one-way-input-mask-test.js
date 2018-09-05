@@ -10,15 +10,15 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
   test('It masks a passed in value', async function(assert) {
     this.set('value', 123)
     await render(hbs`{{one-way-input-mask value mask='9-9+9'}}`);
-    assert.equal(find('input').value, '1-2+3');
+    assert.dom('input').hasValue('1-2+3');
   });
 
   test('The mask updates if the passed value is mutated in the parent', async function(assert) {
     this.set('value', 123)
     await render(hbs`{{one-way-input-mask value mask='9-9+9'}}`);
-    assert.equal(find('input').value, '1-2+3');
+    assert.dom('input').hasValue('1-2+3');
     this.set('value', 456)
-    assert.equal(find('input').value, '4-5+6');
+    assert.dom('input').hasValue('4-5+6');
   });
 
   test('The parent can receive the updated value via the `update` action', async function(assert) {
@@ -47,7 +47,7 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
     this.set('value', 1)
     this.set('options', { placeholder: '*' });
     await render(hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`);
-    assert.equal(find('input').value, '1-*+*');
+    assert.dom('input').hasValue('1-*+*');
   });
 
   test('mask and options are not bound attributes', async function(assert) {
@@ -61,26 +61,26 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
     this.set('mask', '9-9+9');
     this.set('value', 123);
     await render(hbs`{{one-way-input-mask value mask=mask}}`);
-    assert.equal(find('input').value, '1-2+3');
+    assert.dom('input').hasValue('1-2+3');
 
     this.set('mask', '9_9_9');
-    assert.equal(find('input').value, '1_2_3');
+    assert.dom('input').hasValue('1_2_3');
   });
 
   test('options can dynamically be changed', async function(assert) {
     this.set('value', 1)
     this.set('options', { placeholder: '*' });
     await render(hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`);
-    assert.equal(find('input').value, '1-*+*');
+    assert.dom('input').hasValue('1-*+*');
 
     this.set('options', { placeholder: '_' });
-    assert.equal(find('input').value, '1-_+_');
+    assert.dom('input').hasValue('1-_+_');
   });
 
   test('It can have classes', async function(assert) {
     this.set('value', 123)
     await render(hbs`{{one-way-input-mask value mask='9-9+9' class='foo'}}`);
-    assert.equal(find('.foo').value, '1-2+3');
+    assert.dom('.foo').hasValue('1-2+3');
   });
 
   test('It does not throw errors if key event methods are not passed in', async function(assert) {
@@ -88,7 +88,7 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
     await render(hbs`{{one-way-input-mask value mask='9-9+9'}}`);
     await keyEvent('input', 'keyup', 13);
     await keyEvent('input', 'keyup', 27);
-    assert.equal(find('input').value, '1-2+3', 'no errors thrown');
+    assert.dom('input').hasValue('1-2+3', 'no errors thrown');
   });
 
   test('Shows the correct value in input if modified in `update` action', async function(assert) {
@@ -106,9 +106,9 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
         showMaskOnFocus=false
         showMaskOnHover=false
         jitMasking=true)}}`);
-    assert.equal(find('input').value, '15');
+    assert.dom('input').hasValue('15');
 
     await fillIn('input', '155');
-    assert.equal(find('input').value, '15');
+    assert.dom('input').hasValue('15');
   });
 });

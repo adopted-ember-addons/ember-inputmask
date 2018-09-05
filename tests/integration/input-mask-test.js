@@ -12,7 +12,7 @@ module('Integration | Component | input-mask', function(hooks) {
       pattern='[a-z]+ is [0-9]*'}}`);
     fillIn('input', '42');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, '');
+    assert.dom('input').hasValue('');
     assert.equal(this.unmaskedValue, '');
   });
 
@@ -21,7 +21,7 @@ module('Integration | Component | input-mask', function(hooks) {
       pattern='[a-z]+ is [0-9]*'}}`);
     fillIn('input', 'answer is 42');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, 'answer is 42');
+    assert.dom('input').hasValue('answer is 42');
     assert.equal(this.unmaskedValue, 'answer42');
   });
 
@@ -30,7 +30,7 @@ module('Integration | Component | input-mask', function(hooks) {
       pattern='[a-z]+ is [0-9]*'}}`);
     fillIn('input', 'question is ?');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, 'question is ');
+    assert.dom('input').hasValue('question is ');
     assert.equal(this.unmaskedValue, 'question');
   });
 
@@ -40,9 +40,9 @@ module('Integration | Component | input-mask', function(hooks) {
   skip('showMaskOnHover=true (default) works', function(assert) {
     this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9-9+9'}}`);
     triggerEvent('input', 'mouseenter');
-    assert.equal(find('input').value, '_-_+_');
+    assert.dom('input').hasValue('_-_+_');
     triggerEvent('input', 'mouseleave');
-    assert.equal(find('input').value, '');
+    assert.dom('input').hasValue('');
   });
 
   // The inputmask libary does some interesting things with Object.getOwnPropertyDescriptor and some
@@ -52,7 +52,7 @@ module('Integration | Component | input-mask', function(hooks) {
     this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9-9+9'
       showMaskOnHover=false}}`);
     triggerEvent('input', 'mouseenter');
-    assert.equal(find('input').value, '');
+    assert.dom('input').hasValue('');
   });
 
   // The inputmask libary does some interesting things with Object.getOwnPropertyDescriptor and some
@@ -62,7 +62,7 @@ module('Integration | Component | input-mask', function(hooks) {
     this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9-9+9'
       showMaskOnHover=false}}`);
     triggerEvent('input', 'focus');
-    assert.equal(find('input').value, '_-_+_');
+    assert.dom('input').hasValue('_-_+_');
   });
 
   // The inputmask libary does some interesting things with Object.getOwnPropertyDescriptor and some
@@ -73,7 +73,7 @@ module('Integration | Component | input-mask', function(hooks) {
       showMaskOnFocus=false showMaskOnHover=false}}`);
     triggerEvent('input', 'mouseenter');
     triggerEvent('input', 'focus');
-    assert.equal(find('input').value, '');
+    assert.dom('input').hasValue('');
   });
 
   test('clearIncomplete works', async function(assert) {
@@ -81,7 +81,7 @@ module('Integration | Component | input-mask', function(hooks) {
       clearIncomplete=true}}`);
     fillIn('input', '6');
     triggerEvent('input', 'blur');
-    assert.equal(find('input').value, '');
+    assert.dom('input').hasValue('');
   });
 
   // The inputmask libary does some interesting things with Object.getOwnPropertyDescriptor and some
@@ -90,11 +90,11 @@ module('Integration | Component | input-mask', function(hooks) {
   skip('greedyMask=false (default) works', function(assert) {
     this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9[99]'}}`);
     triggerEvent('input', 'mouseenter');
-    assert.equal(find('input').value, '_');
+    assert.dom('input').hasValue('_');
     fillIn('input', '66');
     triggerEvent('input', 'blur');
     triggerEvent('input', 'mouseenter');
-    assert.equal(find('input').value, '66_');
+    assert.dom('input').hasValue('66_');
   });
 
   // The inputmask libary does some interesting things with Object.getOwnPropertyDescriptor and some
@@ -104,6 +104,6 @@ module('Integration | Component | input-mask', function(hooks) {
     this.render(hbs`{{input-mask unmaskedValue=unmaskedValue mask='9[99]'
       greedyMask=true}}`);
     triggerEvent('input', 'mouseenter');
-    assert.equal(find('input').value, '___');
+    assert.dom('input').hasValue('___');
   });
 });
