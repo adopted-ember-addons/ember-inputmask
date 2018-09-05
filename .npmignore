@@ -7,14 +7,15 @@
 .bowerrc
 .editorconfig
 .ember-cli
-.gitignore
 .eslintrc.js
+.gitignore
 .watchmanconfig
 .travis.yml
 bower.json
 ember-cli-build.js
 testem.js
 **/.DS_Store
+yarn.lock
 
 # ember-try
 .node_modules.ember-try/

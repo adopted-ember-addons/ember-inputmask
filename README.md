@@ -40,7 +40,8 @@ In case you are using v0.3.0 of this addon -- it was a versioning mistake. In
 fact, v0.3.0 is older than v0.2.1 and we don't recommend it. Feel free to
 upgrade to the latest version of either v0.2.x or v0.4.x.
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 ```sh
 $ ember install ember-inputmask
