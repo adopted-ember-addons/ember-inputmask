@@ -19,8 +19,8 @@ export default InputMaskComponent.extend({
   newComponent: '{{one-way-credit-card-mask}}',
 
   updateMask: function() {
-    var cardType  = this.get('cardType'),
-        s         = this.get('separator') || '-', // s for separator for convenience
+    var cardType  = this.cardType,
+        s         = this.separator || '-', // s for separator for convenience
         mask;                                     // Also, we put the default in here instead
                                                   // of defining it on the model
 
@@ -32,7 +32,7 @@ export default InputMaskComponent.extend({
       mask = '9999' + s + '9999' + s + '9999' + s + '9999';
     }
 
-    if (this.get('mask') !== mask) {
+    if (this.mask !== mask) {
       this.set('mask', mask);
     }
     this._super();
@@ -43,7 +43,7 @@ export default InputMaskComponent.extend({
   }),
 
   updateCardType: observer('unmaskedValue', function() {
-    var unmaskedValue = this.get('unmaskedValue') || '',
+    var unmaskedValue = this.unmaskedValue || '',
         cardType;
 
     if (unmaskedValue.match(/^4/)) {

@@ -55,24 +55,24 @@ export default InputMaskComponent.extend({
 
   updateMask: function() {
     this.setProperties({
-      'options.autoGroup':      this.get('group'),
-      'options.groupSeparator': this.get('separator'),
-      'options.radixPoint':     this.get('radix'),
-      'options.groupSize':      this.get('groupSize'),
-      'options.digitsOptional': this.get('digitsOptional'),
-      'options.min':            this.get('min'),
-      'options.max':            this.get('max'),
-      'options.prefix':         this.get('prefix'),
-      'options.suffix':         this.get('suffix'),
-      'options.unmaskAsNumber': this.get('unmaskAsNumber'),
+      'options.autoGroup':      this.group,
+      'options.groupSeparator': this.separator,
+      'options.radixPoint':     this.radix,
+      'options.groupSize':      this.groupSize,
+      'options.digitsOptional': this.digitsOptional,
+      'options.min':            this.min,
+      'options.max':            this.max,
+      'options.prefix':         this.prefix,
+      'options.suffix':         this.suffix,
+      'options.unmaskAsNumber': this.unmaskAsNumber,
     });
 
-    if (this.get('decimal') === true) {
+    if (this.decimal === true) {
       this.set('mask', 'decimal');
       this.set('options.digits', 2);
-    } else if (this.get('decimal')) {
+    } else if (this.decimal) {
       this.set('mask', 'decimal');
-      this.set('options.digits', this.get('decimal'));
+      this.set('options.digits', this.decimal);
     }
 
     this._super();
