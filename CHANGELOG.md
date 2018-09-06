@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+- [UPGRADE] Upgrade to Ember 3.3
+
 ## 0.7.2
 
 - [UPGRADE] Upgrade Babel to 6.16.10
