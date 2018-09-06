@@ -59,10 +59,7 @@ const OneWayInputMask = Component.extend({
   _options: null, // Internal options so external attribute doesnt clobber it
   _oldOptions: null,
 
-  keyEvents: {
-    '13': 'onenter',
-    '27': 'onescape',
-  },
+  keyEvents: null,
 
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
@@ -82,6 +79,11 @@ const OneWayInputMask = Component.extend({
 
   init() {
     this._super(...arguments);
+
+    set(this, 'keyEvents', {
+      '13': 'onenter',
+      '27': 'onescape',
+    });
 
     // Give the mask some default options that can be overridden
     let options = get(this, 'options');

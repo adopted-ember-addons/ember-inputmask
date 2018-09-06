@@ -1,7 +1,6 @@
 import { once, debounce } from '@ember/runloop';
 import { deprecate } from '@ember/debug';
 import { isPresent } from '@ember/utils';
-import { on } from '@ember/object/evented';
 import { computed, observer, get } from '@ember/object';
 import TextField from '@ember/component/text-field';
 import Inputmask from 'inputmask';
@@ -68,11 +67,11 @@ export default TextField.extend({
   },
 
   // Remove the mask from the input
-  teardownMask: on('willDestroyElement', function() {
+  willDestroyElement() {
     if (this.element.inputmask) {
       this.element.inputmask.remove();
     }
-  }),
+  },
 
   setMask: function() {
     Inputmask.extendDefinitions({
