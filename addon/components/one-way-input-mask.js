@@ -22,6 +22,7 @@ export const DEFAULT_NON_BOUND_PROPS = [
  * Displays an input with the specified mask applied to it
  * using Inputmask library. Follows Data-down actions up pattern
  *
+ * @class OneWayInputMask
  * @param {string} value The unmasked value to display in the input
  * @param {action} update The function to perform when the value changes. Will be passed the
  * unmasked value and the masked values

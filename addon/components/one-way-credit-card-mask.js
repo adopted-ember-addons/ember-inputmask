@@ -5,6 +5,10 @@ import { computed, get, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { scheduleOnce } from '@ember/runloop';
 
+
+/**
+ * @class OneWayCreditCardMask
+ */
 export default OneWayInputMask.extend({
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('separator'),
 

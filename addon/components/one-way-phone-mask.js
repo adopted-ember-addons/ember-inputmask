@@ -12,6 +12,7 @@ import { computed, get } from '@ember/object';
  * Future: Add config options that allow users to set locality
  * app wide.
  *
+ * @class OneWayPhoneMask
  * @param {boolean} extensions Allows optional extensions to be added to numbers
  */
 export default OneWayInputMask.extend({

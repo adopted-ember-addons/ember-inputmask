@@ -3,7 +3,7 @@ import { observer } from '@ember/object';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
 /**
- * `{{credit-card-input}}` component.
+ * The `{{credit-card-input}}` component.
  *
  * Displays an input with that masks to credit card numbers
  *
@@ -12,8 +12,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  * FUTURE:
  *   - Add support for more cards
  *   - Add validation for full card numbers
+ * 
+ * @class CreditCardInput
  */
-
 export default InputMaskComponent.extend({
   oldComponent: '{{credit-card-input}}',
   newComponent: '{{one-way-credit-card-mask}}',

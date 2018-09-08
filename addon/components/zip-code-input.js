@@ -13,8 +13,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  * OPTIONS:
  *   fullCode - bool
  *     Allows users to optionally enter the full ZIP+4 area code.
+ *
+ * @class ZipCodeInput
  */
-
 export default InputMaskComponent.extend({
   mask:    '99999',
 

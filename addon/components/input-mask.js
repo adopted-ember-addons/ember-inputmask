@@ -26,8 +26,9 @@ import Inputmask from 'inputmask';
  *     Shows optional parts of a mask in preview when true
  *   debounce - number=0
  *     Enable by setting debounce > 0, makes sure to deduplicate calls to update the UI and only deliver the last ui change
+ *
+ * @class InputMask
  */
-
 export default TextField.extend({
   mask: '',
 

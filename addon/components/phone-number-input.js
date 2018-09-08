@@ -14,8 +14,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  * OPTIONS:
  *   extensions - bool
  *     Allows optional extensions to be added to numbers
+ *
+ * @class PhoneNumberMask
  */
-
 export default InputMaskComponent.extend({
   mask:    '(299) 999-9999',
 

@@ -11,6 +11,7 @@ import { computed, get } from '@ember/object';
  * Future: Add config options that allow users to set locality
  * app wide.
  *
+ * @class OneWayZipCodeMask
  * @param {boolean} fullCode Allows users to optionally enter the full ZIP+4 area code.e
  */
 export default OneWayInputMask.extend({
