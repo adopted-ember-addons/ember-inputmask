@@ -18,11 +18,13 @@ export default OneWayInputMask.extend({
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('fullCode'),
 
   /**
+   * @field fullCode
    * Allows users to optionally enter the full ZIP+4 area code.
    */
   fullCode: false,
 
   /**
+   * @computed mask
    * @override
    */
   mask: computed('fullCode', function() {

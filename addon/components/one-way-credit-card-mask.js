@@ -45,6 +45,7 @@ export default OneWayInputMask.extend({
    * _cardType - Use current unmasked value to determine which kind of card the user is
    * typing
    *
+   * @computed _cardType
    * @private
    * @return {string} The card type
    */
@@ -57,6 +58,7 @@ export default OneWayInputMask.extend({
   /**
    * separator - What kind of separator to use between number sections
    *
+   * @field separator
    * @public
    */
   separator: '-',
@@ -65,6 +67,7 @@ export default OneWayInputMask.extend({
    * Dynamically determine which mask to use based on what kind of credit card numbers the user
    * is typing
    *
+   * @computed mask
    * @override
    */
   mask: computed('_cardType', {
@@ -87,6 +90,7 @@ export default OneWayInputMask.extend({
   /**
    * sendUpdate - Pass the credit card type along with the values
    *
+   * @method sendUpdate
    * @override
    * @param  {string} unmaskedValue
    * @param  {string} value
@@ -102,6 +106,7 @@ export default OneWayInputMask.extend({
    * _determineCardType - Use current unmasked value to determine which kind of card the user is
    * typing
    *
+   * @method _determineCardType
    * @private
    * @param {string} unmaskedValue
    * @return {string} The card type

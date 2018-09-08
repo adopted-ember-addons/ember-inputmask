@@ -9,6 +9,8 @@ import OneWayInputMask from 'ember-inputmask/components/one-way-input-mask';
  */
 export default OneWayInputMask.extend({
   /**
+   *
+   * @field mask
    * @override
    */
   mask: 'currency',

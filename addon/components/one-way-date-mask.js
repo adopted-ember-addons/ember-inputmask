@@ -15,6 +15,7 @@ const DEFAULT_OPTIONS = {
  */
 export default OneWayInputMask.extend({
   /**
+   * @field mask
    * @override
    */
   mask: 'datetime',

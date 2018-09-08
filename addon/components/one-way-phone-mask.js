@@ -19,11 +19,13 @@ export default OneWayInputMask.extend({
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('extensions'),
 
   /**
+   * @field extensions
    * Whether or not to include extension in the mask
    */
   extensions: false,
 
   /**
+   * @computed mask
    * @override
    */
   mask: computed('extensions', function() {
