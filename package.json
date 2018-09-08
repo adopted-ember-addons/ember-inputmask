@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/brandynbennett/ember-inputmask",
+  "repository": "https://github.com/brandynbennett/ember-inputmask.git",
   "license": "MIT",
   "author": "Chris Garrett",
   "directories": {
