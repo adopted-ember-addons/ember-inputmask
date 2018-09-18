@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1
+
+- [BUG] Fix issue where phone extensions file was no longer in Inputmask.js
+
 ## 0.8.0
 
 - [UPGRADE] Upgrade to Ember 3.3
