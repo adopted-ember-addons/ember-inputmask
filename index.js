@@ -8,7 +8,6 @@ const filesToImport = [
   'inputmask.extensions.js',
   'inputmask.date.extensions.js',
   'inputmask.numeric.extensions.js',
-  'inputmask.phone.extensions.js'
 ];
 
 module.exports = {
