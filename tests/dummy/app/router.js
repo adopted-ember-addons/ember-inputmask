@@ -15,6 +15,7 @@ Router.map(function() {
     this.route('one-way-phone-mask');
     this.route('one-way-email-mask');
     this.route('one-way-zip-code-mask');
+    this.route('one-way-ssn-mask');
   });
 
   this.route('not-found', { path: '/*path' });
