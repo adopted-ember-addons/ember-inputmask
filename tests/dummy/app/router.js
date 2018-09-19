@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('one-way-input-mask');
     this.route('one-way-number-mask');
     this.route('one-way-currency-mask');
+    this.route('one-way-date-mask');
   });
 
   this.route('not-found', { path: '/*path' });
