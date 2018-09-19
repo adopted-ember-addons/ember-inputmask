@@ -24,8 +24,10 @@ export default OneWayInputMask.extend({
   mask: 'integer',
 
   /**
-   * @field decimal
    * Set this to true to include decimals
+   * 
+   * @argument decimal
+   * @type Boolean
    */
   decimal: false,
 
