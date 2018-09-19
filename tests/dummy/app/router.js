@@ -13,6 +13,7 @@ Router.map(function() {
     this.route('one-way-currency-mask');
     this.route('one-way-date-mask');
     this.route('one-way-phone-mask');
+    this.route('one-way-email-mask');
   });
 
   this.route('not-found', { path: '/*path' });
