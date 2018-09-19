@@ -23,11 +23,6 @@ export const DEFAULT_NON_BOUND_PROPS = [
  * using Inputmask library. Follows Data-down actions up pattern
  *
  * @class OneWayInputMask
- * @param {string} value The unmasked value to display in the input
- * @param {action} update The function to perform when the value changes. Will be passed the
- * unmasked value and the masked values
- * @param {string} mask The mask to use on the input
- * @param {object} options The options to pass into the Inputmask library
  */
 const OneWayInputMask = Component.extend({
   tagName: 'input',
@@ -47,23 +42,34 @@ const OneWayInputMask = Component.extend({
   type: 'text',
 
   /**
-   * mask - Pass in the `mask` string to set it on the element
+   * The mask from [Inputmask.js](https://github.com/RobinHerbots/Inputmask#default-masking-definitions)
    *
-   * @field mask
-   * @public
+   * @argument mask
+   * @type String
    */
   mask: '',
   _oldMask: '',
 
   /**
-   * options - Options accepted by the Inputmask library
-   * @field options
+   * Options accepted by [Inputmask.js](https://github.com/RobinHerbots/Inputmask#options)
+   *
+   * @argument options
+   * @type Object
    */
   options: null,
   _options: null, // Internal options so external attribute doesnt clobber it
   _oldOptions: null,
 
   keyEvents: null,
+
+
+  /**
+   * The value to show inside the input. Can be first `positionalParam`
+   *
+   * @argument value
+   * @type String
+   */
+  value: null,
 
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
@@ -143,11 +149,11 @@ const OneWayInputMask = Component.extend({
   },
 
   /**
-   * update - This action will be called when the value changes and will be passed the unmasked value
+   * This action will be called when the value changes and will be passed the unmasked value
    * and the masked value
    *
-   * @method update
-   * @public
+   * @argument update
+   * @type function
    */
   update() {},
 
