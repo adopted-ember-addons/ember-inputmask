@@ -1,7 +1,7 @@
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 import { computed } from '@ember/object';
 
-/**
+/*
  * `{{date-input}}` component.
  *
  * Displays an input that masks dates.

@@ -5,7 +5,7 @@ import { computed, observer, get } from '@ember/object';
 import TextField from '@ember/component/text-field';
 import Inputmask from 'inputmask';
 
-/**
+/*
  * `{{input-mask}}` component.
  *
  * Displays an input with the specified mask applied to it

@@ -1,6 +1,6 @@
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
-/**
+/*
  * `{{currency-input}}` component.
  *
  * Displays an input that masks to currency

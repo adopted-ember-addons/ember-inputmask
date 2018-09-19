@@ -2,7 +2,7 @@ import { once } from '@ember/runloop';
 import { observer } from '@ember/object';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
-/**
+/*
  * `{{zip-code-input}}` component.
  *
  * Displays an input that masks a US ZIP code.
