@@ -10,6 +10,7 @@ Router.map(function() {
   docsRoute(this, function() {
     this.route('one-way-input-mask');
     this.route('one-way-number-mask');
+    this.route('one-way-currency-mask');
   });
 
   this.route('not-found', { path: '/*path' });
