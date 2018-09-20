@@ -4,22 +4,16 @@ import OneWayInputMask, {
 import { computed, get } from '@ember/object';
 
 /**
- * `{{one-way-zip-code-mask}}` component.
- *
- * Displays an input that masks a US ZIP code.
- *
- * Future: Add config options that allow users to set locality
- * app wide.
- *
  * @class OneWayZipCodeMask
- * @param {boolean} fullCode Allows users to optionally enter the full ZIP+4 area code.e
  */
 export default OneWayInputMask.extend({
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('fullCode'),
 
   /**
-   * @field fullCode
    * Allows users to optionally enter the full ZIP+4 area code.
+   *
+   * @argument fullCode
+   * @type Boolean
    */
   fullCode: false,
 
