@@ -56,10 +56,10 @@ export default OneWayInputMask.extend({
   }),
 
   /**
-   * separator - What kind of separator to use between number sections
+   * What kind of separator to use between number sections
    *
-   * @field separator
-   * @public
+   * @argument separator
+   * @type String
    */
   separator: '-',
 
