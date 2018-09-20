@@ -7,10 +7,6 @@ const DEFAULT_OPTIONS = {
 };
 
 /**
- * `{{one-way-date-mask}}` component.
- *
- * Displays an input that masks to date
- *
  * @class OneWayDateMask
  */
 export default OneWayInputMask.extend({
