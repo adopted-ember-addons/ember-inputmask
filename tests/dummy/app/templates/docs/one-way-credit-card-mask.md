@@ -16,3 +16,9 @@ Supported card types include:
 * Diners Club
 
 {{one-way-credit-card-mask/demo-1}}
+
+## Separator
+
+You can change the default `separator` if you don't like `-`
+
+{{one-way-credit-card-mask/demo-2}}
