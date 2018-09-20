@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.3
+
+- [BUG] Fix issue where phone extensions file was no longer in Inputmask.js
+
 ## 0.7.2
 
 - [UPGRADE] Upgrade Babel to 6.16.10
