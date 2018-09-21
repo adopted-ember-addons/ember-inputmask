@@ -1,0 +1,14 @@
+{{#docs-demo as |demo|}}
+  {{#demo.example name='one-way-input-mask-demo-4.hbs'}}
+    {{one-way-input-mask
+      mask='aa-99-**'
+      update=(action 'onupdate')
+      class='docs-border docs-border-grey'}}
+  {{/demo.example}}
+
+  <p>unmasked: {{unmasked}}</p>
+  <p>masked: {{masked}}</p>
+
+  {{demo.snippet 'one-way-input-mask-demo-4.hbs'}}
+  {{demo.snippet 'one-way-input-mask-demo-4.js' label='component.js'}}
+{{/docs-demo}}

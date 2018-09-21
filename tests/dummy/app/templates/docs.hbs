@@ -1,0 +1,26 @@
+{{#docs-viewer as |viewer|}}
+
+  {{#viewer.nav as |nav|}}
+    {{nav.item 'Introduction' 'docs.index'}}
+
+    {{nav.section 'Usage'}}
+    {{nav.item 'One Way Input Mask' 'docs.one-way-input-mask'}}
+    {{nav.item 'One Way Number Mask' 'docs.one-way-number-mask'}}
+    {{nav.item 'One Way Currency Mask' 'docs.one-way-currency-mask'}}
+    {{nav.item 'One Way Date Mask' 'docs.one-way-date-mask'}}
+    {{nav.item 'One Way Phone Mask' 'docs.one-way-phone-mask'}}
+    {{nav.item 'One Way Email Mask' 'docs.one-way-email-mask'}}
+    {{nav.item 'One Way Zip Code Mask' 'docs.one-way-zip-code-mask'}}
+    {{nav.item 'One Way SSN Mask' 'docs.one-way-ssn-mask'}}
+    {{nav.item 'One Way Credit Card Mask' 'docs.one-way-credit-card-mask'}}
+  {{/viewer.nav}}
+
+  {{#viewer.main}}
+    <div class="docs-container">
+      <div class="docs-section">
+        {{outlet}}
+      </div>
+    </div>
+  {{/viewer.main}}
+
+{{/docs-viewer}}

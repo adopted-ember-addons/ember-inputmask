@@ -5,7 +5,7 @@ import { computed, observer, get } from '@ember/object';
 import TextField from '@ember/component/text-field';
 import Inputmask from 'inputmask';
 
-/**
+/*
  * `{{input-mask}}` component.
  *
  * Displays an input with the specified mask applied to it
@@ -26,8 +26,9 @@ import Inputmask from 'inputmask';
  *     Shows optional parts of a mask in preview when true
  *   debounce - number=0
  *     Enable by setting debounce > 0, makes sure to deduplicate calls to update the UI and only deliver the last ui change
+ *
+ * @class InputMask
  */
-
 export default TextField.extend({
   mask: '',
 

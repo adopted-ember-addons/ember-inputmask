@@ -5,6 +5,10 @@ import { computed, get, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { scheduleOnce } from '@ember/runloop';
 
+
+/**
+ * @class OneWayCreditCardMask
+ */
 export default OneWayInputMask.extend({
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('separator'),
 
@@ -41,6 +45,7 @@ export default OneWayInputMask.extend({
    * _cardType - Use current unmasked value to determine which kind of card the user is
    * typing
    *
+   * @computed _cardType
    * @private
    * @return {string} The card type
    */
@@ -51,9 +56,10 @@ export default OneWayInputMask.extend({
   }),
 
   /**
-   * separator - What kind of separator to use between number sections
+   * What kind of separator to use between number sections
    *
-   * @public
+   * @argument separator
+   * @type String
    */
   separator: '-',
 
@@ -61,6 +67,7 @@ export default OneWayInputMask.extend({
    * Dynamically determine which mask to use based on what kind of credit card numbers the user
    * is typing
    *
+   * @computed mask
    * @override
    */
   mask: computed('_cardType', {
@@ -83,6 +90,7 @@ export default OneWayInputMask.extend({
   /**
    * sendUpdate - Pass the credit card type along with the values
    *
+   * @method sendUpdate
    * @override
    * @param  {string} unmaskedValue
    * @param  {string} value
@@ -98,6 +106,7 @@ export default OneWayInputMask.extend({
    * _determineCardType - Use current unmasked value to determine which kind of card the user is
    * typing
    *
+   * @method _determineCardType
    * @private
    * @param {string} unmaskedValue
    * @return {string} The card type

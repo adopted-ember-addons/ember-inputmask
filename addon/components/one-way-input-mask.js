@@ -22,17 +22,14 @@ export const DEFAULT_NON_BOUND_PROPS = [
  * Displays an input with the specified mask applied to it
  * using Inputmask library. Follows Data-down actions up pattern
  *
- * @param {string} value The unmasked value to display in the input
- * @param {action} update The function to perform when the value changes. Will be passed the
- * unmasked value and the masked values
- * @param {string} mask The mask to use on the input
- * @param {object} options The options to pass into the Inputmask library
+ * @class OneWayInputMask
  */
 const OneWayInputMask = Component.extend({
   tagName: 'input',
 
   /**
    * Set the `_value` to be whatever the `element.value` is
+   * @field attributeBindings
    */
   attributeBindings: [
     'type',
@@ -45,15 +42,19 @@ const OneWayInputMask = Component.extend({
   type: 'text',
 
   /**
-   * mask - Pass in the `mask` string to set it on the element
+   * The mask from [Inputmask.js](https://github.com/RobinHerbots/Inputmask#default-masking-definitions)
    *
-   * @public
+   * @argument mask
+   * @type String
    */
   mask: '',
   _oldMask: '',
 
   /**
-   * options - Options accepted by the Inputmask library
+   * Options accepted by [Inputmask.js](https://github.com/RobinHerbots/Inputmask#options)
+   *
+   * @argument options
+   * @type Object
    */
   options: null,
   _options: null, // Internal options so external attribute doesnt clobber it
@@ -61,9 +62,19 @@ const OneWayInputMask = Component.extend({
 
   keyEvents: null,
 
+
+  /**
+   * The value to show inside the input. Can be first `positionalParam`
+   *
+   * @argument value
+   * @type String
+   */
+  value: null,
+
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
    *
+   * @computed _value
    * @private
    */
   _value: computed('positionalParamValue', 'value', {
@@ -138,10 +149,11 @@ const OneWayInputMask = Component.extend({
   },
 
   /**
-   * update - This action will be called when the value changes and will be passed the unmasked value
+   * This action will be called when the value changes and will be passed the unmasked value
    * and the masked value
    *
-   * @public
+   * @argument update
+   * @type function
    */
   update() {},
 
@@ -149,6 +161,7 @@ const OneWayInputMask = Component.extend({
    * _changeEventListener - A place to store the event listener we setup to listen to the 'input'
    * events, because the Inputmask library events don't play nice with the Ember components event
    *
+   * @method _changeEventListener
    * @private
    */
   _changeEventListener() {},
@@ -156,6 +169,8 @@ const OneWayInputMask = Component.extend({
   /**
    * keyUp - If the keycode matches one of the keycodes in the `keyEvents` hash we want to fire
    * the passed in action that matches it
+   *
+   * @method keyUp
    */
   keyUp(event) {
     let method = get(this, `keyEvents.${event.keyCode}`);
@@ -167,6 +182,8 @@ const OneWayInputMask = Component.extend({
   /**
    * sendUpdate - Send the update action with the values. Components that inherit from this may
    * need to override this if they want to pass additional data on the update
+   *
+   * @method sendUpdate
    */
   sendUpdate(unmaskedValue, value) {
     get(this, 'update')(unmaskedValue, value);
@@ -175,6 +192,9 @@ const OneWayInputMask = Component.extend({
   /**
    * _syncValue - If this component's consumer modifies the passed in `value` inside their `update`
    * method we want to make sure that value is reflected in the input's display.
+   *
+   * @method _syncValue
+   * @private
    */
   _syncValue() {
     let actualValue = get(this, '_value');
@@ -188,6 +208,7 @@ const OneWayInputMask = Component.extend({
   /**
    * _processNewValue - Handle when a new value changes
    *
+   * @method _processNewValue
    * @private
    * @param {string} value - The masked value visible in the element
    */
@@ -219,6 +240,7 @@ const OneWayInputMask = Component.extend({
   /**
    * _setupMask - Connect the 3rd party input masking library to the element
    *
+   * @method _setupMask
    * @private
    */
   _setupMask() {
@@ -238,6 +260,7 @@ const OneWayInputMask = Component.extend({
   /**
    * _getUnmaskedValue - Get the value of the element without the mask
    *
+   * @method _getUnmaskedValue
    * @private
    * @return {string}  The unmasked value
    */
@@ -249,6 +272,7 @@ const OneWayInputMask = Component.extend({
    * _changeMask - Destroy and reapply the mask when the mask or options change so the mask and
    * options can be dynamic
    *
+   * @method _changeMask
    * @private
    */
   _changeMask() {

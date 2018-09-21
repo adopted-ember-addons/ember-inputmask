@@ -2,7 +2,7 @@ import { once } from '@ember/runloop';
 import { observer } from '@ember/object';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
-/**
+/*
  * `{{number-input}}` component.
  *
  * Displays an input with numbers, formatted
@@ -32,8 +32,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  *   unmaskAsNumber - bool
  *     Specify whether the input should be unmasked as a
  *     number instead of a string (defaults to false)
+ *
+ * @class NumberInput
  */
-
 export default InputMaskComponent.extend({
   mask: 'integer',
 

@@ -11,16 +11,23 @@ const DEFAULT_OPTIONS = {
   autoGroup: true,
 };
 
+/**
+ * @class OneWayNumberMask
+ */
 export default OneWayInputMask.extend({
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('decimal'),
 
   /**
+   * @field mask
    * @override
    */
   mask: 'integer',
 
   /**
    * Set this to true to include decimals
+   * 
+   * @argument decimal
+   * @type Boolean
    */
   decimal: false,
 

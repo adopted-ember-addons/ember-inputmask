@@ -2,7 +2,7 @@ import { once } from '@ember/runloop';
 import { observer } from '@ember/object';
 import InputMaskComponent from 'ember-inputmask/components/input-mask';
 
-/**
+/*
  * `{{zip-code-input}}` component.
  *
  * Displays an input that masks a US ZIP code.
@@ -13,8 +13,9 @@ import InputMaskComponent from 'ember-inputmask/components/input-mask';
  * OPTIONS:
  *   fullCode - bool
  *     Allows users to optionally enter the full ZIP+4 area code.
+ *
+ * @class ZipCodeInput
  */
-
 export default InputMaskComponent.extend({
   mask:    '99999',
 
