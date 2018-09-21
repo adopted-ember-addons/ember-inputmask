@@ -4,5 +4,11 @@
     "name": "addon-docs",
     "sha": "747d1fad053e9ba8881a72ed5c8d5d0466190735",
     "tag": null
+  },
+  "master": {
+    "path": "versions/master",
+    "name": "master",
+    "sha": "fa1fc3d6a792d378a1bde9f3be7ef60082e8a807",
+    "tag": null
   }
 }
