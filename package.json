@@ -68,7 +68,7 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "https://brandynbennett.github.io/ember-inputmask/",
+    "demoURL": "https://brandynbennett.github.io/ember-inputmask/"
   },
   "homepage": "https://brandynbennett.github.io/ember-inputmask/"
 }
