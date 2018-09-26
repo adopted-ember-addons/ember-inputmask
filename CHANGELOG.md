@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.2
+
+- [ENHANCEMENT] Addon Docs
+
 ## 0.8.1
 
 - [BUG] Fix issue where phone extensions file was no longer in Inputmask.js
