@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.3
+
+- [ENHANCEMENT] Update Readme
+- [ENHANCEMENT] Add page title
+
 ## 0.8.2
 
 - [ENHANCEMENT] Addon Docs
