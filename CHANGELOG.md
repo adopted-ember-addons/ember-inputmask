@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.4
+
+- [ENHANCEMENT] Show placeholder example for currency mask in docs
+
 ## 0.8.3
 
 - [ENHANCEMENT] Update Readme
