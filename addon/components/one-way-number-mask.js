@@ -3,6 +3,7 @@ import OneWayInputMask, {
 } from 'ember-inputmask/components/one-way-input-mask';
 import { get, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
+import { assign } from '@ember/polyfills';
 
 const DEFAULT_OPTIONS = {
   groupSeparator: ',',
@@ -25,7 +26,7 @@ export default OneWayInputMask.extend({
 
   /**
    * Set this to true to include decimals
-   * 
+   *
    * @argument decimal
    * @type Boolean
    */
@@ -34,12 +35,12 @@ export default OneWayInputMask.extend({
   init() {
     this._super(...arguments);
 
-    set(this, '_options', Object.assign({}, get(this, '_options'), DEFAULT_OPTIONS));
+    set(this, '_options', assign({}, get(this, '_options'), DEFAULT_OPTIONS));
 
     if (get(this, 'decimal')) {
       set(this, 'mask', 'decimal');
 
-      // Give default digits if we don't have them aleady
+      // Give default digits if we don't have them already
       if (isBlank(get(this, 'options.digits'))) {
         set(this, '_options.digits', 2);
       }

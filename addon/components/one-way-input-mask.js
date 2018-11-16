@@ -3,6 +3,7 @@ import { computed, get, set } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { areDifferent } from 'ember-inputmask/utils/compare-objects';
 import Inputmask from 'inputmask';
+import { assign } from '@ember/polyfills';
 
 const DEFAULT_OPTIONS = {
   rightAlign: false,
@@ -98,7 +99,7 @@ const OneWayInputMask = Component.extend({
 
     // Give the mask some default options that can be overridden
     let options = get(this, 'options');
-    set(this, '_options', Object.assign({}, DEFAULT_OPTIONS, options));
+    set(this, '_options', assign({}, DEFAULT_OPTIONS, options));
 
     // We want any attribute that is not explicitally blacklisted to be bound that way we don't
     // have to whitelist every single html attribute that an `input` can have. Borrowed from
@@ -133,7 +134,7 @@ const OneWayInputMask = Component.extend({
 
     if (didOptionsChange) {
       // Override external options on top of internal options
-      set(this, '_options', Object.assign({}, get(this, '_options'), options));
+      set(this, '_options', assign({}, get(this, '_options'), options));
     }
 
     // We want to reapply the mask if it has changed

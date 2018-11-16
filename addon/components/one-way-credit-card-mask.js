@@ -4,6 +4,7 @@ import OneWayInputMask, {
 import { computed, get, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { scheduleOnce } from '@ember/runloop';
+import { assign } from '@ember/polyfills';
 
 
 /**
@@ -17,7 +18,7 @@ export default OneWayInputMask.extend({
 
     let options = get(this, '_options');
 
-    set(this, '_options', Object.assign({}, {
+    set(this, '_options', assign({}, {
       // We need to make sure we catch paste events so that we change the mask before the text
       // hits the input. This is a callback provided by Inputmask.js
       onBeforePaste: value => {
