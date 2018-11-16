@@ -7,7 +7,7 @@ module('Integration | Component | one way number mask', function(hooks) {
   setupRenderingTest(hooks);
 
   test('It defaults to an integer mask', async function(assert) {
-    this.set('value', 1234.56)
+    this.set('value', 1234.46)
     await render(hbs`{{one-way-number-mask value}}`);
 
     assert.dom('input').hasValue('1,234');
