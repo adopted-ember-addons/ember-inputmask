@@ -1,9 +1,11 @@
 {{#docs-demo as |demo|}}
   {{#demo.example name='one-way-input-mask-demo-5.hbs'}}
-    {{one-way-input-mask value
+    {{one-way-input-mask
+      value
       mask='aa-99-**'
       update=(action 'onupdate')
-      class='docs-border docs-border-grey'}}
+      class='docs-border docs-border-grey'
+    }}
   {{/demo.example}}
 
   <p>value: {{value}}</p>
