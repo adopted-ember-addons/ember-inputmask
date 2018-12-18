@@ -6476,8 +6476,9 @@ inline-source-map-comment@^1.0.5:
     xtend "^4.0.0"
 
 inputmask@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/inputmask/-/inputmask-4.0.2.tgz#df85411fabdcad323606a045a055fea90d8d7afe"
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/inputmask/-/inputmask-4.0.4.tgz#a1941b8165e0b1835155d142f873a94b422fbf8d"
+  integrity sha512-m2LAFzQ2IHZbC0FYGP8MO+uVvMGJdTPq07uSzB+v5QF5MOm2h22cAXKxQ4HiOYh3wHwlny9ATuJSp9WPKzq0cg==
 
 inquirer@^2:
   version "2.0.0"
