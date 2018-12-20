@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.1
+
+- [BUG] Fix addon doc styling
+
 ## 0.9.0
 
 - [UPGRADE] Upgrade to Ember 3.6
