@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0
+
+- [UPGRADE] Upgrade to Ember 3.6
+
 ## 0.8.5
 
 - [BUG] Fix IE11 issues because of Object.assign
