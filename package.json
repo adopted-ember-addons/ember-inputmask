@@ -65,7 +65,8 @@
     "qunit-dom": "^0.8.0"
   },
   "resolutions": {
-    "js-yaml": "3.13.1"
+    "js-yaml": "3.13.1",
+    "lodash.template": "4.5.0"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
