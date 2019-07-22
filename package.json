@@ -67,7 +67,8 @@
   "resolutions": {
     "js-yaml": "3.13.1",
     "lodash.template": "4.5.0",
-    "cryptiles": "4.1.2"
+    "cryptiles": "4.1.2",
+    "mime": "1.4.1"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
