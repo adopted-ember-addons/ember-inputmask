@@ -42,6 +42,15 @@ module('Integration | Component | one way number mask', function(hooks) {
     assert.equal(this.get('value'), '456');
   });
 
+  test('It disallows decimal via the `update` action', async function(assert) {
+    this.set('value', 123)
+    await render(hbs`{{one-way-number-mask value
+      update=(action (mut value))}}`);
+    await fillIn('input', '.');
+    assert.equal(this.get('value'), '');
+    assert.dom('input').hasValue('');
+  });
+
   test('Internal options are not clobbered by external ones', async function(assert) {
     this.set('value', 123)
     await render(hbs`{{one-way-number-mask value

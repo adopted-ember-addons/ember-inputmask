@@ -46,4 +46,26 @@ export default OneWayInputMask.extend({
       }
     }
   },
+
+  /**
+   * sendUpdate - Clean Integer Values
+   *
+   * @method sendUpdate
+   * @override
+   * @param  {string} unmaskedValue
+   * @param  {string} value
+   */
+  sendUpdate(unmaskedValue, value) {
+    if (!this.decimal) {
+      unmaskedValue = this._cleanInteger(unmaskedValue);
+      value = this._cleanInteger(value);
+    }
+    get(this, 'update')(unmaskedValue, value);
+  },
+
+  _cleanInteger(number) {
+    if (number === '0.') return '';
+    return parseInt(number);
+  },
 });
+
