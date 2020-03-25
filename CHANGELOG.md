@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.3
+
+- [BUG] Clean integers during send update
+
 ## 0.9.1
 
 - [BUG] Fix addon doc styling
