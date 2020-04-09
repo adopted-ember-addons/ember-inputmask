@@ -27,19 +27,20 @@ export default OneWayInputMask.extend({
         set(this, '_cardType', cardType);
         this._changeMask();
 
-
-        scheduleOnce('afterRender', () => {
-          // We need to reset the value in case the mask was too small before and characters were
-          // cut off
-          this.element.inputmask.setValue(value);
-
-          // We need to update the parent component with the new pasted values
-          this.sendUpdate(this._getUnmaskedValue(), this.element.value);
-        });
+        scheduleOnce('afterRender', this, 'resetMaskForPaste', value);
 
         return value;
       },
     }, options));
+  },
+
+  resetMaskForPaste(value) {
+    // We need to reset the value in case the mask was too small before and characters were
+    // cut off
+    this.element.inputmask.setValue(value);
+
+    // We need to update the parent component with the new pasted values
+    this.sendUpdate(this._getUnmaskedValue(), this.element.value);
   },
 
   /**
