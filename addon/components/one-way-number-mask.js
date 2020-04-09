@@ -41,7 +41,7 @@ export default OneWayInputMask.extend({
       set(this, 'mask', 'decimal');
 
       // Give default digits if we don't have them already
-      if (isBlank(this.options.digits)) {
+      if (!this.options || isBlank(this.options.digits)) {
         set(this, '_options.digits', 2);
       }
     }
