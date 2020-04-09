@@ -25,7 +25,7 @@ export default InputMaskComponent.extend({
   newComponent: '{{one-way-zip-code-mask}}',
 
   updateMask: function() {
-    if (this.get('fullCode')) {
+    if (this.fullCode) {
       this.set('mask', '99999[-9999]');
     }
 

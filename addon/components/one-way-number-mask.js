@@ -1,7 +1,7 @@
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS
 } from 'ember-inputmask/components/one-way-input-mask';
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { assign } from '@ember/polyfills';
 
@@ -35,13 +35,13 @@ export default OneWayInputMask.extend({
   init() {
     this._super(...arguments);
 
-    set(this, '_options', assign({}, get(this, '_options'), DEFAULT_OPTIONS));
+    set(this, '_options', assign({}, this._options, DEFAULT_OPTIONS));
 
-    if (get(this, 'decimal')) {
+    if (this.decimal) {
       set(this, 'mask', 'decimal');
 
       // Give default digits if we don't have them already
-      if (isBlank(get(this, 'options.digits'))) {
+      if (isBlank(this.options.digits)) {
         set(this, '_options.digits', 2);
       }
     }
@@ -60,7 +60,7 @@ export default OneWayInputMask.extend({
       unmaskedValue = this._cleanInteger(unmaskedValue);
       value = this._cleanInteger(value);
     }
-    get(this, 'update')(unmaskedValue, value);
+    this.update(unmaskedValue, value);
   },
 
   _cleanInteger(number) {

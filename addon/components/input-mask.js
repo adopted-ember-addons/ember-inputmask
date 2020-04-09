@@ -50,7 +50,7 @@ export default TextField.extend({
 
   init() {
     this._super(...arguments);
-    let message = `${get(this, 'oldComponent')} is deprecated in favor of ${get(this, 'newComponent')} and will be removed in 1.0.0`;
+    let message = `${this.oldComponent} is deprecated in favor of ${this.newComponent} and will be removed in 1.0.0`;
     deprecate(message, false, {
       id: 'non-one-way-mask',
       until: '1.0.0',
@@ -85,7 +85,7 @@ export default TextField.extend({
       return;
     }
 
-    var mask = this.get('mask'), options = this.get('options');
+    var mask = this.mask, options = this.options;
 
     if (this.element.inputmask) {
       this.element.inputmask.remove();
@@ -95,8 +95,8 @@ export default TextField.extend({
     inputmask.mask(this.element);
 
     // Initialize the unmasked value if it exists
-    if (isPresent(this.get('unmaskedValue'))) {
-      this.element.value = this.get('unmaskedValue');
+    if (isPresent(this.unmaskedValue)) {
+      this.element.value = this.unmaskedValue;
     }
 
     // If the mask has changed, we need to refocus the input to show the
@@ -114,20 +114,20 @@ export default TextField.extend({
   // (See `decimal-input`), which is why the actual setting of the mask is handled
   // in another function.
   updateMask: function() {
-    if (this.get('mask').toLowerCase() === 'regex') {
+    if (this.mask.toLowerCase() === 'regex') {
       // Note: I like pattern better, but I'll leave regex in as an option
       // as well since that's what the plugin defines on the options hash
-      this.set('options.regex', this.get('pattern') || this.get('regex'));
+      this.set('options.regex', this.pattern || this.regex);
       this.set('options.mask', '');
     }
 
     this.setProperties({
-      'options.placeholder'    : this.get('maskPlaceholder'),
-      'options.showMaskOnFocus': this.get('showMaskOnFocus'),
-      'options.showMaskOnHover': this.get('showMaskOnHover'),
-      'options.rightAlign':      this.get('rightAlign'),
-      'options.clearIncomplete': this.get('clearIncomplete'),
-      'options.greedy':          this.get('greedyMask'),
+      'options.placeholder'    : this.maskPlaceholder,
+      'options.showMaskOnFocus': this.showMaskOnFocus,
+      'options.showMaskOnHover': this.showMaskOnHover,
+      'options.rightAlign':      this.rightAlign,
+      'options.clearIncomplete': this.clearIncomplete,
+      'options.greedy':          this.greedyMask,
     });
 
     this.setMask();
@@ -150,8 +150,8 @@ export default TextField.extend({
     if (!this.element || !this.element.inputmask) {
       return;
     }
-    if (this.element.inputmask.unmaskedvalue() !== this.get('unmaskedValue')) {
-      this.element.value = this.get('unmaskedValue');
+    if (this.element.inputmask.unmaskedvalue() !== this.unmaskedValue) {
+      this.element.value = this.unmaskedValue;
     }
   },
 
@@ -164,7 +164,7 @@ export default TextField.extend({
 
   // When the unmaskedValue changes, set the value.
   setValue: observer('unmaskedValue', function() {
-    let debounceTime = this.get('debounce');
+    let debounceTime = this.debounce;
     if ( debounceTime ) {
       debounce(this, this.updateVar, debounce);
     } else {

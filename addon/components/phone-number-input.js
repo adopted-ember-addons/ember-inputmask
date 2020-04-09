@@ -24,7 +24,7 @@ export default InputMaskComponent.extend({
   newComponent: '{{one-way-phone-mask}}',
 
   updateMask: function() {
-    if (this.get('extensions')) {
+    if (this.extensions) {
       this.set('mask', '(299) 999-9999[ x 9{1,4}]');
     }
 

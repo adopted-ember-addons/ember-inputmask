@@ -80,9 +80,9 @@ const OneWayInputMask = Component.extend({
    */
   _value: computed('positionalParamValue', 'value', {
     get() {
-      let value = get(this, 'positionalParamValue');
+      let value = this.positionalParamValue;
       if (value === undefined) {
-        value = get(this, 'value');
+        value = this.value;
       }
 
       return value;
@@ -98,7 +98,7 @@ const OneWayInputMask = Component.extend({
     });
 
     // Give the mask some default options that can be overridden
-    let options = get(this, 'options');
+    let options = this.options;
     set(this, '_options', assign({}, DEFAULT_OPTIONS, options));
 
     // We want any attribute that is not explicitally blacklisted to be bound that way we don't
@@ -106,7 +106,7 @@ const OneWayInputMask = Component.extend({
     // https://github.com/DockYard/ember-one-way-controls/blob/master/addon/-private/dynamic-attribute-bindings.js
     let newAttributeBindings = [];
     for (let key in this.attrs) {
-      if (get(this, 'NON_ATTRIBUTE_BOUND_PROPS').indexOf(key) === -1 && get(this, 'attributeBindings').indexOf(key) === -1) {
+      if (this.NON_ATTRIBUTE_BOUND_PROPS.indexOf(key) === -1 && this.attributeBindings.indexOf(key) === -1) {
         newAttributeBindings.push(key);
       }
     }
@@ -125,16 +125,16 @@ const OneWayInputMask = Component.extend({
   },
 
   didReceiveAttrs() {
-    let mask = get(this, 'mask');
-    let oldMask = get(this, '_oldMask');
+    let mask = this.mask;
+    let oldMask = this._oldMask;
     let didMaskChange = mask !== oldMask;
-    let options = get(this, 'options');
-    let oldOptions = get(this, '_oldOptions');
+    let options = this.options;
+    let oldOptions = this._oldOptions;
     let didOptionsChange = areDifferent(options, oldOptions);
 
     if (didOptionsChange) {
       // Override external options on top of internal options
-      set(this, '_options', assign({}, get(this, '_options'), options));
+      set(this, '_options', assign({}, this._options, options));
     }
 
     // We want to reapply the mask if it has changed
@@ -187,7 +187,7 @@ const OneWayInputMask = Component.extend({
    * @method sendUpdate
    */
   sendUpdate(unmaskedValue, value) {
-    get(this, 'update')(unmaskedValue, value);
+    this.update(unmaskedValue, value);
   },
 
   /**
@@ -198,7 +198,7 @@ const OneWayInputMask = Component.extend({
    * @private
    */
   _syncValue() {
-    let actualValue = get(this, '_value');
+    let actualValue = this._value;
     let renderedValue = this.element.value;
 
     if (actualValue !== renderedValue) {
@@ -217,8 +217,8 @@ const OneWayInputMask = Component.extend({
     let cursorStart = this.element.selectionStart;
     let cursorEnd = this.element.selectionEnd;
     let unmaskedValue = this._getUnmaskedValue();
-    let oldUnmaskedValue = get(this, '_value');
-    let options = get(this, '_options');
+    let oldUnmaskedValue = this._value;
+    let options = this._options;
 
     // We only want to make changes if something is different so we don't cause infinite loops or
     // double renders.
@@ -245,7 +245,7 @@ const OneWayInputMask = Component.extend({
    * @private
    */
   _setupMask() {
-    let mask = get(this, 'mask'), options = get(this, '_options');
+    let mask = this.mask, options = this._options;
     let inputmask = new Inputmask(mask, options);
     inputmask.mask(this.element);
 
@@ -277,7 +277,7 @@ const OneWayInputMask = Component.extend({
    * @private
    */
   _changeMask() {
-    if (get(this, '_didInsertElement') && this.element && this.element.inputmask) {
+    if (this._didInsertElement && this.element && this.element.inputmask) {
       this._destroyMask();
       this._setupMask();
     }

@@ -1,7 +1,7 @@
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS
 } from 'ember-inputmask/components/one-way-input-mask';
-import { computed, get } from '@ember/object';
+import { computed } from '@ember/object';
 
 /**
  * @class OneWayPhoneMask
@@ -22,7 +22,7 @@ export default OneWayInputMask.extend({
    * @override
    */
   mask: computed('extensions', function() {
-    if (get(this, 'extensions')) {
+    if (this.extensions) {
       return '(999) 999-9999[ x 9{1,4}]';
     }
 

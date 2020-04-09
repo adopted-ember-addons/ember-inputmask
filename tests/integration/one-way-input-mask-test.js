@@ -24,13 +24,13 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
     this.set('value', 123)
     await render(hbs`{{one-way-input-mask value mask='9-9+9' update=(action (mut value))}}`);
     await fillIn('input', '456');
-    assert.equal(this.get('value'), '456');
+    assert.equal(this.value, '456');
   });
 
   test('Update action works when `value` begins as undefined', async function(assert) {
     await render(hbs`{{one-way-input-mask value mask='9-9+9' update=(action (mut value))}}`);
     await fillIn('input', '456');
-    assert.equal(this.get('value'), '456');
+    assert.equal(this.value, '456');
   });
 
   test('The parent can receive the masked value via the `update` action', async function(assert) {
@@ -39,7 +39,7 @@ module('Integration | Component | one-way-input-mask', function(hooks) {
     })
     await render(hbs`{{one-way-input-mask value mask='9-9+9' update=update}}`);
     await fillIn('input', '456');
-    assert.equal(this.get('masked'), '4-5+6');
+    assert.equal(this.masked, '4-5+6');
   });
 
   test('It can accept options', async function(assert) {
