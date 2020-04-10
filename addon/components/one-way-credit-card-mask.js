@@ -1,7 +1,7 @@
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS
 } from 'ember-inputmask/components/one-way-input-mask';
-import { computed, get, set } from '@ember/object';
+import { computed, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { scheduleOnce } from '@ember/runloop';
 import { assign } from '@ember/polyfills';
@@ -16,7 +16,7 @@ export default OneWayInputMask.extend({
   init() {
     this._super(...arguments);
 
-    let options = get(this, '_options');
+    let options = this._options;
 
     set(this, '_options', assign({}, {
       // We need to make sure we catch paste events so that we change the mask before the text
@@ -27,19 +27,20 @@ export default OneWayInputMask.extend({
         set(this, '_cardType', cardType);
         this._changeMask();
 
-
-        scheduleOnce('afterRender', () => {
-          // We need to reset the value in case the mask was too small before and characters were
-          // cut off
-          this.element.inputmask.setValue(value);
-
-          // We need to update the parent component with the new pasted values
-          this.sendUpdate(this._getUnmaskedValue(), this.element.value);
-        });
+        scheduleOnce('afterRender', this, 'resetMaskForPaste', value);
 
         return value;
       },
     }, options));
+  },
+
+  resetMaskForPaste(value) {
+    // We need to reset the value in case the mask was too small before and characters were
+    // cut off
+    this.element.inputmask.setValue(value);
+
+    // We need to update the parent component with the new pasted values
+    this.sendUpdate(this._getUnmaskedValue(), this.element.value);
   },
 
   /**
@@ -52,7 +53,7 @@ export default OneWayInputMask.extend({
    */
   _cardType: computed('_value', {
     get() {
-      return this._determineCardType(get(this, '_value'));
+      return this._determineCardType(this._value);
     },
   }),
 
@@ -73,8 +74,8 @@ export default OneWayInputMask.extend({
    */
   mask: computed('_cardType', {
     get() {
-      let cardType = get(this, '_cardType');
-      let s = get(this, 'separator');
+      let cardType = this._cardType;
+      let s = this.separator;
 
       if (cardType === 'American Express') {
         return `9999${s}999999${s}99999`;
@@ -100,7 +101,7 @@ export default OneWayInputMask.extend({
     let cardType = this._determineCardType(unmaskedValue);
     // Set the card type so the parent context can access it
     set(this, '_cardType', cardType);
-    get(this, 'update')(unmaskedValue, value, cardType);
+    this.update(unmaskedValue, value, cardType);
   },
 
   /**

@@ -1,7 +1,7 @@
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS,
 } from 'ember-inputmask/components/one-way-input-mask';
-import { computed, get } from '@ember/object';
+import { computed } from '@ember/object';
 
 /**
  * @class OneWayZipCodeMask
@@ -22,7 +22,7 @@ export default OneWayInputMask.extend({
    * @override
    */
   mask: computed('fullCode', function() {
-    if (get(this, 'fullCode')) {
+    if (this.fullCode) {
       return '99999[-9999]';
     }
 

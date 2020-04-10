@@ -1,5 +1,5 @@
 import OneWayInputMask from 'ember-inputmask/components/one-way-input-mask';
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 import { assign } from '@ember/polyfills';
 
 const DEFAULT_OPTIONS = {
@@ -20,6 +20,6 @@ export default OneWayInputMask.extend({
   init() {
     this._super(...arguments);
 
-    set(this, '_options', assign({}, get(this, '_options'), DEFAULT_OPTIONS));
+    set(this, '_options', assign({}, this._options, DEFAULT_OPTIONS));
   },
 });

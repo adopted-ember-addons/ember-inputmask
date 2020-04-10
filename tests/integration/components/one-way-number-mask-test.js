@@ -39,7 +39,7 @@ module('Integration | Component | one way number mask', function(hooks) {
     this.set('value', 123)
     await render(hbs`{{one-way-number-mask value update=(action (mut value))}}`);
     await fillIn('input', 456);
-    assert.equal(this.get('value'), '456');
+    assert.equal(this.value, '456');
   });
 
   test('It disallows decimal via the `update` action', async function(assert) {
@@ -47,7 +47,7 @@ module('Integration | Component | one way number mask', function(hooks) {
     await render(hbs`{{one-way-number-mask value
       update=(action (mut value))}}`);
     await fillIn('input', '.');
-    assert.equal(this.get('value'), '');
+    assert.equal(this.value, '');
     assert.dom('input').hasValue('');
   });
 
