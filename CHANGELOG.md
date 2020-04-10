@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.0
+
+- [UPGRADE] Upgrade Ember to 3.17
+- [UPGRADE] Bump Inputmask.js to 4.0.9
+
+### Breaking Changes!
+
+Changes lowest supported Ember version to 3.12
+
+Removes non `one-way-` versions of inputmask components
+
 ## 0.9.3
 
 - [BUG] Clean integers during send update
