@@ -1,8 +1,9 @@
+/* global Inputmask */
+
 import Component from '@ember/component';
 import { computed, get, set } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { areDifferent } from 'ember-inputmask/utils/compare-objects';
-import Inputmask from 'inputmask';
 import { assign } from '@ember/polyfills';
 
 const DEFAULT_OPTIONS = {

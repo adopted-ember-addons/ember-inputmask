@@ -1,32 +1,22 @@
 'use strict';
 
-const fastbootTransform = require('fastboot-transform');
-
-const filesToImport = [
-  'dependencyLibs/inputmask.dependencyLib.js',
-  'inputmask.js',
-  'inputmask.extensions.js',
-  'inputmask.date.extensions.js',
-  'inputmask.numeric.extensions.js',
-];
 
 module.exports = {
   name: 'ember-inputmask',
-  options: {
-    nodeAssets: {
-      inputmask: () => ({
-        vendor: {
-          include: filesToImport.map(file => `dist/inputmask/${file}`),
-          processTree: input => fastbootTransform(input)
-        }
-      })
-    }
-  },
+
   included() {
-    this._super.included.apply(this, arguments);
-    filesToImport.forEach(file => {
-      this.import(`vendor/inputmask/dist/inputmask/${file}`);
-    });
-    this.import('vendor/shims/inputmask.js');
+    const dependencies = Object.keys(this.project.dependencies());
+    const hasFastboot = dependencies.includes('ember-cli-fastboot');
+
+    const importOptions = {};
+    if (hasFastboot) {
+      importOptions.using = [{ transformation: 'fastbootShim' }];
+    }
+
+    this.import('node_modules/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js', importOptions);
+    this.import('node_modules/inputmask/dist/inputmask/inputmask.js', importOptions);
+    this.import('node_modules/inputmask/dist/inputmask/inputmask.extensions.js', importOptions);
+    this.import('node_modules/inputmask/dist/inputmask/inputmask.date.extensions.js', importOptions);
+    this.import('node_modules/inputmask/dist/inputmask/inputmask.numeric.extensions.js', importOptions);
   }
 };
