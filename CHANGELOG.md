@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.1
+
+- [UPGRADE] Use Yarn for travis build
+- [UPGRADE] Use builtin `import` for inputmask dependencies instead of ember-cli-node-assets
+
 ## 0.10.0
 
 - [UPGRADE] Upgrade Ember to 3.17
