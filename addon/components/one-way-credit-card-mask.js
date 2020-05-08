@@ -87,6 +87,9 @@ export default OneWayInputMask.extend({
 
       return `9999${s}9999${s}9999${s}9999`;
     },
+    set(_key, value) {
+      return value;
+    }
   }),
 
   /**
