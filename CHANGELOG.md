@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.2
+
+- [UPGRADE] Remove computed property setter deprecation warning
+
 ## 0.10.1
 
 - [UPGRADE] Use Yarn for travis build
