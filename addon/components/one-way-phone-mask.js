@@ -21,11 +21,16 @@ export default OneWayInputMask.extend({
    * @computed mask
    * @override
    */
-  mask: computed('extensions', function() {
-    if (this.extensions) {
-      return '(999) 999-9999[ x 9{1,4}]';
-    }
+  mask: computed('extensions', {
+    get() {
+      if (this.extensions) {
+        return '(999) 999-9999[ x 9{1,4}]';
+      }
 
-    return '(999) 999-9999';
+      return '(999) 999-9999';
+    },
+    set(_key, value) {
+      return value;
+    }
   }),
 });

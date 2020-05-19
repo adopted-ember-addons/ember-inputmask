@@ -21,11 +21,16 @@ export default OneWayInputMask.extend({
    * @computed mask
    * @override
    */
-  mask: computed('fullCode', function() {
-    if (this.fullCode) {
-      return '99999[-9999]';
-    }
+  mask: computed('fullCode', {
+    get() {
+      if (this.fullCode) {
+        return '99999[-9999]';
+      }
 
-    return '99999';
+      return '99999';
+    },
+    set(_key, value) {
+      return value;
+    }
   }),
 });
