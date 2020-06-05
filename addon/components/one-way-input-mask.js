@@ -70,7 +70,7 @@ const OneWayInputMask = Component.extend({
    * @argument value
    * @type String
    */
-  value: null,
+  value: '',
 
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
@@ -156,7 +156,7 @@ const OneWayInputMask = Component.extend({
    * @argument update
    * @type function
    */
-  update() {},
+  update: null,
 
   /**
    * _changeEventListener - A place to store the event listener we setup to listen to the 'input'
@@ -187,6 +187,7 @@ const OneWayInputMask = Component.extend({
    * @method sendUpdate
    */
   sendUpdate(unmaskedValue, value) {
+    if (!this.update) { this._value = value; return; }
     this.update(unmaskedValue, value);
   },
 
