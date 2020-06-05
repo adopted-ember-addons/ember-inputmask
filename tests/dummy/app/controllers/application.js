@@ -1,14 +1,14 @@
 import Controller from '@ember/controller';
-import { set } from '@ember/object';
+import { action, set } from '@ember/object';
+import { tracked } from '@glimmer/tracking'
 
-export default Controller.extend({
-  testValue: "test@test.test",
-  numberValue: 1234567890,
-  ssnValue: 123456789,
+export default class ApplicationController extends Controller {
+  @tracked testValue = "test@test.test";
+  @tracked numberValue = 1234567890;
+  @tracked ssnValue = 123456789;
 
-  actions: {
-    updateCardType(unmasked, masked, cardType) {
-      set(this, 'cardTypeValue', cardType);
-    },
-  },
-});
+  @action
+  updateCardType(unmasked, masked, cardType) {
+    set(this, 'cardTypeValue', cardType);
+  }
+}
