@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.3
+
+- [ENHANCEMENT] Thanks to @jrock2004 for updating docs to Octane syntax
+
 ## 0.10.2
 
 - [UPGRADE] Remove computed property setter deprecation warning
