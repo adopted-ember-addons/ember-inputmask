@@ -1,15 +1,16 @@
-import Component from '@ember/component';
-import { set } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object'
 
-// BEGIN-SNIPPET one-way-date-mask-demo-4.js
-export default Component.extend({
-  tagName: '',
+// BEGIN-SNIPPET one-way-date-mask-demo-3.js
+export default class Demo4Component extends Component {
+  @tracked unmasked;
+  @tracked masked;
 
-  actions: {
-    update(unmasked, masked) {
-      set(this, 'unmasked', unmasked);
-      set(this, 'masked', masked);
-    },
-  },
-});
+  @action
+  update(unmasked, masked) {
+    this.unmasked = unmasked;
+    this.masked = masked;
+  }
+}
 // END-SNIPPET

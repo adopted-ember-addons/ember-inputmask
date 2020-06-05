@@ -1,15 +1,15 @@
 {{#docs-demo as |demo|}}
   {{#demo.example name='one-way-input-mask-demo-5.hbs'}}
-    {{one-way-input-mask
-      value
-      mask='aa-99-**'
-      update=(action 'onupdate')
+    <OneWayInputMask
+      @value={{this.value}}
+      @update={{this.onupdate}}
       class='docs-border docs-border-grey'
-    }}
+    />
   {{/demo.example}}
 
-  <p>value: {{value}}</p>
-  <p>masked: {{masked}}</p>
+  <p>value: {{this.value}}</p>
+  <p>masked: {{this.masked}}</p>
+
 
   {{demo.snippet 'one-way-input-mask-demo-5.hbs'}}
   {{demo.snippet 'one-way-input-mask-demo-5.js' label='component.js'}}

@@ -1,14 +1,14 @@
 {{#docs-demo as |demo|}}
   {{#demo.example name='one-way-date-mask-demo-3.hbs'}}
-    {{one-way-date-mask
-      masked
-      options=(hash inputFormat='mm/dd/yyyy' outputFormat='yyyy-mm-dd')
-      update=(action 'update')
+    <OneWayDateMask
+      @value={{this.masked}}
+      @options={{hash inputFormat='mm/dd/yyyy' outputFormat='yyyy-mm-dd'}}
+      @update={{this.update}}
       class='docs-border docs-border-grey'
-    }}
+    />
 
-    <p>unmasked: {{unmasked}}</p>
-    <p>masked: {{masked}}</p>
+    <p>unmasked: {{this.unmasked}}</p>
+    <p>masked: {{this.masked}}</p>
   {{/demo.example}}
 
 

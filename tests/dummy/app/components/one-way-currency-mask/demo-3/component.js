@@ -1,5 +1,5 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  tagName: '',
-});
+export default class Demo3Component extends Component {
+
+}

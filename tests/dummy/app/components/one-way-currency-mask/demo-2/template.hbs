@@ -1,9 +1,9 @@
 {{#docs-demo as |demo|}}
   {{#demo.example name='one-way-currency-mask-demo-2.hbs'}}
-    {{one-way-currency-mask
-      options=(hash prefix='£')
+    <OneWayCurrencyMask
+      @options={{hash prefix='£'}}
       class='docs-border docs-border-grey'
-    }}
+    />
   {{/demo.example}}
 
   {{demo.snippet 'one-way-currency-mask-demo-2.hbs'}}

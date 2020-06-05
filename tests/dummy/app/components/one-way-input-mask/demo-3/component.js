@@ -1,13 +1,14 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object'
 
 // BEGIN-SNIPPET one-way-input-mask-demo-3.js
-export default Component.extend({
-  completed: false,
+export default class Demo3Component extends Component {
+  @tracked completed = false;
 
-  actions: {
-    oncomplete() {
-      this.toggleProperty('completed');
-    },
-  },
-});
+  @action
+  oncomplete() {
+    this.completed = !this.completed;
+  }
+}
 // END-SNIPPET
