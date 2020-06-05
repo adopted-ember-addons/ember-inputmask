@@ -51,11 +51,7 @@ export default OneWayInputMask.extend({
    * @private
    * @return {string} The card type
    */
-  _cardType: computed('_value', {
-    get() {
-      return this._determineCardType(this._value);
-    },
-  }),
+  _cardType: undefined,
 
   /**
    * What kind of separator to use between number sections
