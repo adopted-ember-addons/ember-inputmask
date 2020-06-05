@@ -9942,10 +9942,10 @@ inline-source-map-comment@^1.0.5:
     sum-up "^1.0.1"
     xtend "^4.0.0"
 
-inputmask@^4.0.9:
-  version "4.0.9"
-  resolved "https://registry.yarnpkg.com/inputmask/-/inputmask-4.0.9.tgz#a60fc46cee52a35a0ba5f50b5cca3a6733ece18c"
-  integrity sha512-EodaYhJKncXRBwvCE8YrRmAFmBJ6bWdgX4Qw8QSnK5GBDXE03jgpJhrS+a2N0v2Zsgp+OjKXy7qACktjYD83Uw==
+inputmask@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/inputmask/-/inputmask-5.0.3.tgz#f6758de84b7a67c3c246f520c5f3e2c383b3fd68"
+  integrity sha512-v1l5IoJK6NE8TapI2g6n/y1/ksMwyVLkkaIS6VPTkdvpgEITLzDtSi7n9Jpp471hL2DdJlae9HpMnFmTpf5VXA==
 
 inquirer@^6:
   version "6.5.2"
