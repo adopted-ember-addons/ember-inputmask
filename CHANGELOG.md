@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.4
+
+- [ENHANCEMENT] Thanks to @juanazam for removing computed set deprecation warning
+
 ## 0.10.3
 
 - [ENHANCEMENT] Thanks to @jrock2004 for updating docs to Octane syntax
