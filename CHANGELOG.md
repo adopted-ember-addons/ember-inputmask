@@ -21,7 +21,7 @@ provide the prefix explicitally. See https://github.com/RobinHerbots/Inputmask/i
 
 It used to be possible to use an inputmask component without passing in a `@value` 
 or `@update` args. This is no longer the case. If you happen to not be passing these
-args in you will need to do so now for the component to work.
+args in, you will need to do so for the component to work.
 
 ## 0.10.4
 
