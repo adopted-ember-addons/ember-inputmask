@@ -23,6 +23,13 @@ It used to be possible to use an inputmask component without passing in a `@valu
 or `@update` args. This is no longer the case. If you happen to not be passing these
 args in, you will need to do so for the component to work.
 
+#### Inputmask no longer a global
+
+If you were relying on `Inputmask` to exist as a global it no longer does. You'll 
+need to import it like so:
+
+`import Inputmask from 'inputmask';`
+
 ## 0.10.4
 
 - [ENHANCEMENT] Thanks to @juanazam for removing computed set deprecation warning
