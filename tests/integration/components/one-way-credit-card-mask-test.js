@@ -21,14 +21,6 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'Visa');
   });
 
-  test('Visa formatting unbound', async function(assert) {
-    await render(hbs`{{one-way-credit-card-mask update=update}}`);
-    await fillIn('input', '4444444444444444');
-    assert.dom('input').hasValue('4444-4444-4444-4444');
-    assert.equal(this.unmaskedValue, '4444444444444444');
-    assert.equal(this.cardType, 'Visa');
-  });
-
   test('MasterCard formatting', async function(assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '5444444444444444');
