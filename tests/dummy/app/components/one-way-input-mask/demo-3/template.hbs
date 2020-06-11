@@ -4,6 +4,8 @@
       @mask='aa-99-**'
       @options={{hash oncomplete=(action 'oncomplete')}}
       class='docs-border docs-border-grey'
+      @value={{this.foo}}
+      @update={{set this.foo _}}
     />
   {{/demo.example}}
 

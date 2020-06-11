@@ -4,6 +4,7 @@ import { action } from '@ember/object'
 
 // BEGIN-SNIPPET one-way-input-mask-demo-3.js
 export default class Demo3Component extends Component {
+  @tracked foo;
   @tracked completed = false;
 
   @action

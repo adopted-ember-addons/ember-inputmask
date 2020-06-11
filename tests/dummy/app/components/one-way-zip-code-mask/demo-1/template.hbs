@@ -1,6 +1,8 @@
 {{#docs-demo as |demo|}}
   {{#demo.example name='one-way-zip-code-mask-demo-1.hbs'}}
     <OneWayZipCodeMask
+      @value={{this.foo}}
+      @update={{set this.foo _}}
       class='docs-border docs-border-grey'
     />
   {{/demo.example}}

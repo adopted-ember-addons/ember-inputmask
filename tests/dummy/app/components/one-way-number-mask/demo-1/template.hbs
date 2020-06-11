@@ -2,6 +2,8 @@
   {{#demo.example name='one-way-number-mask-demo-1.hbs'}}
     <OneWayNumberMask
       class='docs-border docs-border-grey'
+      @value={{this.foo}}
+      @update={{set this.foo _}}
     />
   {{/demo.example}}
 

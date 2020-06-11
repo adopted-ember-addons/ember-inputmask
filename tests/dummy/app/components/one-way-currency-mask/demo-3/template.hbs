@@ -1,6 +1,8 @@
 {{#docs-demo as |demo|}}
   {{#demo.example name='one-way-currency-mask-demo-3.hbs'}}
     <OneWayCurrencyMask
+      @value={{this.foo}}
+      @update={{set this.foo _}}
       @options={{hash prefix='£' clearMaskOnLostFocus=true}}
       @placeholder='my cool placeholder'
       class='docs-border docs-border-grey'

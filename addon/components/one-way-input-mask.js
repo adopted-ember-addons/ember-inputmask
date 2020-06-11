@@ -187,7 +187,6 @@ const OneWayInputMask = Component.extend({
    * @method sendUpdate
    */
   sendUpdate(unmaskedValue, value) {
-    if (!this.update) { this._value = value; return; }
     this.update(unmaskedValue, value);
   },
 

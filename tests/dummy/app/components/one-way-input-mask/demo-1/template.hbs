@@ -3,8 +3,11 @@
     <OneWayInputMask
       @mask='aa-99-**'
       class='docs-border docs-border-grey'
+      @value={{this.foo}}
+      @update={{set this.foo _}}
     />
   {{/demo.example}}
 
   {{demo.snippet 'one-way-input-mask-demo-1.hbs'}}
+  {{demo.snippet 'one-way-input-mask-demo-1.js' label='component.js'}}
 {{/docs-demo}}

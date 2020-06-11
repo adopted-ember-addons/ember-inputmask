@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.11.0
+
+- [UPGRADE] Bump Inputmask.js to 5.0.1
+
+### Breaking Changes!
+
+#### Currency Change
+Inputmask.js no longer defaults to USD for currency mask. You will now need to 
+provide the prefix explicitally. See https://github.com/RobinHerbots/Inputmask/issues/2066
+
+```hbs
+<OneWayCurrencyMask 
+  @value={{foo}}
+  @update={{this.updateFoo}}
+  @options={{hash prefix='$ '}}>
+```
+
+#### @value and @update required
+
+It used to be possible to use an inputmask component without passing in a `@value` 
+or `@update` args. This is no longer the case. If you happen to not be passing these
+args in you will need to do so now for the component to work.
+
 ## 0.10.4
 
 - [ENHANCEMENT] Thanks to @juanazam for removing computed set deprecation warning
