@@ -21,7 +21,7 @@ module('Integration | Component | one way phone mask', function (hooks) {
 
   test('extensions work', async function (assert) {
     await render(
-      hbs`{{one-way-phone-mask value=unmaskedValue extensions=true update=update}}`
+      hbs`{{one-way-phone-mask value=unmaskedValue extensions=true update=update}}`,
     );
     await fillIn('input', '2234567890x1234');
     assert.dom('input').hasValue('(223) 456-7890 x 1234');

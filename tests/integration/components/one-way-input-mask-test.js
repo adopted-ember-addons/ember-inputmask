@@ -23,7 +23,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
   test('The parent can receive the updated value via the `update` action', async function (assert) {
     this.set('value', 123);
     await render(
-      hbs`{{one-way-input-mask value mask='9-9+9' update=(set this 'value')}}`
+      hbs`{{one-way-input-mask value mask='9-9+9' update=(set this 'value')}}`,
     );
     await fillIn('input', '456');
     assert.equal(this.value, '456');
@@ -31,7 +31,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
 
   test('Update action works when `value` begins as undefined', async function (assert) {
     await render(
-      hbs`{{one-way-input-mask value mask='9-9+9' update=(set this 'value')}}`
+      hbs`{{one-way-input-mask value mask='9-9+9' update=(set this 'value')}}`,
     );
     await fillIn('input', '456');
     assert.equal(this.value, '456');
@@ -50,7 +50,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 1);
     this.set('options', { placeholder: '*' });
     await render(
-      hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`
+      hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`,
     );
     assert.dom('input').hasValue('1-*+*');
   });
@@ -58,7 +58,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
   test('mask and options are not bound attributes', async function (assert) {
     this.set('options', { placeholder: '*' });
     await render(
-      hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`
+      hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`,
     );
     assert.notOk(find('input').getAttribute('mask'), 'mask is not bound');
     assert.notOk(find('input').getAttribute('options'), 'options is not bound');
@@ -78,7 +78,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 1);
     this.set('options', { placeholder: '*' });
     await render(
-      hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`
+      hbs`{{one-way-input-mask value mask='9-9+9' options=options}}`,
     );
     assert.dom('input').hasValue('1-*+*');
 

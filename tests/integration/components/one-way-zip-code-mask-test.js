@@ -14,7 +14,7 @@ module('Integration | Component | one way zip code mask', function (hooks) {
 
   test('filled-in value', async function (assert) {
     await render(
-      hbs`{{one-way-zip-code-mask value=unmaskedValue update=update}}`
+      hbs`{{one-way-zip-code-mask value=unmaskedValue update=update}}`,
     );
     await fillIn('input', '12345');
     assert.dom('input').hasValue('12345');
@@ -23,7 +23,7 @@ module('Integration | Component | one way zip code mask', function (hooks) {
 
   test('full code works', async function (assert) {
     await render(
-      hbs`{{one-way-zip-code-mask value=unmaskedValue fullCode=true update=update}}`
+      hbs`{{one-way-zip-code-mask value=unmaskedValue fullCode=true update=update}}`,
     );
     await fillIn('input', '123451234');
     assert.dom('input').hasValue('12345-1234');

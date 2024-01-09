@@ -26,7 +26,7 @@ module('Integration | Component | one way number mask', function (hooks) {
   test('Can change default digits with options', async function (assert) {
     this.set('value', 1234.567);
     await render(
-      hbs`{{one-way-number-mask value decimal=true options=(hash digits=3)}}`
+      hbs`{{one-way-number-mask value decimal=true options=(hash digits=3)}}`,
     );
 
     assert.dom('input').hasValue('1,234.567');

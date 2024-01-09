@@ -112,7 +112,7 @@ const OneWayInputMask = Component.extend({
     set(
       this,
       'attributeBindings',
-      this.attributeBindings.concat(newAttributeBindings)
+      this.attributeBindings.concat(newAttributeBindings),
     );
   },
 
