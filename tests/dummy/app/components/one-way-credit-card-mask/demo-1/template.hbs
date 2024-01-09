@@ -1,5 +1,5 @@
 <DocsDemo as |demo|>
-  <demo.example @name="one-way-credit-card-mask-demo-1.hbs">
+  <demo.example @name='one-way-credit-card-mask-demo-1.hbs'>
     <OneWayCreditCardMask
       @value={{this.unmasked}}
       @update={{this.update}}
@@ -11,6 +11,9 @@
     <p>cardType: {{this.cardType}}</p>
   </demo.example>
 
-  {{demo.snippet 'one-way-credit-card-mask-demo-1.hbs'}}
-  {{demo.snippet 'one-way-credit-card-mask-demo-1.js' label='component.js'}}
+  <demo.snippet @name='one-way-credit-card-mask-demo-1.hbs' />
+  <demo.snippet
+    @name='one-way-credit-card-mask-demo-1.js'
+    @label='component.js'
+  />
 </DocsDemo>

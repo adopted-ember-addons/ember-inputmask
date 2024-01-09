@@ -1,5 +1,5 @@
 <DocsDemo as |demo|>
-  <demo.example @name="one-way-input-mask-demo-4.hbs">
+  <demo.example @name='one-way-input-mask-demo-4.hbs'>
     <OneWayInputMask
       @value={{this.masked}}
       @mask='aa-99-**'
@@ -11,6 +11,6 @@
   <p>unmasked: {{this.unmasked}}</p>
   <p>masked: {{this.masked}}</p>
 
-  {{demo.snippet 'one-way-input-mask-demo-4.hbs'}}
-  {{demo.snippet 'one-way-input-mask-demo-4.js' label='component.js'}}
+  <demo.snippet @name='one-way-input-mask-demo-4.hbs' />
+  <demo.snippet @name='one-way-input-mask-demo-4.js' @label='component.js' />
 </DocsDemo>
