@@ -14,10 +14,10 @@ module('Integration | Component | one way currency mask', function (hooks) {
 
   test('filled-in value', async function (assert) {
     await render(
-      hbs`{{one-way-currency-mask value=unmaskedValue update=update options=(hash prefix='$ ')}}`,
+      hbs`{{one-way-currency-mask value=this.unmaskedValue update=this.update options=(hash prefix='$ ')}}`,
     );
     await fillIn('input', '1234567.89');
     assert.dom('input').hasValue('$ 1,234,567.89');
-    assert.equal(this.unmaskedValue, '1234567.89');
+    assert.strictEqual(this.unmaskedValue, '1234567.89');
   });
 });

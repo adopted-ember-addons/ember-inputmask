@@ -14,19 +14,19 @@ module('Integration | Component | one way zip code mask', function (hooks) {
 
   test('filled-in value', async function (assert) {
     await render(
-      hbs`{{one-way-zip-code-mask value=unmaskedValue update=update}}`,
+      hbs`{{one-way-zip-code-mask value=this.unmaskedValue update=this.update}}`,
     );
     await fillIn('input', '12345');
     assert.dom('input').hasValue('12345');
-    assert.equal(this.unmaskedValue, 12345);
+    assert.strictEqual(this.unmaskedValue, '12345');
   });
 
   test('full code works', async function (assert) {
     await render(
-      hbs`{{one-way-zip-code-mask value=unmaskedValue fullCode=true update=update}}`,
+      hbs`{{one-way-zip-code-mask value=this.unmaskedValue fullCode=true update=this.update}}`,
     );
     await fillIn('input', '123451234');
     assert.dom('input').hasValue('12345-1234');
-    assert.equal(this.unmaskedValue, 123451234);
+    assert.strictEqual(this.unmaskedValue, '123451234');
   });
 });

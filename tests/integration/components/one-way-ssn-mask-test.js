@@ -13,9 +13,11 @@ module('Integration | Component | one way ssn mask', function (hooks) {
   });
 
   test('filled-in value', async function (assert) {
-    await render(hbs`{{one-way-ssn-mask value=unmaskedValue update=update}}`);
+    await render(
+      hbs`{{one-way-ssn-mask value=this.unmaskedValue update=this.update}}`,
+    );
     await fillIn('input', '123456789');
     assert.dom('input').hasValue('123-45-6789');
-    assert.equal(this.unmaskedValue, 123456789);
+    assert.strictEqual(this.unmaskedValue, '123456789');
   });
 });

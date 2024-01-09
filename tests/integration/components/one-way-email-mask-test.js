@@ -13,9 +13,11 @@ module('Integration | Component | one way email mask', function (hooks) {
   });
 
   test('filled-in value', async function (assert) {
-    await render(hbs`{{one-way-email-mask value=unmaskedValue update=update}}`);
+    await render(
+      hbs`{{one-way-email-mask value=this.unmaskedValue update=this.update}}`,
+    );
     await fillIn('input', 'test@test.test');
     assert.dom('input').hasValue('test@test.test');
-    assert.equal(this.unmaskedValue, 'test@test.test');
+    assert.strictEqual(this.unmaskedValue, 'test@test.test');
   });
 });
