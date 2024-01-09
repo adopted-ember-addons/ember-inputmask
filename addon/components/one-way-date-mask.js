@@ -1,6 +1,5 @@
 import OneWayInputMask from 'ember-inputmask/components/one-way-input-mask';
 import { set } from '@ember/object';
-import { assign } from '@ember/polyfills';
 
 const DEFAULT_OPTIONS = {
   inputFormat: 'dd/mm/yyyy',
@@ -20,6 +19,6 @@ export default OneWayInputMask.extend({
   init() {
     this._super(...arguments);
 
-    set(this, '_options', assign({}, this._options, DEFAULT_OPTIONS));
+    set(this, '_options', Object.assign({}, this._options, DEFAULT_OPTIONS));
   },
 });
