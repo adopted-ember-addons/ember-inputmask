@@ -2,7 +2,7 @@
 
 
 module.exports = {
-  name: 'ember-inputmask',
+  name: require('./package').name,
 
   included() {
     const dependencies = Object.keys(this.project.dependencies());
