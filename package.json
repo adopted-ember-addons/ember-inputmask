@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/brandynbennett/ember-inputmask",
+  "repository": "https://github.com/adopted-ember-addons/ember-inputmask",
   "license": "MIT",
   "author": "Chris Garrett",
   "directories": {
@@ -90,7 +90,7 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "https://brandynbennett.github.io/ember-inputmask/"
+    "demoURL": "https://adopted-ember-addons.github.io/ember-inputmask/"
   },
-  "homepage": "https://brandynbennett.github.io/ember-inputmask/"
+  "homepage": "https://adopted-ember-addons.github.io/ember-inputmask/"
 }
