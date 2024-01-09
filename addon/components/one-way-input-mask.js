@@ -3,7 +3,6 @@ import Inputmask from 'inputmask';
 import { computed, get, set } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { areDifferent } from 'ember-inputmask/utils/compare-objects';
-import { assign } from '@ember/polyfills';
 
 const DEFAULT_OPTIONS = {
   rightAlign: false,
@@ -32,10 +31,7 @@ const OneWayInputMask = Component.extend({
    * Set the `_value` to be whatever the `element.value` is
    * @field attributeBindings
    */
-  attributeBindings: [
-    'type',
-    '_value:value'
-  ],
+  attributeBindings: ['type', '_value:value'],
 
   // This is where we blacklist all the attributes that should not be bound
   NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS,
@@ -63,7 +59,6 @@ const OneWayInputMask = Component.extend({
 
   keyEvents: null,
 
-
   /**
    * The value to show inside the input. Can be first `positionalParam`
    *
@@ -86,35 +81,43 @@ const OneWayInputMask = Component.extend({
       }
 
       return value;
-    }
+    },
   }),
 
   init() {
     this._super(...arguments);
 
     set(this, 'keyEvents', {
-      '13': 'onenter',
-      '27': 'onescape',
+      13: 'onenter',
+      27: 'onescape',
     });
 
     // Give the mask some default options that can be overridden
     let options = this.options;
-    set(this, '_options', assign({}, DEFAULT_OPTIONS, options));
+    set(this, '_options', Object.assign({}, DEFAULT_OPTIONS, options));
 
     // We want any attribute that is not explicitally blacklisted to be bound that way we don't
     // have to whitelist every single html attribute that an `input` can have. Borrowed from
     // https://github.com/DockYard/ember-one-way-controls/blob/master/addon/-private/dynamic-attribute-bindings.js
     let newAttributeBindings = [];
     for (let key in this.attrs) {
-      if (this.NON_ATTRIBUTE_BOUND_PROPS.indexOf(key) === -1 && this.attributeBindings.indexOf(key) === -1) {
+      if (
+        this.NON_ATTRIBUTE_BOUND_PROPS.indexOf(key) === -1 &&
+        this.attributeBindings.indexOf(key) === -1
+      ) {
         newAttributeBindings.push(key);
       }
     }
 
-    set(this, 'attributeBindings', this.attributeBindings.concat(newAttributeBindings));
+    set(
+      this,
+      'attributeBindings',
+      this.attributeBindings.concat(newAttributeBindings),
+    );
   },
 
   didInsertElement() {
+    this._super(...arguments);
     this._setupMask();
 
     // We're setting this flag because we want to ensure that fastboot doesn't break when using
@@ -125,6 +128,7 @@ const OneWayInputMask = Component.extend({
   },
 
   didReceiveAttrs() {
+    this._super();
     let mask = this.mask;
     let oldMask = this._oldMask;
     let didMaskChange = mask !== oldMask;
@@ -134,7 +138,7 @@ const OneWayInputMask = Component.extend({
 
     if (didOptionsChange) {
       // Override external options on top of internal options
-      set(this, '_options', assign({}, this._options, options));
+      set(this, '_options', Object.assign({}, this._options, options));
     }
 
     // We want to reapply the mask if it has changed
@@ -146,6 +150,7 @@ const OneWayInputMask = Component.extend({
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     this._destroyMask();
   },
 
@@ -226,7 +231,10 @@ const OneWayInputMask = Component.extend({
     // the masking algorithm, to ensure that we only call `update` if the values are actually different
     // (e.g. '1234.' will be masked as '1234' and so when `update` is called and passed back
     // into the component the decimal will be removed, we don't want this)
-    if (Inputmask.format(String(oldUnmaskedValue), options) !== Inputmask.format(unmaskedValue, options)) {
+    if (
+      Inputmask.format(String(oldUnmaskedValue), options) !==
+      Inputmask.format(unmaskedValue, options)
+    ) {
       this.sendUpdate(unmaskedValue, value);
 
       // When the value is updated, and then sent back down the cursor moves to the end of the field.
@@ -245,7 +253,8 @@ const OneWayInputMask = Component.extend({
    * @private
    */
   _setupMask() {
-    let mask = this.mask, options = this._options;
+    let mask = this.mask,
+      options = this._options;
     let inputmask = new Inputmask(mask, options);
     inputmask.mask(this.element);
 
@@ -253,7 +262,7 @@ const OneWayInputMask = Component.extend({
     // Component event methods, because the Inputmask events don't play nice with the Component
     // ones. Similar issue happens in React.js as well
     // https://github.com/RobinHerbots/Inputmask/issues/1377
-    let eventListener = event => this._processNewValue(event.target.value);
+    let eventListener = (event) => this._processNewValue(event.target.value);
     set(this, '_changeEventListener', eventListener);
     this.element.addEventListener('input', eventListener);
   },
@@ -290,7 +299,7 @@ const OneWayInputMask = Component.extend({
 });
 
 OneWayInputMask.reopenClass({
-  positionalParams: ['positionalParamValue']
+  positionalParams: ['positionalParamValue'],
 });
 
 export default OneWayInputMask;

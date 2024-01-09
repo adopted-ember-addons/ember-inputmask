@@ -1,18 +1,14 @@
-{{#docs-demo as |demo|}}
-  {{#demo.example name='one-way-input-mask-demo-2.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='one-way-input-mask-demo-2.hbs'>
     <OneWayInputMask
       @mask='aa-99-**'
-      @options={{hash
-        showMaskOnHover=false
-        showMaskOnFocus=false
-        repeat=2
-      }}
+      @options={{hash showMaskOnHover=false showMaskOnFocus=false repeat=2}}
       class='docs-border docs-border-grey'
       @value={{this.foo}}
-      @update={{set this.foo _}}
+      @update={{set this 'foo'}}
     />
-  {{/demo.example}}
+  </demo.example>
 
-  {{demo.snippet 'one-way-input-mask-demo-2.hbs'}}
-  {{demo.snippet 'one-way-input-mask-demo-2.js' label='component.js'}}
-{{/docs-demo}}
+  <demo.snippet @name='one-way-input-mask-demo-2.hbs' />
+  <demo.snippet @name='one-way-input-mask-demo-2.js' @label='component.js' />
+</DocsDemo>

@@ -1,13 +1,13 @@
-{{#docs-demo as |demo|}}
-  {{#demo.example name='one-way-number-mask-demo-4.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='one-way-number-mask-demo-4.hbs'>
     <OneWayNumberMask
       @value={{this.foo}}
       @decimal={{true}}
       @options={{hash groupSeparator='.' radixPoint=','}}
-      @update={{action (mut this.foo)}}
+      @update={{set this 'foo'}}
       class='docs-border docs-border-grey'
     />
-  {{/demo.example}}
+  </demo.example>
 
-  {{demo.snippet 'one-way-number-mask-demo-4.hbs'}}
-{{/docs-demo}}
+  <demo.snippet @name='one-way-number-mask-demo-4.hbs' />
+</DocsDemo>

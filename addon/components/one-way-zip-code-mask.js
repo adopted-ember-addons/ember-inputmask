@@ -31,6 +31,6 @@ export default OneWayInputMask.extend({
     },
     set(_key, value) {
       return value;
-    }
+    },
   }),
 });

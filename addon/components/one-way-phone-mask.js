@@ -1,5 +1,5 @@
 import OneWayInputMask, {
-  DEFAULT_NON_BOUND_PROPS
+  DEFAULT_NON_BOUND_PROPS,
 } from 'ember-inputmask/components/one-way-input-mask';
 import { computed } from '@ember/object';
 
@@ -31,6 +31,6 @@ export default OneWayInputMask.extend({
     },
     set(_key, value) {
       return value;
-    }
+    },
   }),
 });

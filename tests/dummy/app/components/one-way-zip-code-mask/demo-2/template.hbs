@@ -1,12 +1,12 @@
-{{#docs-demo as |demo|}}
-  {{#demo.example name='one-way-zip-code-mask-demo-2.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='one-way-zip-code-mask-demo-2.hbs'>
     <OneWayZipCodeMask
       @value={{this.foo}}
-      @update={{set this.foo _}}
+      @update={{set this 'foo'}}
       @fullCode={{true}}
       class='docs-border docs-border-grey'
     />
-  {{/demo.example}}
+  </demo.example>
 
-  {{demo.snippet 'one-way-zip-code-mask-demo-2.hbs'}}
-{{/docs-demo}}
+  <demo.snippet @name='one-way-zip-code-mask-demo-2.hbs' />
+</DocsDemo>

@@ -1,12 +1,12 @@
-{{#docs-demo as |demo|}}
-  {{#demo.example name='one-way-date-mask-demo-2.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='one-way-date-mask-demo-2.hbs'>
     <OneWayDateMask
       @value={{this.foo}}
       @update={{this.update}}
       @options={{hash inputFormat='mm/dd/yyyy'}}
       class='docs-border docs-border-grey'
     />
-  {{/demo.example}}
+  </demo.example>
 
-  {{demo.snippet 'one-way-date-mask-demo-2.hbs'}}
-{{/docs-demo}}
+  <demo.snippet @name='one-way-date-mask-demo-2.hbs' />
+</DocsDemo>
