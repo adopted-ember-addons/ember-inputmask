@@ -6,8 +6,8 @@ const Router = AddonDocsRouter.extend({
   rootURL: config.rootURL,
 });
 
-Router.map(function() {
-  docsRoute(this, function() {
+Router.map(function () {
+  docsRoute(this, function () {
     this.route('one-way-input-mask');
     this.route('one-way-number-mask');
     this.route('one-way-currency-mask');

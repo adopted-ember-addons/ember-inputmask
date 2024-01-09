@@ -3,8 +3,8 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd my-addon`
-* `npm install`
+* `cd ember-inputmask`
+* `yarn install`
 
 ## Linting
 

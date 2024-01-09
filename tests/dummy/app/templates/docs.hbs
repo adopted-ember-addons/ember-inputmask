@@ -1,8 +1,8 @@
 {{docs-header}}
 
-{{#docs-viewer as |viewer|}}
+<DocsViewer as |viewer|>
 
-  {{#viewer.nav as |nav|}}
+  <viewer.nav as |nav|>
     {{nav.item 'Introduction' 'docs.index'}}
 
     {{nav.section 'Usage'}}
@@ -15,14 +15,14 @@
     {{nav.item 'One Way Zip Code Mask' 'docs.one-way-zip-code-mask'}}
     {{nav.item 'One Way SSN Mask' 'docs.one-way-ssn-mask'}}
     {{nav.item 'One Way Credit Card Mask' 'docs.one-way-credit-card-mask'}}
-  {{/viewer.nav}}
+  </viewer.nav>
 
-  {{#viewer.main}}
+  <viewer.main>
     <div class='docs-container'>
       <div class='docs-section'>
         {{outlet}}
       </div>
     </div>
-  {{/viewer.main}}
+  </viewer.main>
 
-{{/docs-viewer}}
+</DocsViewer>

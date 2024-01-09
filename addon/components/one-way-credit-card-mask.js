@@ -1,10 +1,9 @@
 import OneWayInputMask, {
-  DEFAULT_NON_BOUND_PROPS
+  DEFAULT_NON_BOUND_PROPS,
 } from 'ember-inputmask/components/one-way-input-mask';
 import { computed, set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { scheduleOnce } from '@ember/runloop';
-
 
 /**
  * @class OneWayCreditCardMask
@@ -17,20 +16,28 @@ export default OneWayInputMask.extend({
 
     let options = this._options;
 
-    set(this, '_options', Object.assign({}, {
-      // We need to make sure we catch paste events so that we change the mask before the text
-      // hits the input. This is a callback provided by Inputmask.js
-      onBeforePaste: value => {
-        let cardType = this._determineCardType(value);
-        // Set the card type so the parent context can access it
-        set(this, '_cardType', cardType);
-        this._changeMask();
+    set(
+      this,
+      '_options',
+      Object.assign(
+        {},
+        {
+          // We need to make sure we catch paste events so that we change the mask before the text
+          // hits the input. This is a callback provided by Inputmask.js
+          onBeforePaste: (value) => {
+            let cardType = this._determineCardType(value);
+            // Set the card type so the parent context can access it
+            set(this, '_cardType', cardType);
+            this._changeMask();
 
-        scheduleOnce('afterRender', this, 'resetMaskForPaste', value);
+            scheduleOnce('afterRender', this, 'resetMaskForPaste', value);
 
-        return value;
-      },
-    }, options));
+            return value;
+          },
+        },
+        options
+      )
+    );
   },
 
   resetMaskForPaste(value) {
@@ -67,7 +74,7 @@ export default OneWayInputMask.extend({
    * @computed mask
    * @override
    */
-  mask: computed('_cardType', {
+  mask: computed('_cardType', 'separator', {
     get() {
       let cardType = this._cardType;
       let s = this.separator;
@@ -84,7 +91,7 @@ export default OneWayInputMask.extend({
     },
     set(_key, value) {
       return value;
-    }
+    },
   }),
 
   /**

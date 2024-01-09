@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object'
+import { action } from '@ember/object';
 
 // BEGIN-SNIPPET one-way-input-mask-demo-3.js
 export default class Demo3Component extends Component {

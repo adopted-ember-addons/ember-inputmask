@@ -1,5 +1,5 @@
-{{#docs-demo as |demo|}}
-  {{#demo.example name='one-way-date-mask-demo-3.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='one-way-date-mask-demo-3.hbs'>
     <OneWayDateMask
       @value={{this.masked}}
       @options={{hash inputFormat='mm/dd/yyyy' outputFormat='yyyy-mm-dd'}}
@@ -9,9 +9,8 @@
 
     <p>unmasked: {{this.unmasked}}</p>
     <p>masked: {{this.masked}}</p>
-  {{/demo.example}}
-
+  </demo.example>
 
   {{demo.snippet 'one-way-date-mask-demo-3.hbs'}}
   {{demo.snippet 'one-way-date-mask-demo-3.js' label='component.js'}}
-{{/docs-demo}}
+</DocsDemo>

@@ -3,6 +3,7 @@
 module.exports = {
   extends: 'recommended',
   rules: {
-    'quotes': 'single'
-  }
+    'no-curly-component-invocation': false,
+    'no-implicit-this': false,
+  },
 };

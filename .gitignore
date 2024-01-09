@@ -16,10 +16,9 @@
 /connect.lock
 /coverage/
 /libpeerconnection.log
-npm-debug.log*
-yarn-error.log
-testem.log
-.DS_Store
+/npm-debug.log*
+/testem.log
+/yarn-error.log
 
 # ember-try
 /.node_modules.ember-try/

@@ -3,17 +3,17 @@ import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, find, triggerEvent, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | one way credit card mask', function(hooks) {
+module('Integration | Component | one way credit card mask', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.set('update', (unmaskedValue, value, cardType) => {
       this.set('cardType', cardType);
       this.set('unmaskedValue', unmaskedValue);
     });
   });
 
-  test('Visa formatting', async function(assert) {
+  test('Visa formatting', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '4444444444444444');
     assert.dom('input').hasValue('4444-4444-4444-4444');
@@ -21,7 +21,7 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'Visa');
   });
 
-  test('MasterCard formatting', async function(assert) {
+  test('MasterCard formatting', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '5444444444444444');
     assert.dom('input').hasValue('5444-4444-4444-4444');
@@ -29,7 +29,7 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'MasterCard');
   });
 
-  test('Discover formatting', async function(assert) {
+  test('Discover formatting', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '6011444444444444');
     assert.dom('input').hasValue('6011-4444-4444-4444');
@@ -37,7 +37,7 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'Discover');
   });
 
-  test('JCB formatting', async function(assert) {
+  test('JCB formatting', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '2131444444444444');
     assert.dom('input').hasValue('2131-4444-4444-4444');
@@ -45,7 +45,7 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'JCB');
   });
 
-  test('Other formatting', async function(assert) {
+  test('Other formatting', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '9444444444444444');
     assert.dom('input').hasValue('9444-4444-4444-4444');
@@ -53,7 +53,7 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'Other');
   });
 
-  test('American Express formatting', async function(assert) {
+  test('American Express formatting', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '344444444444444');
     assert.dom('input').hasValue('3444-444444-44444');
@@ -61,7 +61,7 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'American Express');
   });
 
-  test('Diners Club formatting', async function(assert) {
+  test('Diners Club formatting', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '30544444444444');
     assert.dom('input').hasValue('3054-444444-4444');
@@ -69,7 +69,7 @@ module('Integration | Component | one way credit card mask', function(hooks) {
     assert.equal(this.cardType, 'Diners Club');
   });
 
-  test('Card mask switches from one to the other on paste', async function(assert) {
+  test('Card mask switches from one to the other on paste', async function (assert) {
     await render(hbs`{{one-way-credit-card-mask unmaskedValue update=update}}`);
     await fillIn('input', '30544444444444');
     assert.dom('input').hasValue('3054-444444-4444');

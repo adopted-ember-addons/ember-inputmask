@@ -1,6 +1,5 @@
 'use strict';
 
-
 module.exports = {
   name: require('./package').name,
 
@@ -12,5 +11,5 @@ module.exports = {
     if (hasFastboot) {
       importOptions.using = [{ transformation: 'fastbootShim' }];
     }
-  }
+  },
 };
