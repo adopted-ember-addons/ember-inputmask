@@ -52,7 +52,7 @@
     "@embroider/test-setup": "^2.1.1",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "@release-it-plugins/lerna-changelog": "^6.0.0",
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.1",
     "ember-cli": "~4.12.1",
