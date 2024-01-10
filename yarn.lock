@@ -7162,7 +7162,7 @@ ember-concurrency@^2.0.0:
     ember-compatibility-helpers "^1.2.0"
     ember-destroyable-polyfill "^2.0.2"
 
-ember-data@^4.12.5:
+ember-data@~4.12.5:
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-4.12.5.tgz#44540401a9577f407ba39619777a620a95be9cb5"
   integrity sha512-5q0m0qFdbur3eFk2/iT1GEGxBUOnwbDD0Gk6sWLiVGL2NLZw1wH6Spo36RqClx62ov2vlo9DytVmKbOu224WaQ==
