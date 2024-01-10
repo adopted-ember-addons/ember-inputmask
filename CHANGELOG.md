@@ -1,5 +1,17 @@
 # Changelog
 
+
+## v1.0.0 (2024-01-10)
+
+#### :boom: Breaking Change
+* [#166](https://github.com/adopted-ember-addons/ember-inputmask/pull/166) Drop support for node < 16, ember-cli-update to 4.12 ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### :house: Internal
+* [#165](https://github.com/adopted-ember-addons/ember-inputmask/pull/165) Add rwjblue release-it setup ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 ## 0.11.0
 
 - [UPGRADE] Bump Inputmask.js to 5.0.1
