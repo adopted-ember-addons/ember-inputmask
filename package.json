@@ -5,18 +5,22 @@
   "keywords": [
     "ember-addon"
   ],
+  "homepage": "https://adopted-ember-addons.github.io/ember-inputmask/",
   "repository": "https://github.com/adopted-ember-addons/ember-inputmask",
   "license": "MIT",
   "author": "Chris Garrett",
+  "contributors": [
+    {
+      "name": "Brandyn Bennett"
+    },
+    {
+      "name": "Robbie Wagner"
+    }
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "contributors": [
-    {
-      "name": "Brandyn Bennett"
-    }
-  ],
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "npm-run-all --print-name --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
@@ -45,6 +49,7 @@
     "@embroider/test-setup": "^1.8.3",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
+    "@release-it-plugins/lerna-changelog": "^6.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-cli": "~4.8.1",
     "ember-cli-addon-docs": "^5.0.0",
@@ -80,10 +85,14 @@
     "prettier": "^3.1.1",
     "qunit": "^2.19.2",
     "qunit-dom": "^2.0.0",
+    "release-it": "^16.3.0",
     "webpack": "^5.89.0"
   },
   "engines": {
     "node": "14.* || 16.* || >= 18"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "ember": {
     "edition": "octane"
@@ -92,5 +101,19 @@
     "configPath": "tests/dummy/config",
     "demoURL": "https://adopted-ember-addons.github.io/ember-inputmask/"
   },
-  "homepage": "https://adopted-ember-addons.github.io/ember-inputmask/"
+  "release-it": {
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
 }
