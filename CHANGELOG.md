@@ -1,6 +1,15 @@
 # Changelog
 
 
+
+## v2.0.0 (2024-01-10)
+
+#### :boom: Breaking Change
+* [#167](https://github.com/adopted-ember-addons/ember-inputmask/pull/167) Drop support for node 16 ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 ## v1.0.0 (2024-01-10)
 
 #### :boom: Breaking Change
