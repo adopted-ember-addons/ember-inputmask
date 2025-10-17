@@ -131,6 +131,9 @@
       "@parcel/watcher",
       "core-js",
       "ember-modal-dialog"
-    ]
+    ],
+    "overrides": {
+      "@ember/string": "^4.0.0"
+    }
   }
 }
