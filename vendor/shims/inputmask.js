@@ -1,11 +1,11 @@
 /* global define */
-(function() {
+(function () {
   function vendorModule() {
     'use strict';
 
     // Export of the inputmask module
     return {
-      'default': self['Inputmask'],
+      default: self['Inputmask'],
       __esModule: true,
     };
   }
