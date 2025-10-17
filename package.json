@@ -124,5 +124,12 @@
       "release": true,
       "tokenRef": "GITHUB_AUTH"
     }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "core-js",
+      "ember-modal-dialog"
+    ]
   }
 }
