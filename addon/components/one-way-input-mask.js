@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-computed-properties-in-native-classes */
 import { attributeBindings, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import Inputmask from 'inputmask';

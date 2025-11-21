@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-computed-properties-in-native-classes */
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS,
 } from 'ember-inputmask/components/one-way-input-mask';
