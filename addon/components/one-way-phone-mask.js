@@ -29,8 +29,4 @@ export default class OneWayPhoneMask extends OneWayInputMask {
 
     return '(999) 999-9999';
   }
-
-  set mask(value) {
-    return value;
-  }
 }

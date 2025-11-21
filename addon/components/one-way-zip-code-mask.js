@@ -29,8 +29,4 @@ export default class OneWayZipCodeMask extends OneWayInputMask {
 
     return '99999';
   }
-
-  set mask(value) {
-    return value;
-  }
 }

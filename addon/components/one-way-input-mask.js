@@ -39,7 +39,8 @@ class OneWayInputMask extends Component {
    * @argument mask
    * @type String
    */
-  mask = '';
+  // TODO: when we switch to glimmer components we can use this.args.mask for this, but for now just removing this.
+  // mask = '';
 
   _oldMask = '';
 
@@ -124,7 +125,7 @@ class OneWayInputMask extends Component {
 
   didReceiveAttrs() {
     super.didReceiveAttrs();
-    let mask = this.mask;
+    let mask = this.mask ?? '';
     let oldMask = this._oldMask;
     let didMaskChange = mask !== oldMask;
     let options = this.options;

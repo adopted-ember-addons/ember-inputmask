@@ -90,10 +90,6 @@ export default class OneWayCreditCardMask extends OneWayInputMask {
     return `9999${s}9999${s}9999${s}9999`;
   }
 
-  set mask(value) {
-    return value;
-  }
-
   /**
    * sendUpdate - Pass the credit card type along with the values
    *
