@@ -14,14 +14,14 @@ const DEFAULT_OPTIONS = {
 /**
  * @class OneWayNumberMask
  */
-export default OneWayInputMask.extend({
-  NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('decimal'),
+export default class OneWayNumberMask extends OneWayInputMask {
+  NON_ATTRIBUTE_BOUND_PROPS = DEFAULT_NON_BOUND_PROPS.concat('decimal');
 
   /**
    * @field mask
    * @override
    */
-  mask: 'integer',
+  mask = 'integer';
 
   /**
    * Set this to true to include decimals
@@ -29,10 +29,10 @@ export default OneWayInputMask.extend({
    * @argument decimal
    * @type Boolean
    */
-  decimal: false,
+  decimal = false;
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
 
     set(this, '_options', Object.assign({}, this._options, DEFAULT_OPTIONS));
 
@@ -44,5 +44,5 @@ export default OneWayInputMask.extend({
         set(this, '_options.digits', 2);
       }
     }
-  },
-});
+  }
+}

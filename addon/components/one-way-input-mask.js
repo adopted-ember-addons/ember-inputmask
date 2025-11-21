@@ -1,6 +1,7 @@
+import { attributeBindings, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import Inputmask from 'inputmask';
-import { computed, get, set } from '@ember/object';
+import { get, set, computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { areDifferent } from 'ember-inputmask/utils/compare-objects';
 
@@ -24,19 +25,13 @@ export const DEFAULT_NON_BOUND_PROPS = [
  *
  * @class OneWayInputMask
  */
-const OneWayInputMask = Component.extend({
-  tagName: 'input',
-
-  /**
-   * Set the `_value` to be whatever the `element.value` is
-   * @field attributeBindings
-   */
-  attributeBindings: ['type', '_value:value'],
-
+@tagName('input')
+@attributeBindings('type', '_value:value')
+class OneWayInputMask extends Component {
   // This is where we blacklist all the attributes that should not be bound
-  NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS,
+  NON_ATTRIBUTE_BOUND_PROPS = DEFAULT_NON_BOUND_PROPS;
 
-  type: 'text',
+  type = 'text';
 
   /**
    * The mask from [Inputmask.js](https://github.com/RobinHerbots/Inputmask#default-masking-definitions)
@@ -44,8 +39,9 @@ const OneWayInputMask = Component.extend({
    * @argument mask
    * @type String
    */
-  mask: '',
-  _oldMask: '',
+  mask = '';
+
+  _oldMask = '';
 
   /**
    * Options accepted by [Inputmask.js](https://github.com/RobinHerbots/Inputmask#options)
@@ -53,11 +49,11 @@ const OneWayInputMask = Component.extend({
    * @argument options
    * @type Object
    */
-  options: null,
-  _options: null, // Internal options so external attribute doesnt clobber it
-  _oldOptions: null,
+  options = null;
 
-  keyEvents: null,
+  _options = null; // Internal options so external attribute doesnt clobber it
+  _oldOptions = null;
+  keyEvents = null;
 
   /**
    * The value to show inside the input. Can be first `positionalParam`
@@ -65,7 +61,7 @@ const OneWayInputMask = Component.extend({
    * @argument value
    * @type String
    */
-  value: '',
+  value = '';
 
   /**
    * Setup _value to be a positional param or the passed param if that is not defined
@@ -73,19 +69,18 @@ const OneWayInputMask = Component.extend({
    * @computed _value
    * @private
    */
-  _value: computed('positionalParamValue', 'value', {
-    get() {
-      let value = this.positionalParamValue;
-      if (value === undefined) {
-        value = this.value;
-      }
+  @computed('positionalParamValue', 'value')
+  get _value() {
+    let value = this.positionalParamValue;
+    if (value === undefined) {
+      value = this.value;
+    }
 
-      return value;
-    },
-  }),
+    return value;
+  }
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
 
     set(this, 'keyEvents', {
       13: 'onenter',
@@ -114,10 +109,10 @@ const OneWayInputMask = Component.extend({
       'attributeBindings',
       this.attributeBindings.concat(newAttributeBindings),
     );
-  },
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this._setupMask();
 
     // We're setting this flag because we want to ensure that fastboot doesn't break when using
@@ -125,10 +120,10 @@ const OneWayInputMask = Component.extend({
     // `this.element` to exist. Fastboot doesn't work with `this.element` so we should only attempt
     // to do this if we know this hook has been called
     set(this, '_didInsertElement', true);
-  },
+  }
 
   didReceiveAttrs() {
-    this._super();
+    super.didReceiveAttrs();
     let mask = this.mask;
     let oldMask = this._oldMask;
     let didMaskChange = mask !== oldMask;
@@ -147,12 +142,12 @@ const OneWayInputMask = Component.extend({
       set(this, '_oldOptions', options);
       this._changeMask();
     }
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     this._destroyMask();
-  },
+  }
 
   /**
    * This action will be called when the value changes and will be passed the unmasked value
@@ -161,7 +156,7 @@ const OneWayInputMask = Component.extend({
    * @argument update
    * @type function
    */
-  update: null,
+  update = null;
 
   /**
    * _changeEventListener - A place to store the event listener we setup to listen to the 'input'
@@ -170,7 +165,7 @@ const OneWayInputMask = Component.extend({
    * @method _changeEventListener
    * @private
    */
-  _changeEventListener() {},
+  _changeEventListener() {}
 
   /**
    * keyUp - If the keycode matches one of the keycodes in the `keyEvents` hash we want to fire
@@ -183,7 +178,7 @@ const OneWayInputMask = Component.extend({
     if (method && get(this, method)) {
       get(this, method)(event.target.value);
     }
-  },
+  }
 
   /**
    * sendUpdate - Send the update action with the values. Components that inherit from this may
@@ -193,7 +188,7 @@ const OneWayInputMask = Component.extend({
    */
   sendUpdate(unmaskedValue, value) {
     this.update(unmaskedValue, value);
-  },
+  }
 
   /**
    * _syncValue - If this component's consumer modifies the passed in `value` inside their `update`
@@ -209,7 +204,7 @@ const OneWayInputMask = Component.extend({
     if (actualValue !== renderedValue) {
       this.element.inputmask.setValue(actualValue);
     }
-  },
+  }
 
   /**
    * _processNewValue - Handle when a new value changes
@@ -244,7 +239,7 @@ const OneWayInputMask = Component.extend({
         this.element.setSelectionRange(cursorStart, cursorEnd);
       });
     }
-  },
+  }
 
   /**
    * _setupMask - Connect the 3rd party input masking library to the element
@@ -265,7 +260,7 @@ const OneWayInputMask = Component.extend({
     let eventListener = (event) => this._processNewValue(event.target.value);
     set(this, '_changeEventListener', eventListener);
     this.element.addEventListener('input', eventListener);
-  },
+  }
 
   /**
    * _getUnmaskedValue - Get the value of the element without the mask
@@ -276,7 +271,7 @@ const OneWayInputMask = Component.extend({
    */
   _getUnmaskedValue() {
     return this.element.inputmask.unmaskedvalue();
-  },
+  }
 
   /**
    * _changeMask - Destroy and reapply the mask when the mask or options change so the mask and
@@ -290,13 +285,13 @@ const OneWayInputMask = Component.extend({
       this._destroyMask();
       this._setupMask();
     }
-  },
+  }
 
   _destroyMask() {
     this.element.removeEventListener('input', this._changeEventListener);
     this.element.inputmask.remove();
-  },
-});
+  }
+}
 
 OneWayInputMask.reopenClass({
   positionalParams: ['positionalParamValue'],

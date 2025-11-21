@@ -9,16 +9,16 @@ const DEFAULT_OPTIONS = {
 /**
  * @class OneWayDateMask
  */
-export default OneWayInputMask.extend({
+export default class OneWayDateMask extends OneWayInputMask {
   /**
    * @field mask
    * @override
    */
-  mask: 'datetime',
+  mask = 'datetime';
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
 
     set(this, '_options', Object.assign({}, this._options, DEFAULT_OPTIONS));
-  },
-});
+  }
+}
