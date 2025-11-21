@@ -37,7 +37,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       '@ember/string':
-        specifier: ^4.0.1
+        specifier: ^4.0.0
         version: 4.0.1
       '@ember/test-helpers':
         specifier: ^3.3.1
