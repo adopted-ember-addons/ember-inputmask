@@ -1,18 +1,19 @@
+/* eslint-disable ember/no-computed-properties-in-native-classes */
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS,
 } from 'ember-inputmask/components/one-way-input-mask';
-import { computed, set } from '@ember/object';
+import { set, computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { scheduleOnce } from '@ember/runloop';
 
 /**
  * @class OneWayCreditCardMask
  */
-export default OneWayInputMask.extend({
-  NON_ATTRIBUTE_BOUND_PROPS: DEFAULT_NON_BOUND_PROPS.concat('separator'),
+export default class OneWayCreditCardMask extends OneWayInputMask {
+  NON_ATTRIBUTE_BOUND_PROPS = DEFAULT_NON_BOUND_PROPS.concat('separator');
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
 
     let options = this._options;
 
@@ -38,7 +39,7 @@ export default OneWayInputMask.extend({
         options,
       ),
     );
-  },
+  }
 
   resetMaskForPaste(value) {
     // We need to reset the value in case the mask was too small before and characters were
@@ -47,7 +48,7 @@ export default OneWayInputMask.extend({
 
     // We need to update the parent component with the new pasted values
     this.sendUpdate(this._getUnmaskedValue(), this.element.value);
-  },
+  }
 
   /**
    * _cardType - Use current unmasked value to determine which kind of card the user is
@@ -57,7 +58,7 @@ export default OneWayInputMask.extend({
    * @private
    * @return {string} The card type
    */
-  _cardType: undefined,
+  _cardType;
 
   /**
    * What kind of separator to use between number sections
@@ -65,7 +66,7 @@ export default OneWayInputMask.extend({
    * @argument separator
    * @type String
    */
-  separator: '-',
+  separator = '-';
 
   /**
    * Dynamically determine which mask to use based on what kind of credit card numbers the user
@@ -74,25 +75,21 @@ export default OneWayInputMask.extend({
    * @computed mask
    * @override
    */
-  mask: computed('_cardType', 'separator', {
-    get() {
-      let cardType = this._cardType;
-      let s = this.separator;
+  @computed('_cardType', 'separator')
+  get mask() {
+    let cardType = this._cardType;
+    let s = this.separator;
 
-      if (cardType === 'American Express') {
-        return `9999${s}999999${s}99999`;
-      }
+    if (cardType === 'American Express') {
+      return `9999${s}999999${s}99999`;
+    }
 
-      if (cardType === 'Diners Club') {
-        return `9999${s}999999${s}9999`;
-      }
+    if (cardType === 'Diners Club') {
+      return `9999${s}999999${s}9999`;
+    }
 
-      return `9999${s}9999${s}9999${s}9999`;
-    },
-    set(_key, value) {
-      return value;
-    },
-  }),
+    return `9999${s}9999${s}9999${s}9999`;
+  }
 
   /**
    * sendUpdate - Pass the credit card type along with the values
@@ -107,7 +104,7 @@ export default OneWayInputMask.extend({
     // Set the card type so the parent context can access it
     set(this, '_cardType', cardType);
     this.update(unmaskedValue, value, cardType);
-  },
+  }
 
   /**
    * _determineCardType - Use current unmasked value to determine which kind of card the user is
@@ -148,5 +145,5 @@ export default OneWayInputMask.extend({
     }
 
     return 'Other';
-  },
-});
+  }
+}
