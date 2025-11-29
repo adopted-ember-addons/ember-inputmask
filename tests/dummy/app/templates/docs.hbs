@@ -3,32 +3,32 @@
 <DocsViewer as |viewer|>
 
   <viewer.nav as |nav|>
-    <nav.item @label='Introduction' @route='docs.index' />
+    <nav.item @label="Introduction" @route="docs.index" />
 
-    <nav.section @label='Usage'/>
-    <nav.item @label='One Way Input Mask' @route='docs.one-way-input-mask' />
-    <nav.item @label='One Way Number Mask' @route='docs.one-way-number-mask' />
+    <nav.section @label="Usage" />
+    <nav.item @label="One Way Input Mask" @route="docs.one-way-input-mask" />
+    <nav.item @label="One Way Number Mask" @route="docs.one-way-number-mask" />
     <nav.item
-      @label='One Way Currency Mask'
-      @route='docs.one-way-currency-mask'
+      @label="One Way Currency Mask"
+      @route="docs.one-way-currency-mask"
     />
-    <nav.item @label='One Way Date Mask' @route='docs.one-way-date-mask' />
-    <nav.item @label='One Way Phone Mask' @route='docs.one-way-phone-mask' />
-    <nav.item @label='One Way Email Mask' @route='docs.one-way-email-mask' />
+    <nav.item @label="One Way Date Mask" @route="docs.one-way-date-mask" />
+    <nav.item @label="One Way Phone Mask" @route="docs.one-way-phone-mask" />
+    <nav.item @label="One Way Email Mask" @route="docs.one-way-email-mask" />
     <nav.item
-      @label='One Way Zip Code Mask'
-      @route='docs.one-way-zip-code-mask'
+      @label="One Way Zip Code Mask"
+      @route="docs.one-way-zip-code-mask"
     />
-    <nav.item @label='One Way SSN Mask' @route='docs.one-way-ssn-mask' />
+    <nav.item @label="One Way SSN Mask" @route="docs.one-way-ssn-mask" />
     <nav.item
-      @label='One Way Credit Card Mask'
-      @route='docs.one-way-credit-card-mask'
+      @label="One Way Credit Card Mask"
+      @route="docs.one-way-credit-card-mask"
     />
   </viewer.nav>
 
   <viewer.main>
-    <div class='docs-container'>
-      <div class='docs-section'>
+    <div class="docs-container">
+      <div class="docs-section">
         {{outlet}}
       </div>
     </div>
