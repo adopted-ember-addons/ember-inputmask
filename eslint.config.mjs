@@ -66,15 +66,15 @@ export default [
       globals: {
         ...globals.browser,
       },
-      rules: {
-        // TODO: enable these
-        'ember/no-attrs-in-components': 'off',
-        'ember/no-classic-classes': 'off',
-        'ember/no-classic-components': 'off',
-        'ember/no-component-lifecycle-hooks': 'off',
-        'ember/no-runloop': 'off',
-        'ember/require-tagless-components': 'off',
-      },
+    },
+    rules: {
+      // TODO: enable these
+      'ember/no-attrs-in-components': 'off',
+      'ember/no-classic-classes': 'off',
+      'ember/no-classic-components': 'off',
+      'ember/no-component-lifecycle-hooks': 'off',
+      'ember/no-runloop': 'off',
+      'ember/require-tagless-components': 'off',
     },
   },
   {
