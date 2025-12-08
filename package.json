@@ -138,13 +138,6 @@
       "@parcel/watcher",
       "core-js",
       "ember-modal-dialog"
-    ],
-    "packageExtensions": {
-      "ember-modal-dialog": {
-        "dependencies": {
-          "@ember/string": "*"
-        }
-      }
-    }
+    ]
   }
 }
