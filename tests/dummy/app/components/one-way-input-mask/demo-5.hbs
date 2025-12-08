@@ -1,0 +1,15 @@
+<DocsDemo as |demo|>
+  <demo.example @name="one-way-input-mask-demo-5.hbs">
+    <OneWayInputMask
+      @value={{this.value}}
+      @update={{this.onupdate}}
+      class="docs-border docs-border-grey"
+    />
+  </demo.example>
+
+  <p>value: {{this.value}}</p>
+  <p>masked: {{this.masked}}</p>
+
+  <demo.snippet @name="one-way-input-mask-demo-5.hbs" />
+  <demo.snippet @name="one-way-input-mask-demo-5.js" @label="component.js" />
+</DocsDemo>
