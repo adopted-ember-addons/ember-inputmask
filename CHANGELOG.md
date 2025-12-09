@@ -2,6 +2,21 @@
 
 
 
+
+## v3.0.0 (2025-12-09)
+
+#### :boom: Breaking Change
+* [#172](https://github.com/adopted-ember-addons/ember-inputmask/pull/172) Require Ember 4.12+, node 20+ ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### :rocket: Enhancement
+* [#175](https://github.com/adopted-ember-addons/ember-inputmask/pull/175) Convert to native classes ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### :house: Internal
+* [#176](https://github.com/adopted-ember-addons/ember-inputmask/pull/176) ember-cli-update to 6.8 ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 ## v2.0.0 (2024-01-10)
 
 #### :boom: Breaking Change
