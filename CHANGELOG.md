@@ -3,6 +3,15 @@
 
 
 
+
+## v3.0.1 (2025-12-09)
+
+#### :bug: Bug Fix
+* [#177](https://github.com/adopted-ember-addons/ember-inputmask/pull/177) Remove ember-decorators ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 ## v3.0.0 (2025-12-09)
 
 #### :boom: Breaking Change
