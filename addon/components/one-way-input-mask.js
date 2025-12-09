@@ -1,5 +1,4 @@
 /* eslint-disable ember/no-computed-properties-in-native-classes */
-import { attributeBindings, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import Inputmask from 'inputmask';
 import { get, set, computed } from '@ember/object';
@@ -26,9 +25,10 @@ export const DEFAULT_NON_BOUND_PROPS = [
  *
  * @class OneWayInputMask
  */
-@tagName('input')
-@attributeBindings('type', '_value:value')
 class OneWayInputMask extends Component {
+  tagName = 'input';
+  attributeBindings = ['type', '_value:value'];
+
   // This is where we blacklist all the attributes that should not be bound
   NON_ATTRIBUTE_BOUND_PROPS = DEFAULT_NON_BOUND_PROPS;
 
