@@ -100,11 +100,17 @@
     "prettier-plugin-ember-template-tag": "^2.1.2",
     "qunit": "^2.24.1",
     "qunit-dom": "^3.4.0",
+    "release-plan": "^0.17.0",
     "rollup": "^4.22.5",
     "testem": "^3.15.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.19.1",
     "vite": "^7.1.9"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "ember": {
     "edition": "octane"
@@ -113,10 +119,5 @@
     "version": 2,
     "type": "addon",
     "main": "addon-main.cjs"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
   }
 }
