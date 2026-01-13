@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-01-13)
+
+* ember-inputmask 4.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-inputmask`
+  * [#178](https://github.com/adopted-ember-addons/ember-inputmask/pull/178) Convert to v2 addon, glimmer components, TS, remove positional params ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 
 
 
