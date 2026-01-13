@@ -1,43 +1,50 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render } from '@ember/test-helpers';
+import { tracked } from '@glimmer/tracking';
 import OneWayZipCodeMask from '#src/components/one-way-zip-code-mask';
 
 module('Integration | Component | one way zip code mask', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function () {
-    this.set('update', (unmaskedValue) => {
-      this.set('unmaskedValue', unmaskedValue);
-    });
-  });
-
   test('filled-in value', async function (assert) {
+    const state = new (class {
+      @tracked unmaskedValue;
+    })();
+    const handleUpdate = (unmasked) => {
+      state.unmaskedValue = unmasked;
+    };
     await render(
       <template>
         <OneWayZipCodeMask
-          @value={{this.unmaskedValue}}
-          @update={{this.update}}
+          @value={{state.unmaskedValue}}
+          @update={{handleUpdate}}
         />
       </template>,
     );
     await fillIn('input', '12345');
     assert.dom('input').hasValue('12345');
-    assert.strictEqual(this.unmaskedValue, '12345');
+    assert.strictEqual(state.unmaskedValue, '12345');
   });
 
   test('full code works', async function (assert) {
+    const state = new (class {
+      @tracked unmaskedValue;
+    })();
+    const handleUpdate = (unmasked) => {
+      state.unmaskedValue = unmasked;
+    };
     await render(
       <template>
         <OneWayZipCodeMask
-          @value={{this.unmaskedValue}}
+          @value={{state.unmaskedValue}}
           @fullCode={{true}}
-          @update={{this.update}}
+          @update={{handleUpdate}}
         />
       </template>,
     );
     await fillIn('input', '123451234');
     assert.dom('input').hasValue('12345-1234');
-    assert.strictEqual(this.unmaskedValue, '123451234');
+    assert.strictEqual(state.unmaskedValue, '123451234');
   });
 });

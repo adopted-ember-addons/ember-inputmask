@@ -2,27 +2,24 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render } from '@ember/test-helpers';
 import { hash } from '@ember/helper';
-import { fn } from '@ember/helper';
-import { set } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 import OneWayNumberMask from '#src/components/one-way-number-mask';
 
 module('Integration | Component | one way number mask', function (hooks) {
   setupRenderingTest(hooks);
 
   test('It defaults to an integer mask', async function (assert) {
-    this.set('value', 1234.44);
-    await render(
-      <template><OneWayNumberMask @value={{this.value}} /></template>,
-    );
+    const value = 1234.44;
+    await render(<template><OneWayNumberMask @value={{value}} /></template>);
 
     assert.dom('input').hasValue('1,234');
   });
 
   test('It can be a decimal mask with 2 digits with one argument', async function (assert) {
-    this.set('value', 1234.567);
+    const value = 1234.567;
     await render(
       <template>
-        <OneWayNumberMask @value={{this.value}} @decimal={{true}} />
+        <OneWayNumberMask @value={{value}} @decimal={{true}} />
       </template>,
     );
 
@@ -33,11 +30,11 @@ module('Integration | Component | one way number mask', function (hooks) {
   });
 
   test('Can change default digits with options', async function (assert) {
-    this.set('value', 1234.567);
+    const value = 1234.567;
     await render(
       <template>
         <OneWayNumberMask
-          @value={{this.value}}
+          @value={{value}}
           @decimal={{true}}
           @options={{hash digits=3}}
         />
@@ -48,41 +45,50 @@ module('Integration | Component | one way number mask', function (hooks) {
   });
 
   test('The parent can receive the updated value via the `update` action', async function (assert) {
-    this.set('value', 123);
+    const state = new (class {
+      @tracked value = 123;
+    })();
+    const handleUpdate = (unmasked) => {
+      state.value = unmasked;
+    };
     await render(
       <template>
-        <OneWayNumberMask
-          @value={{this.value}}
-          @update={{fn set this "value"}}
-        />
+        <OneWayNumberMask @value={{state.value}} @update={{handleUpdate}} />
       </template>,
     );
     await fillIn('input', 456);
-    assert.strictEqual(this.value, '456');
+    assert.strictEqual(state.value, '456');
   });
 
   test('It disallows decimal via the `update` action', async function (assert) {
-    this.set('value', 123);
+    const state = new (class {
+      @tracked value = 123;
+    })();
+    const handleUpdate = (unmasked) => {
+      state.value = unmasked;
+    };
     await render(
       <template>
-        <OneWayNumberMask
-          @value={{this.value}}
-          @update={{fn set this "value"}}
-        />
+        <OneWayNumberMask @value={{state.value}} @update={{handleUpdate}} />
       </template>,
     );
     await fillIn('input', '.');
-    assert.strictEqual(this.value, '');
+    assert.strictEqual(state.value, '');
     assert.dom('input').hasValue('');
   });
 
   test('Internal options are not clobbered by external ones', async function (assert) {
-    this.set('value', 123);
+    const state = new (class {
+      @tracked value = 123;
+    })();
+    const handleUpdate = (unmasked) => {
+      state.value = unmasked;
+    };
     await render(
       <template>
         <OneWayNumberMask
-          @value={{this.value}}
-          @update={{fn set this "value"}}
+          @value={{state.value}}
+          @update={{handleUpdate}}
           @options={{hash prefix="$"}}
           @decimal={{true}}
         />
@@ -95,13 +101,13 @@ module('Integration | Component | one way number mask', function (hooks) {
 
   test('It can show a trailing decimal', async function (assert) {
     let callCount = 0;
-    this.set('update', () => callCount++);
-    this.set('value', '1234');
+    const handleUpdate = () => callCount++;
+    const value = '1234';
     await render(
       <template>
         <OneWayNumberMask
-          @value={{this.value}}
-          @update={{this.update}}
+          @value={{value}}
+          @update={{handleUpdate}}
           @options={{hash prefix="$"}}
           @decimal={{true}}
         />
