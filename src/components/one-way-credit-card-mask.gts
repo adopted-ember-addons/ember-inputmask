@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
+import { scheduleOnce } from '@ember/runloop';
 import { isBlank } from '@ember/utils';
 import { modifier } from 'ember-modifier';
 import OneWayInputMask from './one-way-input-mask.gts';
@@ -23,6 +23,7 @@ export interface OneWayCreditCardMaskSignature extends OneWayInputMaskSignature 
 export default class OneWayCreditCardMask extends Component<OneWayCreditCardMaskSignature> {
   @tracked private cardType: string = 'Other';
   private inputElement?: HTMLInputElement;
+  private _resetMaskForPasteValue?: string;
 
   setupInputModifier = modifier((element: HTMLInputElement) => {
     this.inputElement = element;
@@ -56,18 +57,25 @@ export default class OneWayCreditCardMask extends Component<OneWayCreditCardMask
     );
   }
 
-  @action
-  private handleBeforePaste(value: string): string {
+  private handleBeforePaste = (value: string): string => {
     const cardType = this.determineCardType(value);
     this.cardType = cardType;
 
-    requestAnimationFrame(() => this.resetMaskForPaste(value));
+    this._resetMaskForPasteValue = value;
+    // eslint-disable-next-line ember/no-runloop -- Required for Ember 5.8/5.12 compatibility
+    scheduleOnce('afterRender', this, this._resetMaskForPasteCallback);
 
     return value;
-  }
+  };
 
-  @action
-  resetMaskForPaste(value: string): void {
+  private _resetMaskForPasteCallback = (): void => {
+    if (this._resetMaskForPasteValue !== undefined) {
+      this.resetMaskForPaste(this._resetMaskForPasteValue);
+      this._resetMaskForPasteValue = undefined;
+    }
+  };
+
+  resetMaskForPaste = (value: string): void => {
     if (!this.inputElement) return;
 
     // We need to reset the value in case the mask was too small before and characters were cut off
@@ -76,14 +84,13 @@ export default class OneWayCreditCardMask extends Component<OneWayCreditCardMask
     // We need to update the parent component with the new pasted values
     const unmaskedValue = this.inputElement.inputmask?.unmaskedvalue() ?? '';
     this.sendUpdate(unmaskedValue, this.inputElement.value);
-  }
+  };
 
-  @action
-  sendUpdate(unmaskedValue: string, value: string): void {
+  sendUpdate = (unmaskedValue: string, value: string): void => {
     const cardType = this.determineCardType(unmaskedValue);
     this.cardType = cardType;
     this.args.update?.(unmaskedValue, value, cardType);
-  }
+  };
 
   private determineCardType(unmaskedValue: string): string {
     if (isBlank(unmaskedValue)) {

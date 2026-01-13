@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
+import { schedule } from '@ember/runloop';
 import { on } from '@ember/modifier';
 import { modifier } from 'ember-modifier';
 import Inputmask from 'inputmask';
@@ -69,8 +69,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     return this.args.value ?? '';
   }
 
-  @action
-  private updateMask(): void {
+  private updateMask = (): void => {
     const mask = this.args.mask ?? '';
     const oldMask = this._oldMask;
     const didMaskChange = mask !== oldMask;
@@ -84,17 +83,16 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
       this._oldOptions = this.args.options ?? null;
       this._changeMask();
     }
-  }
+  };
 
-  @action
-  handleKeyUp(event: KeyboardEvent): void {
+  handleKeyUp = (event: KeyboardEvent): void => {
     const method = this.keyEvents[event.keyCode as 13 | 27];
     if (method && this.args[method as 'onenter' | 'onescape']) {
       this.args[method as 'onenter' | 'onescape']?.(
         (event.target as HTMLInputElement).value,
       );
     }
-  }
+  };
 
   /**
    * Send the update action with the values. Components that inherit from this may
@@ -145,7 +143,8 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
 
       // When the value is updated, and then sent back down the cursor moves to the end of the field.
       // We therefore need to put it back to where the user was typing so they don't get janked around
-      requestAnimationFrame(() => {
+      // eslint-disable-next-line ember/no-runloop -- Required for Ember 5.8/5.12 compatibility
+      schedule('afterRender', () => {
         this._syncValue();
         this.inputElement?.setSelectionRange(cursorStart, cursorEnd);
       });
