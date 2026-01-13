@@ -1,0 +1,302 @@
+/* eslint-disable ember/no-attrs-in-components, ember/no-classic-components, ember/no-component-lifecycle-hooks, ember/no-computed-properties-in-native-classes, ember/no-runloop, ember/require-tagless-components */
+import Component from '@ember/component';
+import Inputmask from 'inputmask';
+import { get, set, computed } from '@ember/object';
+import { schedule } from '@ember/runloop';
+import { areDifferent } from 'ember-inputmask/utils/compare-objects';
+
+const DEFAULT_OPTIONS = {
+  rightAlign: false,
+};
+
+export const DEFAULT_NON_BOUND_PROPS = [
+  'keyEvents',
+  'class',
+  'classNames',
+  'positionalParamValue',
+  'update',
+  'mask',
+  'options',
+];
+
+/**
+ * Displays an input with the specified mask applied to it
+ * using Inputmask library. Follows Data-down actions up pattern
+ *
+ * @class OneWayInputMask
+ */
+class OneWayInputMask extends Component {
+  tagName = 'input';
+  attributeBindings = ['type', '_value:value'];
+
+  // This is where we blacklist all the attributes that should not be bound
+  NON_ATTRIBUTE_BOUND_PROPS = DEFAULT_NON_BOUND_PROPS;
+
+  type = 'text';
+
+  /**
+   * The mask from [Inputmask.js](https://github.com/RobinHerbots/Inputmask#default-masking-definitions)
+   *
+   * @argument mask
+   * @type String
+   */
+  // TODO: when we switch to glimmer components we can use this.args.mask for this, but for now just removing this.
+  // mask = '';
+
+  _oldMask = '';
+
+  /**
+   * Options accepted by [Inputmask.js](https://github.com/RobinHerbots/Inputmask#options)
+   *
+   * @argument options
+   * @type Object
+   */
+  options = null;
+
+  _options = null; // Internal options so external attribute doesnt clobber it
+  _oldOptions = null;
+  keyEvents = null;
+
+  /**
+   * The value to show inside the input. Can be first `positionalParam`
+   *
+   * @argument value
+   * @type String
+   */
+  value = '';
+
+  /**
+   * Setup _value to be a positional param or the passed param if that is not defined
+   *
+   * @computed _value
+   * @private
+   */
+  @computed('positionalParamValue', 'value')
+  get _value() {
+    let value = this.positionalParamValue;
+    if (value === undefined) {
+      value = this.value;
+    }
+
+    return value;
+  }
+
+  constructor() {
+    super(...arguments);
+
+    set(this, 'keyEvents', {
+      13: 'onenter',
+      27: 'onescape',
+    });
+
+    // Give the mask some default options that can be overridden
+    let options = this.options;
+    set(this, '_options', Object.assign({}, DEFAULT_OPTIONS, options));
+
+    // We want any attribute that is not explicitally blacklisted to be bound that way we don't
+    // have to whitelist every single html attribute that an `input` can have. Borrowed from
+    // https://github.com/DockYard/ember-one-way-controls/blob/master/addon/-private/dynamic-attribute-bindings.js
+    let newAttributeBindings = [];
+    for (let key in this.attrs) {
+      if (
+        this.NON_ATTRIBUTE_BOUND_PROPS.indexOf(key) === -1 &&
+        this.attributeBindings.indexOf(key) === -1
+      ) {
+        newAttributeBindings.push(key);
+      }
+    }
+
+    set(
+      this,
+      'attributeBindings',
+      this.attributeBindings.concat(newAttributeBindings),
+    );
+  }
+
+  didInsertElement() {
+    super.didInsertElement(...arguments);
+    this._setupMask();
+
+    // We're setting this flag because we want to ensure that fastboot doesn't break when using
+    // this component. In `didReceiveAttrs` we can potentially change the mask which reqires
+    // `this.element` to exist. Fastboot doesn't work with `this.element` so we should only attempt
+    // to do this if we know this hook has been called
+    set(this, '_didInsertElement', true);
+  }
+
+  didReceiveAttrs() {
+    super.didReceiveAttrs();
+    let mask = this.mask ?? '';
+    let oldMask = this._oldMask;
+    let didMaskChange = mask !== oldMask;
+    let options = this.options;
+    let oldOptions = this._oldOptions;
+    let didOptionsChange = areDifferent(options, oldOptions);
+
+    if (didOptionsChange) {
+      // Override external options on top of internal options
+      set(this, '_options', Object.assign({}, this._options, options));
+    }
+
+    // We want to reapply the mask if it has changed
+    if (didMaskChange || didOptionsChange) {
+      set(this, '_oldMask', mask);
+      set(this, '_oldOptions', options);
+      this._changeMask();
+    }
+  }
+
+  willDestroyElement() {
+    super.willDestroyElement(...arguments);
+    this._destroyMask();
+  }
+
+  /**
+   * This action will be called when the value changes and will be passed the unmasked value
+   * and the masked value
+   *
+   * @argument update
+   * @type function
+   */
+  update = null;
+
+  /**
+   * _changeEventListener - A place to store the event listener we setup to listen to the 'input'
+   * events, because the Inputmask library events don't play nice with the Ember components event
+   *
+   * @method _changeEventListener
+   * @private
+   */
+  _changeEventListener() {}
+
+  /**
+   * keyUp - If the keycode matches one of the keycodes in the `keyEvents` hash we want to fire
+   * the passed in action that matches it
+   *
+   * @method keyUp
+   */
+  keyUp(event) {
+    let method = get(this, `keyEvents.${event.keyCode}`);
+    if (method && get(this, method)) {
+      get(this, method)(event.target.value);
+    }
+  }
+
+  /**
+   * sendUpdate - Send the update action with the values. Components that inherit from this may
+   * need to override this if they want to pass additional data on the update
+   *
+   * @method sendUpdate
+   */
+  sendUpdate(unmaskedValue, value) {
+    this.update(unmaskedValue, value);
+  }
+
+  /**
+   * _syncValue - If this component's consumer modifies the passed in `value` inside their `update`
+   * method we want to make sure that value is reflected in the input's display.
+   *
+   * @method _syncValue
+   * @private
+   */
+  _syncValue() {
+    let actualValue = this._value;
+    let renderedValue = this.element.value;
+
+    if (actualValue !== renderedValue) {
+      this.element.inputmask.setValue(actualValue);
+    }
+  }
+
+  /**
+   * _processNewValue - Handle when a new value changes
+   *
+   * @method _processNewValue
+   * @private
+   * @param {string} value - The masked value visible in the element
+   */
+  _processNewValue(value) {
+    let cursorStart = this.element.selectionStart;
+    let cursorEnd = this.element.selectionEnd;
+    let unmaskedValue = this._getUnmaskedValue();
+    let oldUnmaskedValue = this._value;
+    let options = this._options;
+
+    // We only want to make changes if something is different so we don't cause infinite loops or
+    // double renders.
+    // We want to make sure that that values we compare are going to come out the same through
+    // the masking algorithm, to ensure that we only call `update` if the values are actually different
+    // (e.g. '1234.' will be masked as '1234' and so when `update` is called and passed back
+    // into the component the decimal will be removed, we don't want this)
+    if (
+      Inputmask.format(String(oldUnmaskedValue), options) !==
+      Inputmask.format(unmaskedValue, options)
+    ) {
+      this.sendUpdate(unmaskedValue, value);
+
+      // When the value is updated, and then sent back down the cursor moves to the end of the field.
+      // We therefore need to put it back to where the user was typing so they don't get janked around
+      schedule('afterRender', () => {
+        this._syncValue();
+        this.element.setSelectionRange(cursorStart, cursorEnd);
+      });
+    }
+  }
+
+  /**
+   * _setupMask - Connect the 3rd party input masking library to the element
+   *
+   * @method _setupMask
+   * @private
+   */
+  _setupMask() {
+    let mask = this.mask,
+      options = this._options;
+    let inputmask = new Inputmask(mask, options);
+    inputmask.mask(this.element);
+
+    // We need to setup a manual event listener for the change event instead of using the Ember
+    // Component event methods, because the Inputmask events don't play nice with the Component
+    // ones. Similar issue happens in React.js as well
+    // https://github.com/RobinHerbots/Inputmask/issues/1377
+    let eventListener = (event) => this._processNewValue(event.target.value);
+    set(this, '_changeEventListener', eventListener);
+    this.element.addEventListener('input', eventListener);
+  }
+
+  /**
+   * _getUnmaskedValue - Get the value of the element without the mask
+   *
+   * @method _getUnmaskedValue
+   * @private
+   * @return {string}  The unmasked value
+   */
+  _getUnmaskedValue() {
+    return this.element.inputmask.unmaskedvalue();
+  }
+
+  /**
+   * _changeMask - Destroy and reapply the mask when the mask or options change so the mask and
+   * options can be dynamic
+   *
+   * @method _changeMask
+   * @private
+   */
+  _changeMask() {
+    if (this._didInsertElement && this.element && this.element.inputmask) {
+      this._destroyMask();
+      this._setupMask();
+    }
+  }
+
+  _destroyMask() {
+    this.element.removeEventListener('input', this._changeEventListener);
+    this.element.inputmask.remove();
+  }
+}
+
+OneWayInputMask.reopenClass({
+  positionalParams: ['positionalParamValue'],
+});
+
+export default OneWayInputMask;
