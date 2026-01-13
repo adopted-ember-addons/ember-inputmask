@@ -81,6 +81,9 @@ importers:
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.1.0(@babel/core@7.28.5)(rollup@4.55.1)
+      '@types/inputmask':
+        specifier: ^5.0.7
+        version: 5.0.7
       '@types/qunit':
         specifier: ^2.19.12
         version: 2.19.13
@@ -130,8 +133,8 @@ importers:
         specifier: ^3.4.2
         version: 3.7.2
       prettier-plugin-ember-template-tag:
-        specifier: ^2.0.4
-        version: 2.1.0(prettier@3.7.2)
+        specifier: ^2.1.2
+        version: 2.1.2(prettier@3.7.2)
       qunit:
         specifier: ^2.24.1
         version: 2.24.2
@@ -1390,6 +1393,9 @@ packages:
 
   '@types/http-errors@2.0.5':
     resolution: {integrity: sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==}
+
+  '@types/inputmask@5.0.7':
+    resolution: {integrity: sha512-uojbVPWzBQ/n/0jc/d16fLqmGasFIptbrLD2WrCPWArlk+5PgblOqH4EDkI3AoobXLAlOK5yF01V8jMmvMG5qg==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -4113,8 +4119,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-ember-template-tag@2.1.0:
-    resolution: {integrity: sha512-Ium+m2zHSZKzRFt1Shn+sv8j1BzfFWP3E0tZeKTKP1U7v/tMyLuQNBRyRCJ7REdKc9bWkIJG/hCSf0CKqCVU1w==}
+  prettier-plugin-ember-template-tag@2.1.2:
+    resolution: {integrity: sha512-SZqbv8qfqJ7AnAaNhyeHOzsq1kvlkHdVrCAZDVBjUeWuW8xF2AK7LfKRkn9MPEUsbEO7BSkLsjkb5++eoWjtGw==}
     engines: {node: 18.* || >= 20}
     peerDependencies:
       prettier: '>= 3.0.0'
@@ -6756,6 +6762,8 @@ snapshots:
       glob: 10.5.0
 
   '@types/http-errors@2.0.5': {}
+
+  '@types/inputmask@5.0.7': {}
 
   '@types/json-schema@7.0.15': {}
 
@@ -9993,7 +10001,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-ember-template-tag@2.1.0(prettier@3.7.2):
+  prettier-plugin-ember-template-tag@2.1.2(prettier@3.7.2):
     dependencies:
       '@babel/core': 7.28.5
       content-tag: 4.0.0

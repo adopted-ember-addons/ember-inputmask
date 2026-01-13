@@ -112,10 +112,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 123);
     await render(
       <template>
-        <OneWayInputMask
-          @value={{this.value}}
-          @mask={{this.mask}}
-        />
+        <OneWayInputMask @value={{this.value}} @mask={{this.mask}} />
       </template>,
     );
     assert.dom('input').hasValue('1-2+3');
@@ -146,11 +143,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 123);
     await render(
       <template>
-        <OneWayInputMask
-          @value={{this.value}}
-          @mask="9-9+9"
-          class="foo"
-        />
+        <OneWayInputMask @value={{this.value}} @mask="9-9+9" class="foo" />
       </template>,
     );
     assert.dom('.foo').hasValue('1-2+3');

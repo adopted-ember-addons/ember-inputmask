@@ -12,9 +12,7 @@ module('Integration | Component | one way number mask', function (hooks) {
   test('It defaults to an integer mask', async function (assert) {
     this.set('value', 1234.44);
     await render(
-      <template>
-        <OneWayNumberMask @value={{this.value}} />
-      </template>,
+      <template><OneWayNumberMask @value={{this.value}} /></template>,
     );
 
     assert.dom('input').hasValue('1,234');
@@ -24,10 +22,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     this.set('value', 1234.567);
     await render(
       <template>
-        <OneWayNumberMask
-          @value={{this.value}}
-          @decimal={{true}}
-        />
+        <OneWayNumberMask @value={{this.value}} @decimal={{true}} />
       </template>,
     );
 

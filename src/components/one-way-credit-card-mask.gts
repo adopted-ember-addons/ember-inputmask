@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
-import { scheduleOnce } from '@ember/runloop';
 import { modifier } from 'ember-modifier';
 import OneWayInputMask from './one-way-input-mask.gts';
 import type { OneWayInputMaskSignature } from './one-way-input-mask.gts';
@@ -10,7 +9,11 @@ import type { OneWayInputMaskSignature } from './one-way-input-mask.gts';
 export interface OneWayCreditCardMaskSignature extends OneWayInputMaskSignature {
   Args: OneWayInputMaskSignature['Args'] & {
     separator?: string;
-    update?: (unmaskedValue: string, maskedValue: string, cardType: string) => void;
+    update?: (
+      unmaskedValue: string,
+      maskedValue: string,
+      cardType: string,
+    ) => void;
   };
 }
 
@@ -31,40 +34,47 @@ export default class OneWayCreditCardMask extends Component<OneWayCreditCardMask
 
   get mask() {
     const s = this.separator;
-    
+
     if (this.cardType === 'American Express') {
       return `9999${s}999999${s}99999`;
     }
-    
+
     if (this.cardType === 'Diners Club') {
       return `9999${s}999999${s}9999`;
     }
-    
+
     return `9999${s}9999${s}9999${s}9999`;
   }
 
   get mergedOptions() {
-    return Object.assign({}, {
-      onBeforePaste: (value: string) => {
-        const cardType = this.determineCardType(value);
-        this.cardType = cardType;
-        
-        scheduleOnce('afterRender', this, this.resetMaskForPaste, value);
-        
-        return value;
+    return Object.assign(
+      {},
+      {
+        onBeforePaste: (value: string) => this.handleBeforePaste(value),
       },
-    }, this.args.options);
+      this.args.options,
+    );
+  }
+
+  @action
+  private handleBeforePaste(value: string): string {
+    const cardType = this.determineCardType(value);
+    this.cardType = cardType;
+
+    requestAnimationFrame(() => this.resetMaskForPaste(value));
+
+    return value;
   }
 
   @action
   resetMaskForPaste(value: string): void {
     if (!this.inputElement) return;
-    
+
     // We need to reset the value in case the mask was too small before and characters were cut off
-    (this.inputElement as any).inputmask?.setValue(value);
-    
+    this.inputElement.inputmask?.setValue(value);
+
     // We need to update the parent component with the new pasted values
-    const unmaskedValue = (this.inputElement as any).inputmask?.unmaskedvalue() ?? '';
+    const unmaskedValue = this.inputElement.inputmask?.unmaskedvalue() ?? '';
     this.sendUpdate(unmaskedValue, this.inputElement.value);
   }
 

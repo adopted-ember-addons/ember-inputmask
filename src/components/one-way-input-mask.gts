@@ -1,10 +1,7 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { schedule } from '@ember/runloop';
 import { on } from '@ember/modifier';
 import { modifier } from 'ember-modifier';
-// @ts-expect-error - no types available
 import Inputmask from 'inputmask';
 import { areDifferent } from '../utils/compare-objects.ts';
 
@@ -77,14 +74,14 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     const mask = this.args.mask ?? '';
     const oldMask = this._oldMask;
     const didMaskChange = mask !== oldMask;
-    const options = this.args.options;
-    const oldOptions = this._oldOptions;
+    const options = this.args.options ?? {};
+    const oldOptions = this._oldOptions ?? {};
     const didOptionsChange = areDifferent(options, oldOptions);
 
     // We want to reapply the mask if it has changed
     if (didMaskChange || didOptionsChange) {
       this._oldMask = mask;
-      this._oldOptions = options ?? null;
+      this._oldOptions = this.args.options ?? null;
       this._changeMask();
     }
   }
@@ -93,7 +90,9 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   handleKeyUp(event: KeyboardEvent): void {
     const method = this.keyEvents[event.keyCode as 13 | 27];
     if (method && this.args[method as 'onenter' | 'onescape']) {
-      this.args[method as 'onenter' | 'onescape']?.((event.target as HTMLInputElement).value);
+      this.args[method as 'onenter' | 'onescape']?.(
+        (event.target as HTMLInputElement).value,
+      );
     }
   }
 
@@ -116,7 +115,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     const renderedValue = this.inputElement.value;
 
     if (actualValue !== renderedValue) {
-      (this.inputElement as any).inputmask.setValue(actualValue);
+      this.inputElement.inputmask?.setValue(String(actualValue));
     }
   }
 
@@ -146,7 +145,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
 
       // When the value is updated, and then sent back down the cursor moves to the end of the field.
       // We therefore need to put it back to where the user was typing so they don't get janked around
-      schedule('afterRender', () => {
+      requestAnimationFrame(() => {
         this._syncValue();
         this.inputElement?.setSelectionRange(cursorStart, cursorEnd);
       });
@@ -159,7 +158,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   private _setupMask(): void {
     if (!this.inputElement) return;
 
-    const mask = this.args.mask;
+    const mask = this.args.mask ?? '';
     const options = this._options;
     const inputmask = new Inputmask(mask, options);
     inputmask.mask(this.inputElement);
@@ -168,7 +167,8 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     // Component event methods, because the Inputmask events don't play nice with the Component
     // ones. Similar issue happens in React.js as well
     // https://github.com/RobinHerbots/Inputmask/issues/1377
-    const eventListener = (event: Event) => this._processNewValue((event.target as HTMLInputElement).value);
+    const eventListener = (event: Event) =>
+      this._processNewValue((event.target as HTMLInputElement).value);
     this._changeEventListener = eventListener;
     this.inputElement.addEventListener('input', eventListener);
   }
@@ -178,7 +178,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
    */
   private _getUnmaskedValue(): string {
     if (!this.inputElement) return '';
-    return (this.inputElement as any).inputmask.unmaskedvalue();
+    return this.inputElement.inputmask?.unmaskedvalue() ?? '';
   }
 
   /**
@@ -186,7 +186,11 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
    * options can be dynamic
    */
   private _changeMask(): void {
-    if (this._didInsertElement && this.inputElement && (this.inputElement as any).inputmask) {
+    if (
+      this._didInsertElement &&
+      this.inputElement &&
+      this.inputElement.inputmask
+    ) {
       this._destroyMask();
       this._setupMask();
     }
@@ -196,7 +200,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     if (!this.inputElement || !this._changeEventListener) return;
 
     this.inputElement.removeEventListener('input', this._changeEventListener);
-    (this.inputElement as any).inputmask?.remove();
+    this.inputElement.inputmask?.remove();
   }
 
   <template>

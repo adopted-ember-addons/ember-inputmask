@@ -25,12 +25,12 @@ export default class OneWayNumberMask extends Component<OneWayNumberMaskSignatur
 
   get mergedOptions() {
     const baseOptions = Object.assign({}, DEFAULT_OPTIONS, this.args.options);
-    
+
     // Give default digits if we don't have them already for decimal
     if (this.args.decimal && !baseOptions.digits) {
       baseOptions.digits = 2;
     }
-    
+
     return baseOptions;
   }
 
