@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import Inputmask from 'inputmask';
 import { get, set, computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
-import { areDifferent } from 'ember-inputmask/utils/compare-objects';
+import { areDifferent } from '../utils/compare-objects.js';
 
 const DEFAULT_OPTIONS = {
   rightAlign: false,

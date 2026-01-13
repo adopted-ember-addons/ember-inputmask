@@ -1,21 +1,35 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { hash } from '@ember/helper';
+import { fn } from '@ember/helper';
+import { set } from '@ember/object';
+import OneWayNumberMask from '#src/components/one-way-number-mask';
 
 module('Integration | Component | one way number mask', function (hooks) {
   setupRenderingTest(hooks);
 
   test('It defaults to an integer mask', async function (assert) {
     this.set('value', 1234.44);
-    await render(hbs`{{one-way-number-mask this.value}}`);
+    await render(
+      <template>
+        <OneWayNumberMask @positionalParamValue={{this.value}} />
+      </template>,
+    );
 
     assert.dom('input').hasValue('1,234');
   });
 
   test('It can be a decimal mask with 2 digits with one argument', async function (assert) {
     this.set('value', 1234.567);
-    await render(hbs`{{one-way-number-mask this.value decimal=true}}`);
+    await render(
+      <template>
+        <OneWayNumberMask
+          @positionalParamValue={{this.value}}
+          @decimal={{true}}
+        />
+      </template>,
+    );
 
     assert.dom('input').hasValue('1,234.57');
     assert
@@ -26,7 +40,13 @@ module('Integration | Component | one way number mask', function (hooks) {
   test('Can change default digits with options', async function (assert) {
     this.set('value', 1234.567);
     await render(
-      hbs`{{one-way-number-mask this.value decimal=true options=(hash digits=3)}}`,
+      <template>
+        <OneWayNumberMask
+          @positionalParamValue={{this.value}}
+          @decimal={{true}}
+          @options={{hash digits=3}}
+        />
+      </template>,
     );
 
     assert.dom('input').hasValue('1,234.567');
@@ -35,7 +55,12 @@ module('Integration | Component | one way number mask', function (hooks) {
   test('The parent can receive the updated value via the `update` action', async function (assert) {
     this.set('value', 123);
     await render(
-      hbs`{{one-way-number-mask this.value update=(set this 'value')}}`,
+      <template>
+        <OneWayNumberMask
+          @positionalParamValue={{this.value}}
+          @update={{fn set this "value"}}
+        />
+      </template>,
     );
     await fillIn('input', 456);
     assert.strictEqual(this.value, '456');
@@ -43,8 +68,14 @@ module('Integration | Component | one way number mask', function (hooks) {
 
   test('It disallows decimal via the `update` action', async function (assert) {
     this.set('value', 123);
-    await render(hbs`{{one-way-number-mask this.value
-      update=(set this 'value')}}`);
+    await render(
+      <template>
+        <OneWayNumberMask
+          @positionalParamValue={{this.value}}
+          @update={{fn set this "value"}}
+        />
+      </template>,
+    );
     await fillIn('input', '.');
     assert.strictEqual(this.value, '');
     assert.dom('input').hasValue('');
@@ -52,10 +83,16 @@ module('Integration | Component | one way number mask', function (hooks) {
 
   test('Internal options are not clobbered by external ones', async function (assert) {
     this.set('value', 123);
-    await render(hbs`{{one-way-number-mask this.value
-      update=(set this 'value')
-      options=(hash prefix='$')
-      decimal=true}}`);
+    await render(
+      <template>
+        <OneWayNumberMask
+          @positionalParamValue={{this.value}}
+          @update={{fn set this "value"}}
+          @options={{hash prefix="$"}}
+          @decimal={{true}}
+        />
+      </template>,
+    );
     await fillIn('input', 1);
     await fillIn('input', 456.78901);
     assert.dom('input').hasValue('$456.79');
@@ -65,10 +102,16 @@ module('Integration | Component | one way number mask', function (hooks) {
     let callCount = 0;
     this.set('update', () => callCount++);
     this.set('value', '1234');
-    await render(hbs`{{one-way-number-mask this.value
-      update=this.update
-      options=(hash prefix='$')
-      decimal=true}}`);
+    await render(
+      <template>
+        <OneWayNumberMask
+          @positionalParamValue={{this.value}}
+          @update={{this.update}}
+          @options={{hash prefix="$"}}
+          @decimal={{true}}
+        />
+      </template>,
+    );
     await fillIn('input', '1234.');
     assert.strictEqual(callCount, 0, '');
   });

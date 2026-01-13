@@ -90,6 +90,9 @@ importers:
       ember-qunit:
         specifier: ^9.0.2
         version: 9.0.4(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@glint/template@1.7.3)(qunit@2.24.2)
+      ember-set-helper:
+        specifier: ^3.1.0
+        version: 3.1.0(@babel/core@7.28.5)
       ember-source:
         specifier: ^6.7.0
         version: 6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)
@@ -2352,6 +2355,9 @@ packages:
     resolution: {integrity: sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==}
     engines: {node: '>=0.10'}
 
+  decorator-transforms@1.2.1:
+    resolution: {integrity: sha512-UUtmyfdlHvYoX3VSG1w5rbvBQ2r5TX1JsE4hmKU9snleFymadA3VACjl6SRfi9YgBCSjBbfQvR1bs9PRW9yBKw==}
+
   decorator-transforms@2.3.0:
     resolution: {integrity: sha512-jo8c1ss9yFPudHuYYcrJ9jpkDZIoi+lOGvt+Uyp9B+dz32i50icRMx9Bfa8hEt7TnX1FyKWKkjV+cUdT/ep2kA==}
 
@@ -2501,6 +2507,9 @@ packages:
   ember-router-generator@2.0.0:
     resolution: {integrity: sha512-89oVHVJwmLDvGvAUWgS87KpBoRhy3aZ6U0Ql6HOmU4TrPkyaa8pM0W81wj9cIwjYprcQtN9EwzZMHnq46+oUyw==}
     engines: {node: 8.* || 10.* || >= 12}
+
+  ember-set-helper@3.1.0:
+    resolution: {integrity: sha512-5BTcvqktYjpDbi1HRaSKjuIZsSioilWczDDY3AevwbxoEiasfQMLuXFJkiCKm4aW34OXz652Upo7mumCVXJKOw==}
 
   ember-source@6.8.2:
     resolution: {integrity: sha512-z2ukdKj+97fmo6DqIajKcPFVFwxEIiHzcENmDQVMGlPUR9O7jtENOST7RS3xAiHdCdFoYKRuf7+g2GvNW/7hLw==}
@@ -7751,6 +7760,13 @@ snapshots:
 
   decode-uri-component@0.2.2: {}
 
+  decorator-transforms@1.2.1(@babel/core@7.28.5):
+    dependencies:
+      '@babel/plugin-syntax-decorators': 7.27.1(@babel/core@7.28.5)
+      babel-import-util: 2.1.1
+    transitivePeerDependencies:
+      - '@babel/core'
+
   decorator-transforms@2.3.0(@babel/core@7.28.5):
     dependencies:
       '@babel/plugin-syntax-decorators': 7.27.1(@babel/core@7.28.5)
@@ -7981,6 +7997,14 @@ snapshots:
       '@babel/traverse': 7.28.5
       recast: 0.18.10
     transitivePeerDependencies:
+      - supports-color
+
+  ember-set-helper@3.1.0(@babel/core@7.28.5):
+    dependencies:
+      '@embroider/addon-shim': 1.10.2
+      decorator-transforms: 1.2.1(@babel/core@7.28.5)
+    transitivePeerDependencies:
+      - '@babel/core'
       - supports-color
 
   ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5):

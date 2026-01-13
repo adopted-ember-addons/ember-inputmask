@@ -1,20 +1,31 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, find, triggerKeyEvent, render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { hash } from '@ember/helper';
+import { fn } from '@ember/helper';
+import { set } from '@ember/object';
+import OneWayInputMask from '#src/components/one-way-input-mask';
 
 module('Integration | Component | one-way-input-mask', function (hooks) {
   setupRenderingTest(hooks);
 
   test('It masks a passed in value', async function (assert) {
     this.set('value', 123);
-    await render(hbs`{{one-way-input-mask this.value mask='9-9+9'}}`);
+    await render(
+      <template>
+        <OneWayInputMask @positionalParamValue={{this.value}} @mask="9-9+9" />
+      </template>,
+    );
     assert.dom('input').hasValue('1-2+3');
   });
 
   test('The mask updates if the passed value is mutated in the parent', async function (assert) {
     this.set('value', 123);
-    await render(hbs`{{one-way-input-mask this.value mask='9-9+9'}}`);
+    await render(
+      <template>
+        <OneWayInputMask @positionalParamValue={{this.value}} @mask="9-9+9" />
+      </template>,
+    );
     assert.dom('input').hasValue('1-2+3');
     this.set('value', 456);
     assert.dom('input').hasValue('4-5+6');
@@ -23,7 +34,13 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
   test('The parent can receive the updated value via the `update` action', async function (assert) {
     this.set('value', 123);
     await render(
-      hbs`{{one-way-input-mask this.value mask='9-9+9' update=(set this 'value')}}`,
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask="9-9+9"
+          @update={{fn set this "value"}}
+        />
+      </template>,
     );
     await fillIn('input', '456');
     assert.strictEqual(this.value, '456');
@@ -31,7 +48,13 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
 
   test('Update action works when `value` begins as undefined', async function (assert) {
     await render(
-      hbs`{{one-way-input-mask this.value mask='9-9+9' update=(set this 'value')}}`,
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask="9-9+9"
+          @update={{fn set this "value"}}
+        />
+      </template>,
     );
     await fillIn('input', '456');
     assert.strictEqual(this.value, '456');
@@ -42,7 +65,13 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
       this.set('masked', masked);
     });
     await render(
-      hbs`{{one-way-input-mask this.value mask='9-9+9' update=this.update}}`,
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask="9-9+9"
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '456');
     assert.strictEqual(this.masked, '4-5+6');
@@ -52,7 +81,13 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 1);
     this.set('options', { placeholder: '*' });
     await render(
-      hbs`{{one-way-input-mask this.value mask='9-9+9' options=this.options}}`,
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask="9-9+9"
+          @options={{this.options}}
+        />
+      </template>,
     );
     assert.dom('input').hasValue('1-*+*');
   });
@@ -60,7 +95,13 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
   test('mask and options are not bound attributes', async function (assert) {
     this.set('options', { placeholder: '*' });
     await render(
-      hbs`{{one-way-input-mask this.value mask='9-9+9' options=this.options}}`,
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask="9-9+9"
+          @options={{this.options}}
+        />
+      </template>,
     );
     assert.notOk(find('input').getAttribute('mask'), 'mask is not bound');
     assert.notOk(find('input').getAttribute('options'), 'options is not bound');
@@ -69,7 +110,14 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
   test('mask can dynamically be changed', async function (assert) {
     this.set('mask', '9-9+9');
     this.set('value', 123);
-    await render(hbs`{{one-way-input-mask this.value mask=this.mask}}`);
+    await render(
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask={{this.mask}}
+        />
+      </template>,
+    );
     assert.dom('input').hasValue('1-2+3');
 
     this.set('mask', '9_9_9');
@@ -80,7 +128,13 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 1);
     this.set('options', { placeholder: '*' });
     await render(
-      hbs`{{one-way-input-mask this.value mask='9-9+9' options=this.options}}`,
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask="9-9+9"
+          @options={{this.options}}
+        />
+      </template>,
     );
     assert.dom('input').hasValue('1-*+*');
 
@@ -91,14 +145,24 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
   test('It can have classes', async function (assert) {
     this.set('value', 123);
     await render(
-      hbs`{{one-way-input-mask this.value mask='9-9+9' class='foo'}}`,
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.value}}
+          @mask="9-9+9"
+          class="foo"
+        />
+      </template>,
     );
     assert.dom('.foo').hasValue('1-2+3');
   });
 
   test('It does not throw errors if key event methods are not passed in', async function (assert) {
     this.set('value', 123);
-    await render(hbs`{{one-way-input-mask this.value mask='9-9+9'}}`);
+    await render(
+      <template>
+        <OneWayInputMask @positionalParamValue={{this.value}} @mask="9-9+9" />
+      </template>,
+    );
     await triggerKeyEvent('input', 'keyup', 13);
     await triggerKeyEvent('input', 'keyup', 27);
     assert.dom('input').hasValue('1-2+3', 'no errors thrown');
@@ -114,11 +178,20 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
         this.set('num', number);
       }
     });
-    await render(hbs`{{one-way-input-mask this.num mask='999999' update=this.update	
-      options=(hash	
-        showMaskOnFocus=false	
-        showMaskOnHover=false	
-        jitMasking=true)}}`);
+    await render(
+      <template>
+        <OneWayInputMask
+          @positionalParamValue={{this.num}}
+          @mask="999999"
+          @update={{this.update}}
+          @options={{hash
+            showMaskOnFocus=false
+            showMaskOnHover=false
+            jitMasking=true
+          }}
+        />
+      </template>,
+    );
     assert.dom('input').hasValue('15');
 
     await fillIn('input', '155');

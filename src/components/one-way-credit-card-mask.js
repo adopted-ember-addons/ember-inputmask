@@ -1,7 +1,7 @@
 /* eslint-disable ember/no-computed-properties-in-native-classes, ember/no-runloop */
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS,
-} from 'ember-inputmask/components/one-way-input-mask';
+} from './one-way-input-mask.js';
 import { set, computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { scheduleOnce } from '@ember/runloop';

@@ -1,6 +1,6 @@
 import OneWayInputMask, {
   DEFAULT_NON_BOUND_PROPS,
-} from 'ember-inputmask/components/one-way-input-mask';
+} from './one-way-input-mask.js';
 import { set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 

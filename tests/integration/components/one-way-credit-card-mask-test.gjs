@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, find, triggerEvent, render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import OneWayCreditCardMask from '#src/components/one-way-credit-card-mask';
 
 module('Integration | Component | one way credit card mask', function (hooks) {
   setupRenderingTest(hooks);
@@ -15,7 +15,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('Visa formatting', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '4444444444444444');
     assert.dom('input').hasValue('4444-4444-4444-4444');
@@ -25,7 +30,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('MasterCard formatting', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '5444444444444444');
     assert.dom('input').hasValue('5444-4444-4444-4444');
@@ -35,7 +45,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('Discover formatting', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '6011444444444444');
     assert.dom('input').hasValue('6011-4444-4444-4444');
@@ -45,7 +60,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('JCB formatting', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '2131444444444444');
     assert.dom('input').hasValue('2131-4444-4444-4444');
@@ -55,7 +75,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('Other formatting', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '9444444444444444');
     assert.dom('input').hasValue('9444-4444-4444-4444');
@@ -65,7 +90,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('American Express formatting', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '344444444444444');
     assert.dom('input').hasValue('3444-444444-44444');
@@ -75,7 +105,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('Diners Club formatting', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '30544444444444');
     assert.dom('input').hasValue('3054-444444-4444');
@@ -85,7 +120,12 @@ module('Integration | Component | one way credit card mask', function (hooks) {
 
   test('Card mask switches from one to the other on paste', async function (assert) {
     await render(
-      hbs`{{one-way-credit-card-mask this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayCreditCardMask
+          @positionalParamValue={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', '30544444444444');
     assert.dom('input').hasValue('3054-444444-4444');

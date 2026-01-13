@@ -1,4 +1,4 @@
-import OneWayInputMask from 'ember-inputmask/components/one-way-input-mask';
+import OneWayInputMask from './one-way-input-mask.js';
 
 /**
  * @class OneWayCurrencyMask

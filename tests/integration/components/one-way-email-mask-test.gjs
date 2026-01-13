@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import OneWayEmailMask from '#src/components/one-way-email-mask';
 
 module('Integration | Component | one way email mask', function (hooks) {
   setupRenderingTest(hooks);
@@ -14,7 +14,12 @@ module('Integration | Component | one way email mask', function (hooks) {
 
   test('filled-in value', async function (assert) {
     await render(
-      hbs`{{one-way-email-mask value=this.unmaskedValue update=this.update}}`,
+      <template>
+        <OneWayEmailMask
+          @value={{this.unmaskedValue}}
+          @update={{this.update}}
+        />
+      </template>,
     );
     await fillIn('input', 'test@test.test');
     assert.dom('input').hasValue('test@test.test');
