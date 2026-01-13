@@ -8,9 +8,8 @@ Ember wrapper around
 
 ## Compatibility
 
-- Ember.js v4.12 or above
-- Ember CLI v4.12 or above
-- Node.js v20 or above
+- Ember.js v5.8 or above
+- Embroider or ember-auto-import v2
 
 ## Installation
 
