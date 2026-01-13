@@ -13,7 +13,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     this.set('value', 1234.44);
     await render(
       <template>
-        <OneWayNumberMask @positionalParamValue={{this.value}} />
+        <OneWayNumberMask @value={{this.value}} />
       </template>,
     );
 
@@ -25,7 +25,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     await render(
       <template>
         <OneWayNumberMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @decimal={{true}}
         />
       </template>,
@@ -42,7 +42,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     await render(
       <template>
         <OneWayNumberMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @decimal={{true}}
           @options={{hash digits=3}}
         />
@@ -57,7 +57,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     await render(
       <template>
         <OneWayNumberMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @update={{fn set this "value"}}
         />
       </template>,
@@ -71,7 +71,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     await render(
       <template>
         <OneWayNumberMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @update={{fn set this "value"}}
         />
       </template>,
@@ -86,7 +86,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     await render(
       <template>
         <OneWayNumberMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @update={{fn set this "value"}}
           @options={{hash prefix="$"}}
           @decimal={{true}}
@@ -105,7 +105,7 @@ module('Integration | Component | one way number mask', function (hooks) {
     await render(
       <template>
         <OneWayNumberMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @update={{this.update}}
           @options={{hash prefix="$"}}
           @decimal={{true}}

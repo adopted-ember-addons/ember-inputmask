@@ -1,6 +1,12 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { fillIn, find, triggerEvent, render } from '@ember/test-helpers';
+import {
+  fillIn,
+  find,
+  triggerEvent,
+  render,
+  settled,
+} from '@ember/test-helpers';
 import OneWayCreditCardMask from '#src/components/one-way-credit-card-mask';
 
 module('Integration | Component | one way credit card mask', function (hooks) {
@@ -17,7 +23,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -32,7 +38,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -47,7 +53,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -62,7 +68,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -77,7 +83,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -92,7 +98,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -107,7 +113,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -122,7 +128,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
     await render(
       <template>
         <OneWayCreditCardMask
-          @positionalParamValue={{this.unmaskedValue}}
+          @value={{this.unmaskedValue}}
           @update={{this.update}}
         />
       </template>,
@@ -140,6 +146,7 @@ module('Integration | Component | one way credit card mask', function (hooks) {
       },
     });
     await triggerEvent(input, 'input');
+    await settled();
     assert.dom('input').hasValue('2131-4567-4567-4567');
     assert.strictEqual(this.unmaskedValue, '2131456745674567');
     assert.strictEqual(this.cardType, 'JCB');

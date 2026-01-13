@@ -13,7 +13,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 123);
     await render(
       <template>
-        <OneWayInputMask @positionalParamValue={{this.value}} @mask="9-9+9" />
+        <OneWayInputMask @value={{this.value}} @mask="9-9+9" />
       </template>,
     );
     assert.dom('input').hasValue('1-2+3');
@@ -23,7 +23,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 123);
     await render(
       <template>
-        <OneWayInputMask @positionalParamValue={{this.value}} @mask="9-9+9" />
+        <OneWayInputMask @value={{this.value}} @mask="9-9+9" />
       </template>,
     );
     assert.dom('input').hasValue('1-2+3');
@@ -36,7 +36,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask="9-9+9"
           @update={{fn set this "value"}}
         />
@@ -50,7 +50,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask="9-9+9"
           @update={{fn set this "value"}}
         />
@@ -67,7 +67,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask="9-9+9"
           @update={{this.update}}
         />
@@ -83,7 +83,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask="9-9+9"
           @options={{this.options}}
         />
@@ -97,7 +97,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask="9-9+9"
           @options={{this.options}}
         />
@@ -113,7 +113,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask={{this.mask}}
         />
       </template>,
@@ -130,7 +130,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask="9-9+9"
           @options={{this.options}}
         />
@@ -147,7 +147,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.value}}
+          @value={{this.value}}
           @mask="9-9+9"
           class="foo"
         />
@@ -160,7 +160,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     this.set('value', 123);
     await render(
       <template>
-        <OneWayInputMask @positionalParamValue={{this.value}} @mask="9-9+9" />
+        <OneWayInputMask @value={{this.value}} @mask="9-9+9" />
       </template>,
     );
     await triggerKeyEvent('input', 'keyup', 13);
@@ -181,7 +181,7 @@ module('Integration | Component | one-way-input-mask', function (hooks) {
     await render(
       <template>
         <OneWayInputMask
-          @positionalParamValue={{this.num}}
+          @value={{this.num}}
           @mask="999999"
           @update={{this.update}}
           @options={{hash

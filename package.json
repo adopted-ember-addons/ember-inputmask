@@ -54,8 +54,10 @@
     "test": "vite build --mode=development --out-dir dist-tests && testem --file testem.cjs ci --port 0"
   },
   "dependencies": {
+    "@ember/render-modifiers": "^3.0.0",
     "@embroider/addon-shim": "^1.8.9",
     "decorator-transforms": "^2.2.2",
+    "ember-modifier": "^4.2.2",
     "inputmask": "^5.0.9"
   },
   "devDependencies": {
