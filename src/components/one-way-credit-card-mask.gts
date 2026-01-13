@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { scheduleOnce } from '@ember/runloop';
+import { next } from '@ember/runloop';
 import { isBlank } from '@ember/utils';
 import { modifier } from 'ember-modifier';
 import OneWayInputMask from './one-way-input-mask.gts';
@@ -63,7 +63,7 @@ export default class OneWayCreditCardMask extends Component<OneWayCreditCardMask
 
     this._resetMaskForPasteValue = value;
     // eslint-disable-next-line ember/no-runloop -- Required for Ember 5.8/5.12 compatibility
-    scheduleOnce('afterRender', this, this._resetMaskForPasteCallback);
+    next(this._resetMaskForPasteCallback);
 
     return value;
   };
