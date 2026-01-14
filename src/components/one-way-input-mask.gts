@@ -21,8 +21,8 @@ export interface OneWayInputMaskSignature {
   Element: HTMLInputElement;
   Args: {
     value?: string | number;
-    mask?: string;
-    options?: Record<string, unknown>;
+    mask?: Inputmask.Options['mask'];
+    options?: Inputmask.Options;
     update?: (unmaskedValue: string, maskedValue: string) => void;
     onenter?: (value: string) => void;
     onescape?: (value: string) => void;
@@ -35,8 +35,8 @@ export interface OneWayInputMaskSignature {
  * using Inputmask library. Follows Data-down actions up pattern
  */
 export default class OneWayInputMask extends Component<OneWayInputMaskSignature> {
-  private _oldMask = '';
-  private _oldOptions: Record<string, unknown> | null = null;
+  private _oldMask: Inputmask.Options['mask'] = '';
+  private _oldOptions: Inputmask.Options | null = null;
   private _didInsertElement = false;
 
   private _changeEventListener?: (event: Event) => void;
@@ -61,8 +61,10 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     this.updateMask();
   });
 
-  get _options(): Record<string, unknown> {
-    return Object.assign({}, DEFAULT_OPTIONS, this.args.options);
+  get _options(): Inputmask.Options {
+    const options = Object.assign({}, DEFAULT_OPTIONS, this.args.options);
+    options.mask = this.args.mask;
+    return options;
   }
 
   private get _value(): string | number {
@@ -157,9 +159,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   private _setupMask(): void {
     if (!this.inputElement) return;
 
-    const mask = this.args.mask ?? '';
-    const options = this._options;
-    const inputmask = new Inputmask(mask, options);
+    const inputmask = new Inputmask(this._options);
     inputmask.mask(this.inputElement);
 
     // We need to setup a manual event listener for the change event instead of using the Ember

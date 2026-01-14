@@ -118,6 +118,17 @@
   "ember-addon": {
     "version": 2,
     "type": "addon",
-    "main": "addon-main.cjs"
+    "main": "addon-main.cjs",
+    "app-js": {
+      "./components/one-way-credit-card-mask.js": "./dist/_app_/components/one-way-credit-card-mask.js",
+      "./components/one-way-currency-mask.js": "./dist/_app_/components/one-way-currency-mask.js",
+      "./components/one-way-date-mask.js": "./dist/_app_/components/one-way-date-mask.js",
+      "./components/one-way-email-mask.js": "./dist/_app_/components/one-way-email-mask.js",
+      "./components/one-way-input-mask.js": "./dist/_app_/components/one-way-input-mask.js",
+      "./components/one-way-number-mask.js": "./dist/_app_/components/one-way-number-mask.js",
+      "./components/one-way-phone-mask.js": "./dist/_app_/components/one-way-phone-mask.js",
+      "./components/one-way-ssn-mask.js": "./dist/_app_/components/one-way-ssn-mask.js",
+      "./components/one-way-zip-code-mask.js": "./dist/_app_/components/one-way-zip-code-mask.js"
+    }
   }
 }
