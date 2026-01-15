@@ -6,7 +6,7 @@ import OneWayInputMask from './one-way-input-mask.gts';
 export default class OneWayCurrencyMask extends OneWayInputMask {
   <template>
     <OneWayInputMask
-      @mask="currency"
+      @alias="currency"
       @value={{@value}}
       @update={{@update}}
       @options={{@options}}

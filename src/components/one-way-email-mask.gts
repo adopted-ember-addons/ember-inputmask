@@ -6,7 +6,7 @@ import OneWayInputMask from './one-way-input-mask.gts';
 export default class OneWayEmailMask extends OneWayInputMask {
   <template>
     <OneWayInputMask
-      @mask="email"
+      @alias="email"
       @value={{@value}}
       @update={{@update}}
       @options={{@options}}

@@ -14,15 +14,17 @@ export const DEFAULT_NON_BOUND_PROPS = [
   'keyEvents',
   'update',
   'mask',
+  'alias',
   'options',
 ];
 
 export interface OneWayInputMaskSignature {
   Element: HTMLInputElement;
   Args: {
+    alias?: Inputmask.Options['alias'];
+    mask?: Inputmask.Options['mask'];
+    options?: Inputmask.Options;
     value?: string | number;
-    mask?: string;
-    options?: Record<string, unknown>;
     update?: (unmaskedValue: string, maskedValue: string) => void;
     onenter?: (value: string) => void;
     onescape?: (value: string) => void;
@@ -35,11 +37,11 @@ export interface OneWayInputMaskSignature {
  * using Inputmask library. Follows Data-down actions up pattern
  */
 export default class OneWayInputMask extends Component<OneWayInputMaskSignature> {
-  private _oldMask = '';
-  private _oldOptions: Record<string, unknown> | null = null;
+  private _oldMask: Inputmask.Options['mask'] = '';
+  private _oldAlias: Inputmask.Options['alias'] = undefined;
+  private _oldOptions: Inputmask.Options | null = null;
   private _didInsertElement = false;
 
-  private _changeEventListener?: (event: Event) => void;
   private inputElement?: HTMLInputElement;
 
   private keyEvents = {
@@ -61,8 +63,14 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     this.updateMask();
   });
 
-  get _options(): Record<string, unknown> {
-    return Object.assign({}, DEFAULT_OPTIONS, this.args.options);
+  get _options(): Inputmask.Options {
+    const options = Object.assign({}, DEFAULT_OPTIONS, this.args.options);
+    if (this.args.alias) {
+      options.alias = this.args.alias;
+    } else {
+      options.mask = this.args.mask;
+    }
+    return options;
   }
 
   private get _value(): string | number {
@@ -71,15 +79,19 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
 
   private updateMask = (): void => {
     const mask = this.args.mask ?? '';
+    const alias = this.args.alias;
     const oldMask = this._oldMask;
+    const oldAlias = this._oldAlias;
     const didMaskChange = mask !== oldMask;
+    const didAliasChange = alias !== oldAlias;
     const options = this.args.options ?? {};
     const oldOptions = this._oldOptions ?? {};
     const didOptionsChange = areDifferent(options, oldOptions);
 
     // We want to reapply the mask if it has changed
-    if (didMaskChange || didOptionsChange) {
+    if (didMaskChange || didAliasChange || didOptionsChange) {
       this._oldMask = mask;
+      this._oldAlias = alias;
       this._oldOptions = this.args.options ?? null;
       this._changeMask();
     }
@@ -92,6 +104,10 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
         (event.target as HTMLInputElement).value,
       );
     }
+  };
+
+  handleInput = (event: Event): void => {
+    this._processNewValue((event.target as HTMLInputElement).value);
   };
 
   /**
@@ -157,19 +173,8 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   private _setupMask(): void {
     if (!this.inputElement) return;
 
-    const mask = this.args.mask ?? '';
-    const options = this._options;
-    const inputmask = new Inputmask(mask, options);
+    const inputmask = new Inputmask(this._options);
     inputmask.mask(this.inputElement);
-
-    // We need to setup a manual event listener for the change event instead of using the Ember
-    // Component event methods, because the Inputmask events don't play nice with the Component
-    // ones. Similar issue happens in React.js as well
-    // https://github.com/RobinHerbots/Inputmask/issues/1377
-    const eventListener = (event: Event) =>
-      this._processNewValue((event.target as HTMLInputElement).value);
-    this._changeEventListener = eventListener;
-    this.inputElement.addEventListener('input', eventListener);
   }
 
   /**
@@ -196,10 +201,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   }
 
   private _destroyMask(): void {
-    if (!this.inputElement || !this._changeEventListener) return;
-
-    this.inputElement.removeEventListener('input', this._changeEventListener);
-    this.inputElement.inputmask?.remove();
+    this.inputElement?.inputmask?.remove();
   }
 
   <template>
@@ -208,6 +210,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
       value={{this._value}}
       {{this.setupInputModifier}}
       {{this.updateMaskModifier @mask @options}}
+      {{on "input" this.handleInput}}
       {{on "keyup" this.handleKeyUp}}
       ...attributes
     />
