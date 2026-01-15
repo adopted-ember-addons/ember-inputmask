@@ -14,15 +14,17 @@ export const DEFAULT_NON_BOUND_PROPS = [
   'keyEvents',
   'update',
   'mask',
+  'alias',
   'options',
 ];
 
 export interface OneWayInputMaskSignature {
   Element: HTMLInputElement;
   Args: {
-    value?: string | number;
+    alias?: Inputmask.Options['alias'];
     mask?: Inputmask.Options['mask'];
     options?: Inputmask.Options;
+    value?: string | number;
     update?: (unmaskedValue: string, maskedValue: string) => void;
     onenter?: (value: string) => void;
     onescape?: (value: string) => void;
@@ -36,6 +38,7 @@ export interface OneWayInputMaskSignature {
  */
 export default class OneWayInputMask extends Component<OneWayInputMaskSignature> {
   private _oldMask: Inputmask.Options['mask'] = '';
+  private _oldAlias: Inputmask.Options['alias'] = undefined;
   private _oldOptions: Inputmask.Options | null = null;
   private _didInsertElement = false;
 
@@ -62,7 +65,11 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
 
   get _options(): Inputmask.Options {
     const options = Object.assign({}, DEFAULT_OPTIONS, this.args.options);
-    options.mask = this.args.mask;
+    if (this.args.alias) {
+      options.alias = this.args.alias;
+    } else {
+      options.mask = this.args.mask;
+    }
     return options;
   }
 
@@ -72,15 +79,19 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
 
   private updateMask = (): void => {
     const mask = this.args.mask ?? '';
+    const alias = this.args.alias;
     const oldMask = this._oldMask;
+    const oldAlias = this._oldAlias;
     const didMaskChange = mask !== oldMask;
+    const didAliasChange = alias !== oldAlias;
     const options = this.args.options ?? {};
     const oldOptions = this._oldOptions ?? {};
     const didOptionsChange = areDifferent(options, oldOptions);
 
     // We want to reapply the mask if it has changed
-    if (didMaskChange || didOptionsChange) {
+    if (didMaskChange || didAliasChange || didOptionsChange) {
       this._oldMask = mask;
+      this._oldAlias = alias;
       this._oldOptions = this.args.options ?? null;
       this._changeMask();
     }

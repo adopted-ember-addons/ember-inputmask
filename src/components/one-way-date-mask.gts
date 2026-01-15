@@ -17,7 +17,7 @@ export default class OneWayDateMask extends Component<OneWayInputMaskSignature> 
 
   <template>
     <OneWayInputMask
-      @mask="datetime"
+      @alias="datetime"
       @value={{@value}}
       @update={{@update}}
       @options={{this.mergedOptions}}

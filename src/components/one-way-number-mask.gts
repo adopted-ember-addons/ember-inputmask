@@ -19,7 +19,7 @@ export interface OneWayNumberMaskSignature extends OneWayInputMaskSignature {
  * Number mask component
  */
 export default class OneWayNumberMask extends Component<OneWayNumberMaskSignature> {
-  get mask() {
+  get alias() {
     return this.args.decimal ? 'decimal' : 'integer';
   }
 
@@ -36,7 +36,7 @@ export default class OneWayNumberMask extends Component<OneWayNumberMaskSignatur
 
   <template>
     <OneWayInputMask
-      @mask={{this.mask}}
+      @alias={{this.alias}}
       @value={{@value}}
       @update={{@update}}
       @options={{this.mergedOptions}}
