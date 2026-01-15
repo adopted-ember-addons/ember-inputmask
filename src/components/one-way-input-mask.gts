@@ -39,7 +39,6 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   private _oldOptions: Inputmask.Options | null = null;
   private _didInsertElement = false;
 
-  private _changeEventListener?: (event: Event) => void;
   private inputElement?: HTMLInputElement;
 
   private keyEvents = {
@@ -94,6 +93,10 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
         (event.target as HTMLInputElement).value,
       );
     }
+  };
+
+  handleInput = (event: Event): void => {
+    this._processNewValue((event.target as HTMLInputElement).value);
   };
 
   /**
@@ -161,15 +164,6 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
 
     const inputmask = new Inputmask(this._options);
     inputmask.mask(this.inputElement);
-
-    // We need to setup a manual event listener for the change event instead of using the Ember
-    // Component event methods, because the Inputmask events don't play nice with the Component
-    // ones. Similar issue happens in React.js as well
-    // https://github.com/RobinHerbots/Inputmask/issues/1377
-    const eventListener = (event: Event) =>
-      this._processNewValue((event.target as HTMLInputElement).value);
-    this._changeEventListener = eventListener;
-    this.inputElement.addEventListener('input', eventListener);
   }
 
   /**
@@ -196,10 +190,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   }
 
   private _destroyMask(): void {
-    if (!this.inputElement || !this._changeEventListener) return;
-
-    this.inputElement.removeEventListener('input', this._changeEventListener);
-    this.inputElement.inputmask?.remove();
+    this.inputElement?.inputmask?.remove();
   }
 
   <template>
@@ -208,6 +199,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
       value={{this._value}}
       {{this.setupInputModifier}}
       {{this.updateMaskModifier @mask @options}}
+      {{on "input" this.handleInput}}
       {{on "keyup" this.handleKeyUp}}
       ...attributes
     />
