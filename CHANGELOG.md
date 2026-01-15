@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-01-15)
+
+* ember-inputmask 4.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-inputmask`
+  * [#181](https://github.com/adopted-ember-addons/ember-inputmask/pull/181) Include mask in options, use alias correctly ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 ## Release (2026-01-13)
 
 * ember-inputmask 4.0.0 (major)
