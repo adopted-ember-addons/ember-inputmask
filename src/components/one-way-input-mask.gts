@@ -162,8 +162,10 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     // (e.g. '1234.' will be masked as '1234' and so when `update` is called and passed back
     // into the component the decimal will be removed, we don't want this)
     if (
-      Inputmask.format(String(oldUnmaskedValue), options as Inputmask.Options) !==
-      Inputmask.format(unmaskedValue, options as Inputmask.Options)
+      Inputmask.format(
+        String(oldUnmaskedValue),
+        options as Inputmask.Options,
+      ) !== Inputmask.format(unmaskedValue, options as Inputmask.Options)
     ) {
       this.sendUpdate(unmaskedValue, value);
 
