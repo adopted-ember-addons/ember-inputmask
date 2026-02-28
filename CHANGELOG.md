@@ -2,6 +2,17 @@
 
 ## Release (2026-02-28)
 
+* ember-inputmask 4.0.3 (patch)
+
+#### :bug: Bug Fix
+* `ember-inputmask`
+  * [#186](https://github.com/adopted-ember-addons/ember-inputmask/pull/186) More type fixes ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+## Release (2026-02-28)
+
 * ember-inputmask 4.0.2 (patch)
 
 #### :bug: Bug Fix
