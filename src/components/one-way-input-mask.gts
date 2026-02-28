@@ -18,17 +18,22 @@ export const DEFAULT_NON_BOUND_PROPS = [
   'options',
 ];
 
+type OneWayInputMaskOptions = Omit<
+  Inputmask.Options,
+  'oncleared' | 'oncomplete' | 'onincomplete' | 'regex'
+> & {
+  oncleared?: (event?: InputEvent) => void;
+  oncomplete?: (event?: InputEvent) => void;
+  onincomplete?: (event?: InputEvent) => void;
+  regex?: RegExp | string;
+};
+
 export interface OneWayInputMaskSignature {
   Element: HTMLInputElement;
   Args: {
-    alias?: Inputmask.Options['alias'];
-    mask?: Inputmask.Options['mask'];
-    options?: Inputmask.Options & {
-      oncleared?: (event: InputEvent) => void;
-      oncomplete?: (event: InputEvent) => void;
-      onincomplete?: (event: InputEvent) => void;
-      regex?: RegExp | string;
-    };
+    alias?: OneWayInputMaskOptions['alias'];
+    mask?: OneWayInputMaskOptions['mask'];
+    options?: OneWayInputMaskOptions;
     value?: string | number;
     update?: (unmaskedValue: string, maskedValue: string) => void;
     onenter?: (value: string) => void;
@@ -42,9 +47,9 @@ export interface OneWayInputMaskSignature {
  * using Inputmask library. Follows Data-down actions up pattern
  */
 export default class OneWayInputMask extends Component<OneWayInputMaskSignature> {
-  private _oldMask: Inputmask.Options['mask'] = '';
-  private _oldAlias: Inputmask.Options['alias'] = undefined;
-  private _oldOptions: Inputmask.Options | null = null;
+  private _oldMask: OneWayInputMaskOptions['mask'] = '';
+  private _oldAlias: OneWayInputMaskOptions['alias'] = undefined;
+  private _oldOptions: OneWayInputMaskOptions | null = null;
   private _didInsertElement = false;
 
   private inputElement?: HTMLInputElement;
@@ -68,7 +73,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     this.updateMask();
   });
 
-  get _options(): Inputmask.Options {
+  get _options(): OneWayInputMaskOptions {
     const options = Object.assign({}, DEFAULT_OPTIONS, this.args.options);
     if (this.args.alias) {
       options.alias = this.args.alias;
@@ -157,8 +162,10 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
     // (e.g. '1234.' will be masked as '1234' and so when `update` is called and passed back
     // into the component the decimal will be removed, we don't want this)
     if (
-      Inputmask.format(String(oldUnmaskedValue), options) !==
-      Inputmask.format(unmaskedValue, options)
+      Inputmask.format(
+        String(oldUnmaskedValue),
+        options as Inputmask.Options,
+      ) !== Inputmask.format(unmaskedValue, options as Inputmask.Options)
     ) {
       this.sendUpdate(unmaskedValue, value);
 
@@ -178,7 +185,7 @@ export default class OneWayInputMask extends Component<OneWayInputMaskSignature>
   private _setupMask(): void {
     if (!this.inputElement) return;
 
-    const inputmask = new Inputmask(this._options);
+    const inputmask = new Inputmask(this._options as Inputmask.Options);
     inputmask.mask(this.inputElement);
   }
 
