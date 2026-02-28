@@ -23,7 +23,12 @@ export interface OneWayInputMaskSignature {
   Args: {
     alias?: Inputmask.Options['alias'];
     mask?: Inputmask.Options['mask'];
-    options?: Inputmask.Options;
+    options?: Inputmask.Options & {
+      oncleared?: (event: InputEvent) => void;
+      oncomplete?: (event: InputEvent) => void;
+      onincomplete?: (event: InputEvent) => void;
+      regex?: RegExp | string;
+    };
     value?: string | number;
     update?: (unmaskedValue: string, maskedValue: string) => void;
     onenter?: (value: string) => void;
